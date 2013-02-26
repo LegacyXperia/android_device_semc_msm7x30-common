@@ -89,6 +89,10 @@ PRODUCT_PACKAGES += \
     LegacyCamera \
     Torch
 
+# WiFi
+PRODUCT_PACKAGES += \
+    libnetcmdiface
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.tethering.kb_disconnect=1
 
