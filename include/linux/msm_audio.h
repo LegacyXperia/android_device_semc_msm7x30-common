@@ -1,7 +1,7 @@
 /* include/linux/msm_audio.h
  *
  * Copyright (C) 2008 Google, Inc.
- * Copyright (c) 2009, Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2012 Code Aurora Forum. All rights reserved.
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -19,7 +19,6 @@
 
 #include <linux/types.h>
 #include <linux/ioctl.h>
-#include <asm/sizes.h>
 
 /* PCM Audio */
 
@@ -65,6 +64,9 @@
 					unsigned short)
 #define AUDIO_GET_BITSTREAM_ERROR_INFO _IOR(AUDIO_IOCTL_MAGIC, 42, \
 			       struct msm_audio_bitstream_error_info)
+
+#define AUDIO_SET_SRS_TRUMEDIA_PARAM _IOW(AUDIO_IOCTL_MAGIC, 43, unsigned)
+
 /* Qualcomm extensions */
 #define AUDIO_SET_STREAM_CONFIG   _IOW(AUDIO_IOCTL_MAGIC, 80, \
 				struct msm_audio_stream_config)
@@ -87,6 +89,13 @@
 					struct msm_audio_buf_cfg)
 #define AUDIO_SET_BUF_CFG    _IOW(AUDIO_IOCTL_MAGIC, 94, \
 					struct msm_audio_buf_cfg)
+#define AUDIO_SET_ACDB_BLK _IOW(AUDIO_IOCTL_MAGIC, 95,  \
+					struct msm_acdb_cmd_device)
+#define AUDIO_GET_ACDB_BLK _IOW(AUDIO_IOCTL_MAGIC, 96,  \
+					struct msm_acdb_cmd_device)
+
+#define AUDIO_REGISTER_ION _IOW(AUDIO_IOCTL_MAGIC, 97, unsigned)
+#define AUDIO_DEREGISTER_ION _IOW(AUDIO_IOCTL_MAGIC, 98, unsigned)
 
 #define	AUDIO_MAX_COMMON_IOCTL_NUM	100
 
@@ -127,10 +136,13 @@
 #define IIR_ENABLE		0x0004
 #define QCONCERT_PLUS_ENABLE	0x0008
 #define MBADRC_ENABLE		0x0010
+#define SRS_ENABLE		0x0020
+#define SRS_DISABLE	0x0040
 
 #define AGC_ENABLE		0x0001
 #define NS_ENABLE		0x0002
 #define TX_IIR_ENABLE		0x0004
+#define FLUENCE_ENABLE		0x0008
 
 #define VOC_REC_UPLINK		0x00
 #define VOC_REC_DOWNLINK	0x01
@@ -161,6 +173,11 @@ struct msm_audio_stats {
 	uint32_t byte_count;
 	uint32_t sample_count;
 	uint32_t unused[2];
+};
+
+struct msm_audio_ion_info {
+	int fd;
+	void *vaddr;
 };
 
 struct msm_audio_pmem_info {
@@ -205,7 +222,30 @@ struct msm_snd_device_config {
 
 #define SND_SET_DEVICE _IOW(SND_IOCTL_MAGIC, 2, struct msm_device_config *)
 
+enum cad_device_path_type {
+	CAD_DEVICE_PATH_RX,	/*For Decoding session*/
+	CAD_DEVICE_PATH_TX,	/* For Encoding session*/
+	CAD_DEVICE_PATH_RX_TX, /* For Voice call */
+	CAD_DEVICE_PATH_LB,	/* For loopback (FM Analog)*/
+	CAD_DEVICE_PATH_MAX
+};
+
+struct cad_devices_type {
+	uint32_t rx_device;
+	uint32_t tx_device;
+	enum cad_device_path_type pathtype;
+};
+
+struct msm_cad_device_config {
+	struct cad_devices_type device;
+	uint32_t ear_mute;
+	uint32_t mic_mute;
+};
+
+#define CAD_SET_DEVICE _IOW(SND_IOCTL_MAGIC, 2, struct msm_cad_device_config *)
+
 #define SND_METHOD_VOICE 0
+#define SND_METHOD_MIDI 4
 
 struct msm_snd_volume_config {
 	uint32_t device;
@@ -214,6 +254,14 @@ struct msm_snd_volume_config {
 };
 
 #define SND_SET_VOLUME _IOW(SND_IOCTL_MAGIC, 3, struct msm_snd_volume_config *)
+
+struct msm_cad_volume_config {
+	struct cad_devices_type device;
+	uint32_t method;
+	uint32_t volume;
+};
+
+#define CAD_SET_VOLUME _IOW(SND_IOCTL_MAGIC, 3, struct msm_cad_volume_config *)
 
 /* Returns the number of SND endpoints supported. */
 
@@ -236,6 +284,24 @@ struct msm_snd_endpoint {
 
 #define SND_AVC_CTL _IOW(SND_IOCTL_MAGIC, 6, unsigned *)
 #define SND_AGC_CTL _IOW(SND_IOCTL_MAGIC, 7, unsigned *)
+
+/*return the number of CAD endpoints supported. */
+
+#define CAD_GET_NUM_ENDPOINTS _IOR(SND_IOCTL_MAGIC, 4, unsigned *)
+
+struct msm_cad_endpoint {
+	int id; /* input and output */
+	char name[64]; /* output only */
+};
+
+/* Takes an index between 0 and one less than the number returned by
+ * SND_GET_NUM_ENDPOINTS, and returns the CAD index and name of a
+ * CAD endpoint.  On input, the .id field contains the number of the
+ * endpoint, and on exit it contains the SND index, while .name contains
+ * the description of the endpoint.
+ */
+
+#define CAD_GET_ENDPOINT _IOWR(SND_IOCTL_MAGIC, 5, struct msm_cad_endpoint *)
 
 struct msm_audio_pcm_config {
 	uint32_t pcm_feedback;	/* 0 - disable > 0 - enable */
@@ -334,5 +400,17 @@ struct msm_audio_eq_stream_config {
 	uint32_t	num_bands;
 	struct msm_audio_eq_band	eq_bands[AUDIO_MAX_EQ_BANDS];
 } __attribute__ ((packed));
+
+struct msm_acdb_cmd_device {
+	uint32_t     command_id;
+	uint32_t     device_id;
+	uint32_t     network_id;
+	uint32_t     sample_rate_id;      /* Actual sample rate value */
+	uint32_t     interface_id;        /* See interface id's above */
+	uint32_t     algorithm_block_id;  /* See enumerations above */
+	uint32_t     total_bytes;         /* Length in bytes used by buffer */
+	uint32_t     *phys_buf;           /* Physical Address of data */
+};
+
 
 #endif
