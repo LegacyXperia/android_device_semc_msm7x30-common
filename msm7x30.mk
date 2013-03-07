@@ -86,8 +86,9 @@ PRODUCT_PACKAGES += \
 #Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
-    LegacyCamera \
     Torch
+
+#    LegacyCamera \
 
 # WiFi
 PRODUCT_PACKAGES += \
