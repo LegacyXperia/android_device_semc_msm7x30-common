@@ -121,7 +121,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.logs=0 \
     BUILD_UTC_DATE=0 \
     persist.sys.usb.config=mtp \
-    sys.mem.max_hidden_apps=10 \
     debug.camcorder.disablemeta=1 \
     ro.debuggable=1 \
     persist.sys.strictmode.visual=0 \
