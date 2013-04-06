@@ -25,7 +25,6 @@
 
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings. -->
     <bool name="config_automatic_brightness_available">true</bool>
-    <bool name="config_autoBrightnessButtonKeyboard">false</bool>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">70</integer>
