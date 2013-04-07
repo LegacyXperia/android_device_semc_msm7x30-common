@@ -38,6 +38,7 @@
     <storage android:mountPoint="/storage/primary/legacy"
         android:storageDescription="@string/storage_sd_card"
         android:primary="true"
+        android:allowMassStorage="true"
         android:removable="true"
         android:maxFileSize="4096" />
 </StorageList>
