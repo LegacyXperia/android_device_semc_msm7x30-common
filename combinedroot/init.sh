@@ -39,11 +39,16 @@ MTDCACHE=`busybox cat /proc/mtd | busybox grep cache | busybox awk -F ':' {'prin
 busybox mknod -m 600 /dev/block/mtdblock${MTDCACHE} b 31 $MTDCACHE
 
 # leds & backlight configuration
+BOOTREC_LED_RED="/sys/class/leds/red"
+BOOTREC_LED_GREEN="/sys/class/leds/green"
+BOOTREC_LED_BLUE="/sys/class/leds/blue"
+BOOTREC_LED_BUTTONS="/sys/class/leds/button-backlight"
+BOOTREC_LED_LCD="/sys/class/leds/lcd-backlight"
+
 busybox echo ${BOOTREC_LED_RED_CURRENT} > ${BOOTREC_LED_RED}/max_current
 busybox echo ${BOOTREC_LED_GREEN_CURRENT} > ${BOOTREC_LED_GREEN}/max_current
 busybox echo ${BOOTREC_LED_BLUE_CURRENT} > ${BOOTREC_LED_BLUE}/max_current
 busybox echo ${BOOTREC_LED_BUTTONS_CURRENT} > ${BOOTREC_LED_BUTTONS}/max_current
-busybox echo ${BOOTREC_LED_BUTTONS2_CURRENT} > ${BOOTREC_LED_BUTTONS2}/max_current
 busybox echo ${BOOTREC_LED_LCD_CURRENT} > ${BOOTREC_LED_LCD}/max_current
 busybox echo ${BOOTREC_LED_LCD_MODE} > ${BOOTREC_LED_LCD}/mode
 
@@ -62,7 +67,6 @@ busybox echo 255 > ${BOOTREC_LED_RED}/brightness
 busybox echo 0 > ${BOOTREC_LED_GREEN}/brightness
 busybox echo 255 > ${BOOTREC_LED_BLUE}/brightness
 busybox echo 255 > ${BOOTREC_LED_BUTTONS}/brightness
-busybox echo 255 > ${BOOTREC_LED_BUTTONS2}/brightness
 
 # keycheck
 busybox cat /dev/input/event${keypad_input} > /dev/keycheck&
@@ -84,7 +88,6 @@ then
 	busybox echo 0 > ${BOOTREC_LED_GREEN}/brightness
 	busybox echo 255 > ${BOOTREC_LED_BLUE}/brightness
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS}/brightness
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS2}/brightness
 	# framebuffer fix
 	busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
 	# recovery ramdisk
@@ -96,7 +99,6 @@ else
 	busybox echo 0 > ${BOOTREC_LED_GREEN}/brightness
 	busybox echo 0 > ${BOOTREC_LED_BLUE}/brightness
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS}/brightness
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS2}/brightness
 	# framebuffer fix
 	busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
 fi
