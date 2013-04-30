@@ -8,9 +8,6 @@ busybox date >>boot.txt
 exec >>boot.txt 2>&1
 busybox rm /init
 
-# include device specific vars
-source /sbin/bootrec-device
-
 # create directories & mount filesystems
 busybox mount -o remount,rw rootfs /
 
@@ -39,18 +36,10 @@ MTDCACHE=`busybox cat /proc/mtd | busybox grep cache | busybox awk -F ':' {'prin
 busybox mknod -m 600 /dev/block/mtdblock${MTDCACHE} b 31 $MTDCACHE
 
 # leds & backlight configuration
-BOOTREC_LED_RED="/sys/class/leds/red"
-BOOTREC_LED_GREEN="/sys/class/leds/green"
-BOOTREC_LED_BLUE="/sys/class/leds/blue"
-BOOTREC_LED_BUTTONS="/sys/class/leds/button-backlight"
-BOOTREC_LED_LCD="/sys/class/leds/lcd-backlight"
-
-busybox echo ${BOOTREC_LED_RED_CURRENT} > ${BOOTREC_LED_RED}/max_current
-busybox echo ${BOOTREC_LED_GREEN_CURRENT} > ${BOOTREC_LED_GREEN}/max_current
-busybox echo ${BOOTREC_LED_BLUE_CURRENT} > ${BOOTREC_LED_BLUE}/max_current
-busybox echo ${BOOTREC_LED_BUTTONS_CURRENT} > ${BOOTREC_LED_BUTTONS}/max_current
-busybox echo ${BOOTREC_LED_LCD_CURRENT} > ${BOOTREC_LED_LCD}/max_current
-busybox echo ${BOOTREC_LED_LCD_MODE} > ${BOOTREC_LED_LCD}/mode
+BOOTREC_LED_RED="/sys/class/leds/red/brightness"
+BOOTREC_LED_GREEN="/sys/class/leds/green/brightness"
+BOOTREC_LED_BLUE="/sys/class/leds/blue/brightness"
+BOOTREC_LED_BUTTONS="/sys/class/leds/button-backlight/brightness"
 
 keypad_input=''
 for input in `busybox ls -d /sys/class/input/input*`
@@ -63,14 +52,17 @@ do
 done
 
 # trigger amber LED & button-backlight
-busybox echo 255 > ${BOOTREC_LED_RED}/brightness
-busybox echo 0 > ${BOOTREC_LED_GREEN}/brightness
-busybox echo 255 > ${BOOTREC_LED_BLUE}/brightness
-busybox echo 255 > ${BOOTREC_LED_BUTTONS}/brightness
+busybox echo 255 > ${BOOTREC_LED_RED}
+busybox echo 0 > ${BOOTREC_LED_GREEN}
+busybox echo 255 > ${BOOTREC_LED_BLUE}
+busybox echo 255 > ${BOOTREC_LED_BUTTONS}
 
 # keycheck
 busybox cat /dev/input/event${keypad_input} > /dev/keycheck&
+busybox echo $! > /dev/keycheck.pid
 busybox sleep 3
+echo 30 > /sys/class/timed_output/vibrator/enable
+busybox kill -9 $(cat /dev/keycheck.pid)
 
 # mount cache
 busybox mount -t yaffs2 /dev/block/mtdblock${MTDCACHE} /cache
@@ -84,10 +76,10 @@ then
 	busybox echo 'RECOVERY BOOT' >>boot.txt
 	busybox rm -fr /cache/recovery/boot
 	# trigger blue led
-	busybox echo 0 > ${BOOTREC_LED_RED}/brightness
-	busybox echo 0 > ${BOOTREC_LED_GREEN}/brightness
-	busybox echo 255 > ${BOOTREC_LED_BLUE}/brightness
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS}/brightness
+	busybox echo 0 > ${BOOTREC_LED_RED}
+	busybox echo 0 > ${BOOTREC_LED_GREEN}
+	busybox echo 255 > ${BOOTREC_LED_BLUE}
+	busybox echo 0 > ${BOOTREC_LED_BUTTONS}
 	# framebuffer fix
 	busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
 	# recovery ramdisk
@@ -95,16 +87,13 @@ then
 else
 	busybox echo 'ANDROID BOOT' >>boot.txt
 	# poweroff LED & button-backlight
-	busybox echo 0 > ${BOOTREC_LED_RED}/brightness
-	busybox echo 0 > ${BOOTREC_LED_GREEN}/brightness
-	busybox echo 0 > ${BOOTREC_LED_BLUE}/brightness
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS}/brightness
+	busybox echo 0 > ${BOOTREC_LED_RED}
+	busybox echo 0 > ${BOOTREC_LED_GREEN}
+	busybox echo 0 > ${BOOTREC_LED_BLUE}
+	busybox echo 0 > ${BOOTREC_LED_BUTTONS}
 	# framebuffer fix
 	busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
 fi
-
-# kill the keycheck process
-busybox pkill -f "busybox cat ${BOOTREC_EVENT}"
 
 # unpack the ramdisk image
 busybox cpio -i < ${load_image}
