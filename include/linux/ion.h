@@ -2,7 +2,7 @@
  * include/linux/ion.h
  *
  * Copyright (C) 2011 Google, Inc.
- * Copyright (c) 2011-2012, Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -59,6 +59,7 @@ enum ion_heap_type {
 					   cached, ion will do cache
 					   maintenance when the buffer is
 					   mapped for dma */
+#define ION_IOMMU_UNMAP_DELAYED 1
 
 #ifdef __KERNEL__
 #include <linux/err.h>
@@ -227,9 +228,11 @@ struct sg_table *ion_sg_table(struct ion_client *client,
  * ion_map_kernel - create mapping for the given handle
  * @client:	the client
  * @handle:	handle to map
+ * @flags:	flags for this mapping
  *
  * Map the given handle into the kernel and return a kernel address that
- * can be used to access this address.
+ * can be used to access this address. If no flags are specified, this
+ * will return a non-secure uncached mapping.
  */
 void *ion_map_kernel(struct ion_client *client, struct ion_handle *handle);
 
@@ -421,7 +424,7 @@ static inline struct sg_table *ion_sg_table(struct ion_client *client,
 }
 
 static inline void *ion_map_kernel(struct ion_client *client,
-	struct ion_handle *handle)
+	struct ion_handle *handle/*, unsigned long flags*/)
 {
 	return ERR_PTR(-ENODEV);
 }
@@ -452,12 +455,6 @@ static inline int ion_map_iommu(struct ion_client *client,
 			unsigned long *buffer_size,
 			unsigned long flags,
 			unsigned long iommu_flags)
-{
-	return -ENODEV;
-}
-
-static inline int ion_handle_get_size(struct ion_client *client,
-				struct ion_handle *handle, unsigned long *size)
 {
 	return -ENODEV;
 }

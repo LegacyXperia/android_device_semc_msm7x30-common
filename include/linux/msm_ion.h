@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -39,10 +39,8 @@ enum ion_heap_ids {
 	ION_CP_MFC_HEAP_ID = 12,
 	ION_CP_WB_HEAP_ID = 16, /* 8660 only */
 	ION_CAMERA_HEAP_ID = 20, /* 8660 only */
-	ION_PIL1_HEAP_ID = 23, /* Currently used for other PIL images */
 	ION_SF_HEAP_ID = 24,
 	ION_IOMMU_HEAP_ID = 25,
-	ION_PIL2_HEAP_ID = 26, /* Currently used for modem firmware images */
 	ION_QSECOM_HEAP_ID = 27,
 	ION_AUDIO_HEAP_ID = 28,
 
@@ -75,13 +73,6 @@ enum cp_mem_usage {
 #define ION_SECURE (1 << ION_HEAP_ID_RESERVED)
 
 /**
- * Flag for clients to force contiguous memort allocation
- *
- * Use of this flag is carefully monitored!
- */
-#define ION_FORCE_CONTIGUOUS (1 << 30)
-
-/**
  * Macro should be used with ion_heap_ids defined above.
  */
 #define ION_HEAP(bit) (1 << (bit))
@@ -95,8 +86,6 @@ enum cp_mem_usage {
 #define ION_MFC_HEAP_NAME	"mfc"
 #define ION_WB_HEAP_NAME	"wb"
 #define ION_MM_FIRMWARE_HEAP_NAME	"mm_fw"
-#define ION_PIL1_HEAP_NAME  "pil_1"
-#define ION_PIL2_HEAP_NAME  "pil_2"
 #define ION_QSECOM_HEAP_NAME	"qsecom"
 #define ION_FMEM_HEAP_NAME	"fmem"
 
@@ -112,12 +101,6 @@ enum cp_mem_usage {
  * defer un-mapping from the IOMMU until the buffer memory is freed.
  */
 #define ION_IOMMU_UNMAP_DELAYED 1
-
-/*
- * This flag allows clients to defer unsecuring a buffer until the buffer
- * is actually freed.
- */
-#define ION_UNSECURE_DELAYED	1
 
 /**
  * struct ion_cp_heap_pdata - defines a content protection heap in the given
@@ -236,26 +219,6 @@ int msm_ion_secure_heap_2_0(int heap_id, enum cp_mem_usage usage);
  * Returns 0 on success
  */
 int msm_ion_unsecure_heap_2_0(int heap_id, enum cp_mem_usage usage);
-
-/**
- * msm_ion_secure_buffer - secure an individual buffer
- *
- * @client - client who has access to the buffer
- * @handle - buffer to secure
- * @usage - usage hint to TZ
- * @flags - flags for the securing
- */
-int msm_ion_secure_buffer(struct ion_client *client, struct ion_handle *handle,
-				enum cp_mem_usage usage, int flags);
-
-/**
- * msm_ion_unsecure_buffer - unsecure an individual buffer
- *
- * @client - client who has access to the buffer
- * @handle - buffer to secure
- */
-int msm_ion_unsecure_buffer(struct ion_client *client,
-				struct ion_handle *handle);
 #else
 static inline int msm_ion_secure_heap(int heap_id)
 {
