@@ -19,6 +19,8 @@
 # application settings that are stored in resourced.
 DEVICE_PACKAGE_OVERLAYS += device/semc/msm7x30-common/overlay
 
+COMMON_PATH := device/semc/msm7x30-common
+
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # These are the common hardware-specific features
@@ -37,16 +39,27 @@ PRODUCT_COPY_FILES += \
 
 # Common device specific configs
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x30-common/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
-    device/semc/msm7x30-common/prebuilt/media_codecs.xml:system/etc/media_codecs.xml \
-    device/semc/msm7x30-common/prebuilt/audio_policy.conf:system/etc/audio_policy.conf \
-    device/semc/msm7x30-common/prebuilt/10hostapconf:system/etc/init.d/10hostapconf \
-    device/semc/msm7x30-common/prebuilt/10dhcpcd:system/etc/init.d/10dhcpcd \
-    device/semc/msm7x30-common/prebuilt/ueventd.semc.rc:root/ueventd.semc.rc \
-    device/semc/msm7x30-common/prebuilt/vold.fstab:system/etc/vold.fstab \
-    device/semc/msm7x30-common/prebuilt/fstab:root/fstab \
-    device/semc/msm7x30-common/prebuilt/fstab.semc:root/fstab.semc \
-    device/semc/msm7x30-common/prebuilt/postrecoveryboot.sh:root/sbin/postrecoveryboot.sh
+    $(COMMON_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
+    $(COMMON_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
+    $(COMMON_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    $(COMMON_PATH)/rootdir/system/etc/init.d/10hostapconf:system/etc/init.d/10hostapconf \
+    $(COMMON_PATH)/rootdir/system/etc/init.d/10dhcpcd:system/etc/init.d/10dhcpcd \
+    $(COMMON_PATH)/rootdir/system/etc/vold.fstab:system/etc/vold.fstab \
+    $(COMMON_PATH)/rootdir/fstab:root/fstab \
+    $(COMMON_PATH)/rootdir/fstab.semc:root/fstab.semc \
+    $(COMMON_PATH)/rootdir/ueventd.semc.rc:root/ueventd.semc.rc \
+    $(COMMON_PATH)/rootdir/sbin/postrecoveryboot.sh:root/sbin/postrecoveryboot.sh
+
+# Offline charging animation & boot logo
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/animations/charging_animation_01_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_01.png \
+    $(COMMON_PATH)/animations/charging_animation_02_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_02.png \
+    $(COMMON_PATH)/animations/charging_animation_03_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_03.png \
+    $(COMMON_PATH)/animations/charging_animation_04_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_04.png \
+    $(COMMON_PATH)/animations/charging_animation_05_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_05.png \
+    $(COMMON_PATH)/animations/charging_animation_06_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_06.png \
+    $(COMMON_PATH)/animations/charging_animation_07_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_07.png \
+    $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).rle:root/initlogo.rle
 
 # Audio
 PRODUCT_PACKAGES += \
