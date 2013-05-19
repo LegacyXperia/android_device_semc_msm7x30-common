@@ -46,7 +46,7 @@ TARGET_USES_ION := false
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_NO_HW_VSYNC := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
-BOARD_EGL_CFG := device/semc/msm7x30-common/prebuilt/egl.cfg
+BOARD_EGL_CFG := device/semc/msm7x30-common/rootdir/system/etc/egl.cfg
 
 # Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
