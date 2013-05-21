@@ -46,7 +46,7 @@ char const*const BUTTON_BACKLIGHT_FILE[] = {
 char const*const KEYBOARD_BACKLIGHT_FILE[] = {
   "/sys/class/leds/keyboard-backlight/brightness",
   "/sys/class/leds/keyboard-backlight-rgb1/brightness",
-  "/sys/class/leds/keyboard-backlight-rgb2/brightness",
+  "/sys/class/leds/keyboard-backlight-rgb2/brightness"
 };
 
 char const*const ALS_FILE = "/sys/devices/i2c-0/0-0040/als_on";
@@ -54,7 +54,7 @@ char const*const ALS_FILE = "/sys/devices/i2c-0/0-0040/als_on";
 char const*const LED_FILE_TRIGGER[]  = {
   "/sys/class/leds/red/use_pattern",
   "/sys/class/leds/green/use_pattern",
-  "/sys/class/leds/blue/use_pattern",
+  "/sys/class/leds/blue/use_pattern"
 };
 
 char const*const LED_FILE_PATTERN     = "/sys/devices/i2c-0/0-0040/pattern_data";
@@ -63,7 +63,7 @@ char const*const LED_FILE_PATTERNLEN  = "/sys/devices/i2c-0/0-0040/pattern_durat
 char const*const LED_FILE_DIMONOFF    = "/sys/devices/i2c-0/0-0040/pattern_use_softdim";
 char const*const LED_FILE_DIMTIME     = "/sys/devices/i2c-0/0-0040/dim_time";
 
-const int LCD_BRIGHTNESS_MIN = "10";
+const int LCD_BRIGHTNESS_MIN = 10;
 
 char const*const ON  = "1";
 char const*const OFF = "0";
@@ -168,6 +168,7 @@ static int set_light_backlight (struct light_device_t *dev, struct light_state_t
 	err = write_int (ALS_FILE, enable);
 	err |= write_int (LCD_BACKLIGHT_FILE, brightness);
 	pthread_mutex_unlock(&g_lock);
+
 	return err;
 }
 
@@ -185,9 +186,8 @@ static int set_light_buttons (struct light_device_t *dev, struct light_state_t c
 	return 0;
 }
 
-static int set_light_keyboard(struct light_device_t* dev, struct light_state_t const* state) {
+static int set_light_keyboard (struct light_device_t* dev, struct light_state_t const* state) {
 	size_t i = 0;
-	int err = 0;
 	int on = is_lit(state);
 	pthread_mutex_lock(&g_lock);
 
@@ -197,11 +197,12 @@ static int set_light_keyboard(struct light_device_t* dev, struct light_state_t c
 
 	pthread_mutex_unlock(&g_lock);
 
-	return err;
+	return 0;
 }
 
 static void set_shared_light_locked (struct light_device_t *dev, struct light_state_t *state) {
 	int r, g, b, i;
+
 	uint32_t pattern = 0;
 	uint32_t patbits = 0;
 	uint32_t numbits, delayshift;
@@ -252,12 +253,12 @@ static void set_shared_light_locked (struct light_device_t *dev, struct light_st
 	case LIGHT_FLASH_HARDWARE:
 		for (i = 0; i < sizeof(LED_FILE_TRIGGER)/sizeof(LED_FILE_TRIGGER[0]); i++) {
 			write_string (LED_FILE_TRIGGER[i], ON);
-			write_string (LED_FILE_DIMONOFF, ON);
-			write_int (LED_FILE_DIMTIME, numbits * 125);
-			write_string (LED_FILE_PATTERN, patternstr);
-			write_int (LED_FILE_PATTERNLEN, 8);
-			write_int (LED_FILE_REPEATDELAY, 0);
 		}
+		write_string (LED_FILE_DIMONOFF, ON);
+		write_int (LED_FILE_DIMTIME, numbits * 125);
+		write_string (LED_FILE_PATTERN, patternstr);
+		write_int (LED_FILE_PATTERNLEN, 8);
+		write_int (LED_FILE_REPEATDELAY, 0);
 		break;
 
 	case LIGHT_FLASH_NONE:
