@@ -60,7 +60,7 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/animations/charging_animation_05_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_05.png \
     $(COMMON_PATH)/animations/charging_animation_06_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_06.png \
     $(COMMON_PATH)/animations/charging_animation_07_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_07.png \
-    $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).rle:root/initlogo.rle
+    $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).rle:root/logo.rle
 
 # Audio
 PRODUCT_PACKAGES += \
