@@ -23,6 +23,8 @@ COMMON_PATH := device/semc/msm7x30-common
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
+$(call inherit-product, device/common/gps/gps_eu_supl.mk)
+
 # These are the common hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
