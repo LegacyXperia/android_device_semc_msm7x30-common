@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
  * Copyright (C) 2011 Diogo Ferreira <defer@cyanogenmod.com>
- * Copyright (C) 2012 The CyanogenMod Project <http://www.cyanogenmod.org>
+ * Copyright (C) 2012-2013 The CyanogenMod Project <http://www.cyanogenmod.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,48 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <pthread.h>
+#include <math.h>
 
 #include <sys/ioctl.h>
 #include <sys/types.h>
 
 #include <hardware/lights.h>
-#include "lights.h"
+
+char const*const LCD_BACKLIGHT_FILE = "/sys/class/leds/lcd-backlight/brightness";
+char const*const RED_LED_FILE       = "/sys/class/leds/red/brightness";
+char const*const GREEN_LED_FILE     = "/sys/class/leds/green/brightness";
+char const*const BLUE_LED_FILE      = "/sys/class/leds/blue/brightness";
+
+char const*const BUTTON_BACKLIGHT_FILE[] = {
+  "/sys/class/leds/button-backlight/brightness",
+  "/sys/class/leds/button-backlight-rgb1/brightness",
+  "/sys/class/leds/button-backlight-rgb2/brightness"
+};
+
+char const*const KEYBOARD_BACKLIGHT_FILE[] = {
+  "/sys/class/leds/keyboard-backlight/brightness",
+  "/sys/class/leds/keyboard-backlight-rgb1/brightness",
+  "/sys/class/leds/keyboard-backlight-rgb2/brightness",
+};
+
+char const*const ALS_FILE = "/sys/devices/i2c-0/0-0040/als_on";
+
+char const*const LED_FILE_TRIGGER[]  = {
+  "/sys/class/leds/red/use_pattern",
+  "/sys/class/leds/green/use_pattern",
+  "/sys/class/leds/blue/use_pattern",
+};
+
+char const*const LED_FILE_PATTERN     = "/sys/devices/i2c-0/0-0040/pattern_data";
+char const*const LED_FILE_REPEATDELAY = "/sys/devices/i2c-0/0-0040/pattern_delay";
+char const*const LED_FILE_PATTERNLEN  = "/sys/devices/i2c-0/0-0040/pattern_duration_secs";
+char const*const LED_FILE_DIMONOFF    = "/sys/devices/i2c-0/0-0040/pattern_use_softdim";
+char const*const LED_FILE_DIMTIME     = "/sys/devices/i2c-0/0-0040/dim_time";
+
+const int LCD_BRIGHTNESS_MIN = "10";
+
+char const*const ON  = "1";
+char const*const OFF = "0";
 
 /* Synchronization primities */
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
@@ -101,13 +137,35 @@ static int rgb_to_brightness (struct light_state_t const* state) {
 			+ (150*((color>>8)&0x00ff)) + (29*(color&0x00ff))) >> 8;
 }
 
+static int brightness_apply_gamma (int brightness) {
+	double floatbrt = (double) brightness;
+	floatbrt /= 255.0;
+	ALOGV("%s: brightness = %d, floatbrt = %f", __func__, brightness, floatbrt);
+	floatbrt = pow(floatbrt,2.2);
+	ALOGV("%s: gamma corrected floatbrt = %f", __func__, floatbrt);
+	floatbrt *= 255.0;
+	brightness = (int) floatbrt;
+	if (brightness < LCD_BRIGHTNESS_MIN)
+		brightness = LCD_BRIGHTNESS_MIN;
+	ALOGV("%s: gamma corrected brightness = %d", __func__, brightness);
+	return brightness;
+}
+
 /* The actual lights controlling section */
 static int set_light_backlight (struct light_device_t *dev, struct light_state_t const *state) {
 	int err = 0;
+	int enable = 0;
 	int brightness = rgb_to_brightness(state);
 
-	ALOGV("%s brightness=%d", __func__, brightness);
+	if(brightness > 0)
+		brightness = brightness_apply_gamma(brightness);
+
+	if ((state->brightnessMode == BRIGHTNESS_MODE_SENSOR) && (brightness > 0))
+		enable = 1;
+
+	ALOGV("%s brightness = %d", __func__, brightness);
 	pthread_mutex_lock(&g_lock);
+	err = write_int (ALS_FILE, enable);
 	err |= write_int (LCD_BACKLIGHT_FILE, brightness);
 	pthread_mutex_unlock(&g_lock);
 	return err;
@@ -128,39 +186,85 @@ static int set_light_buttons (struct light_device_t *dev, struct light_state_t c
 }
 
 static int set_light_keyboard(struct light_device_t* dev, struct light_state_t const* state) {
+	size_t i = 0;
 	int err = 0;
 	int on = is_lit(state);
 	pthread_mutex_lock(&g_lock);
-	err = write_int(KEYBOARD_BACKLIGHT_FILE, on?255:0);
+
+	for (i = 0; i < sizeof(KEYBOARD_BACKLIGHT_FILE)/sizeof(KEYBOARD_BACKLIGHT_FILE[0]); i++) {
+		write_int (KEYBOARD_BACKLIGHT_FILE[i], on ? 255 : 0);
+	}
+
 	pthread_mutex_unlock(&g_lock);
+
 	return err;
 }
 
 static void set_shared_light_locked (struct light_device_t *dev, struct light_state_t *state) {
 	int r, g, b, i;
-	int delayOn,delayOff;
+	uint32_t pattern = 0;
+	uint32_t patbits = 0;
+	uint32_t numbits, delayshift;
+
+	char patternstr[11];
+
+	ALOGV("color 0x%x", state->color);
 
 	r = (state->color >> 16) & 0xFF;
 	g = (state->color >> 8) & 0xFF;
 	b = (state->color) & 0xFF;
 
-	delayOn = state->flashOnMS;
-	delayOff = state->flashOffMS;
+	ALOGV("flashOn = %d, flashOff = %d", state->flashOnMS, state->flashOffMS);
+
+	if (state->flashOnMS == 1)
+		state->flashMode = LIGHT_FLASH_NONE;
+	else {
+		numbits = state->flashOnMS / 250;
+		delayshift = state->flashOffMS / 250;
+
+		// Make sure we never do 0 on time
+		if (numbits == 0)
+			numbits = 1;
+
+		// Always make sure period is >2x the on time, we don't support
+		// more than 50% duty cycle
+		if (delayshift < numbits * 2)
+			delayshift = numbits * 2;
+
+		ALOGV("numbits = %d, delayshift = %d", numbits, delayshift);
+
+		patbits = ((uint32_t)1 << numbits) - 1;
+		ALOGV("patbits = 0x%x", patbits);
+
+		for (i = 0; i < 32; i += delayshift) {
+			pattern = pattern | (patbits << i);
+		}
+
+		ALOGV("pattern = 0x%x", pattern);
+
+		snprintf(patternstr, 11, "0x%x", pattern);
+
+		ALOGV("patternstr = %s", patternstr);
+	}
 
 	switch (state->flashMode) {
 	case LIGHT_FLASH_TIMED:
 	case LIGHT_FLASH_HARDWARE:
 		for (i = 0; i < sizeof(LED_FILE_TRIGGER)/sizeof(LED_FILE_TRIGGER[0]); i++) {
-			write_string (LED_FILE_TRIGGER[i], "timer");
-			write_int (LED_FILE_DELAYON[i], delayOn);
-			write_int (LED_FILE_DELAYOFF[i], delayOff);
+			write_string (LED_FILE_TRIGGER[i], ON);
+			write_string (LED_FILE_DIMONOFF, ON);
+			write_int (LED_FILE_DIMTIME, numbits * 125);
+			write_string (LED_FILE_PATTERN, patternstr);
+			write_int (LED_FILE_PATTERNLEN, 8);
+			write_int (LED_FILE_REPEATDELAY, 0);
 		}
 		break;
 
 	case LIGHT_FLASH_NONE:
 		for (i = 0; i < sizeof(LED_FILE_TRIGGER)/sizeof(LED_FILE_TRIGGER[0]); i++) {
-			write_string (LED_FILE_TRIGGER[i], "none");
+			write_string (LED_FILE_TRIGGER[i], OFF);
 		}
+		write_string (LED_FILE_DIMONOFF, OFF);
 		break;
 	}
 
@@ -247,6 +351,6 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
 	.version_minor	= 0,
 	.id		= LIGHTS_HARDWARE_MODULE_ID,
 	.name		= "SEMC lights module",
-	.author		= "Diogo Ferreira <defer@cyanogenmod.com>",
+	.author		= "Diogo Ferreira <defer@cyanogenmod.com>, Andreas Makris <Andreas.Makris@gmail.com>",
 	.methods	= &lights_module_methods,
 };
