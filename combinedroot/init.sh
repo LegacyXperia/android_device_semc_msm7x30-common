@@ -40,6 +40,8 @@ BOOTREC_LED_RED="/sys/class/leds/red/brightness"
 BOOTREC_LED_GREEN="/sys/class/leds/green/brightness"
 BOOTREC_LED_BLUE="/sys/class/leds/blue/brightness"
 BOOTREC_LED_BUTTONS="/sys/class/leds/button-backlight/brightness"
+BOOTREC_LED_BUTTONS_RGB1="/sys/class/leds/button-backlight-rgb1/brightness"
+BOOTREC_LED_BUTTONS_RGB2="/sys/class/leds/button-backlight-rgb2/brightness"
 
 keypad_input=''
 for input in `busybox ls -d /sys/class/input/input*`
@@ -56,6 +58,8 @@ busybox echo 255 > ${BOOTREC_LED_RED}
 busybox echo 0 > ${BOOTREC_LED_GREEN}
 busybox echo 255 > ${BOOTREC_LED_BLUE}
 busybox echo 255 > ${BOOTREC_LED_BUTTONS}
+busybox echo 255 > ${BOOTREC_LED_BUTTONS_RGB1}
+busybox echo 255 > ${BOOTREC_LED_BUTTONS_RGB2}
 
 # keycheck
 busybox cat /dev/input/event${keypad_input} > /dev/keycheck&
@@ -80,6 +84,8 @@ then
 	busybox echo 0 > ${BOOTREC_LED_GREEN}
 	busybox echo 255 > ${BOOTREC_LED_BLUE}
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS}
+	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB1}
+	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB2}
 	# framebuffer fix
 	busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
 	# recovery ramdisk
@@ -91,6 +97,8 @@ else
 	busybox echo 0 > ${BOOTREC_LED_GREEN}
 	busybox echo 0 > ${BOOTREC_LED_BLUE}
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS}
+	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB1}
+	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB2}
 	# framebuffer fix
 	busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
 fi
