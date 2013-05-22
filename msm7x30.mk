@@ -65,18 +65,17 @@ PRODUCT_COPY_FILES += \
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
+    audio.usb.default \
     audio.primary.msm7x30 \
-    audio_policy.msm7x30
+    audio_policy.msm7x30 \
+    libaudio-resampler \
+    libaudioparameter
 
 # Graphics
 PRODUCT_PACKAGES += \
     gralloc.msm7x30 \
     copybit.msm7x30 \
-    hwcomposer.msm7x30 \
-    libgenlock \
-    libtilerenderer \
-    libmemalloc \
-    liboverlay
+    hwcomposer.msm7x30
 
 # Hal
 PRODUCT_PACKAGES += \
@@ -93,7 +92,7 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libmm-omxcore \
-    libdivxdrmdecrypt
+    libc2dcolorconvert
 
 # Misc
 PRODUCT_PACKAGES += \
@@ -107,37 +106,5 @@ PRODUCT_PACKAGES += \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-
-# Common device properties
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072 \
-    rild.libpath=/system/lib/libril-qc-1.so \
-    rild.libargs=-d/dev/smd0 \
-    ro.ril.hsxpa=1 \
-    ro.ril.gprsclass=10 \
-    ro.ril.def.agps.mode=2 \
-    ro.ril.def.agps.feature=1 \
-    ro.telephony.call_ring.multiple=false \
-    wifi.supplicant_scan_interval=15 \
-    keyguard.no_require_sim=true \
-    ro.com.google.locationfeatures=1 \
-    ro.product.locale.language=en \
-    ro.product.locale.region=US \
-    persist.ro.ril.sms_sync_sending=1 \
-    ro.use_data_netmgrd=true \
-    ro.tethering.kb_disconnect=1 \
-    com.qc.hardware=true \
-    debug.sf.hw=1 \
-    debug.composition.type=gpu \
-    hwui.render_dirty_regions=false \
-    hwui.disable_vsync=true \
-    debug.mdpcomp.logs=0 \
-    BUILD_UTC_DATE=0 \
-    persist.sys.usb.config=mtp,adb \
-    ro.vold.umsdirtyratio=20 \
-    debug.camcorder.disablemeta=1 \
-    ro.debuggable=1 \
-    persist.sys.strictmode.visual=0 \
-    persist.sys.strictmode.disable=1
 
 $(call inherit-product-if-exists, vendor/semc/msm7x30-common/msm7x30-common-vendor.mk)
