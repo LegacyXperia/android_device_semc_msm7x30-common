@@ -79,10 +79,9 @@ PRODUCT_PACKAGES += \
 
 # Hal
 PRODUCT_PACKAGES += \
-    power.semc \
-    gps.semc \
-    lights.semc \
-    camera.semc \
+    power.msm7x30 \
+    gps.msm7x30 \
+    lights.msm7x30 \
     sensors.default
 
 # QCOM OMX
