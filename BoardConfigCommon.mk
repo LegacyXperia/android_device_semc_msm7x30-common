@@ -12,7 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# WARNING: This line must come *before* including the proprietary
+# variant, so that it gets overwritten by the parent (which goes
+# against the traditional rules of inheritance).
 USE_CAMERA_STUB := true
+
+# inherit from the proprietary version
+-include vendor/semc/msm7x30-common/BoardConfigVendor.mk
+
 TARGET_SPECIFIC_HEADER_PATH := device/semc/msm7x30-common/include
 
 # Platform
@@ -24,17 +31,14 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a8
-ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
-
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
 # QCOM Hardware
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_GPS := true
-BOARD_USES_QCOM_LIBS := true
-BOARD_USES_QCOM_LIBRPC := true
+#BOARD_USES_QCOM_LIBS := true
+#BOARD_USES_QCOM_LIBRPC := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 
 # Display
 TARGET_QCOM_DISPLAY_VARIANT := legacy
@@ -43,8 +47,8 @@ USE_OPENGL_RENDERER := true
 TARGET_USES_ION := false
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_NO_HW_VSYNC := true
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
 BOARD_EGL_CFG := device/semc/msm7x30-common/rootdir/system/etc/egl.cfg
+TARGET_NO_INITLOGO := true
 
 # Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
@@ -71,11 +75,7 @@ BOARD_NEEDS_MEMORYHEAPPMEM := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_CUSTOM_BOOTIMG_MK := device/semc/msm7x30-common/custombootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
-BOARD_HAS_SMALL_RECOVERY := true
-BOARD_HAS_NO_MISC_PARTITION := true
-BOARD_USES_RECOVERY_CHARGEMODE := false
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/msm7x30-common/recovery/recovery_keys.c
-BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 
@@ -84,7 +84,6 @@ TARGET_KERNEL_SOURCE := kernel/semc/msm7x30
 #TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 BOARD_KERNEL_CMDLINE := console=null
 BOARD_KERNEL_BASE := 0x00200000
-BOARD_RECOVERY_BASE := 0x00200000
 TARGET_NO_BOOTLOADER := true
 COMMON_GLOBAL_CFLAGS += -DHAS_SEMC_BOOTLOADER
 
