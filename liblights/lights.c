@@ -44,9 +44,10 @@ char const*const BUTTON_BACKLIGHT_FILE[] = {
 };
 
 char const*const KEYBOARD_BACKLIGHT_FILE[] = {
-  "/sys/class/leds/keyboard-backlight/brightness",
   "/sys/class/leds/keyboard-backlight-rgb1/brightness",
-  "/sys/class/leds/keyboard-backlight-rgb2/brightness"
+  "/sys/class/leds/keyboard-backlight-rgb2/brightness",
+  "/sys/class/leds/keyboard-backlight-rgb3/brightness",
+  "/sys/class/leds/keyboard-backlight-rgb4/brightness"
 };
 
 char const*const ALS_FILE = "/sys/devices/i2c-0/0-0040/als_on";
