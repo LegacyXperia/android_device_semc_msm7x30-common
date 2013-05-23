@@ -105,4 +105,62 @@ PRODUCT_PACKAGES += \
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
+# Common device properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/system/lib/libril-qc-1.so \
+    rild.libargs=-d/dev/smd0 \
+    ro.ril.hsxpa=1 \
+    ro.ril.gprsclass=10 \
+    ro.telephony.call_ring.multiple=false \
+    persist.ro.ril.sms_sync_sending=1 \
+    ro.ril.def.agps.mode=2 \
+    ro.ril.def.agps.feature=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.supplicant_scan_interval=15 \
+    keyguard.no_require_sim=true \
+    ro.com.google.locationfeatures=1 \
+    ro.product.locale.language=en \
+    ro.product.locale.region=US \
+    ro.use_data_netmgrd=true \
+    ro.tethering.kb_disconnect=1
+
+# The OpenGL ES API level that is natively supported by this device.
+# This is a 16.16 fixed point number.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=131072
+
+# QCOM
+PRODUCT_PROPERTY_OVERRIDES += \
+    com.qc.hardware=true \
+    debug.sf.hw=1 \
+    debug.egl.hw=1 \
+    debug.mdpcomp.logs=0 \
+    hwui.disable_vsync=true
+#    debug.composition.type=gpu
+#    hwui.render_dirty_regions=false
+
+# Low Power Audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    lpa.decode=false \
+    lpa.use-stagefright=false \
+    use.non-omx.mp3.decoder=true
+
+# Set default USB interface
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp,adb
+
+# Increase speed for UMS transfer
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vold.umsdirtyratio=50
+
+# Fix camcorder
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.camcorder.disablemeta=1
+
+# Extra debugging props
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.strictmode.visual=0 \
+    persist.sys.strictmode.disable=1
+
 $(call inherit-product-if-exists, vendor/semc/msm7x30-common/msm7x30-common-vendor.mk)
