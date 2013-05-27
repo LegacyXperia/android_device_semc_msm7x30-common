@@ -59,14 +59,14 @@
     <integer-array name="config_autoBrightnessLcdBacklightValues">
         <item>10</item>
         <item>20</item>
-        <item>59</item>
-        <item>110</item>
-        <item>142</item>
-        <item>159</item>
-        <item>174</item>
+        <item>45</item>
+        <item>70</item>
+        <item>100</item>
+        <item>125</item>
+        <item>150</item>
+        <item>175</item>
         <item>200</item>
-        <item>228</item>
-        <item>253</item>
+        <item>225</item>
         <item>255</item>
     </integer-array>
 
