@@ -285,6 +285,7 @@ static void dispatchNVWriteItem(Parcel &p, RequestInfo *pRI);
 static void dispatchUiccSubscripton(Parcel &p, RequestInfo *pRI);
 static void dispatchSimAuthentication(Parcel &p, RequestInfo *pRI);
 static void dispatchDataProfile(Parcel &p, RequestInfo *pRI);
+static void dispatchNetworkManual (Parcel& p, RequestInfo *pRI);
 static int responseInts(Parcel &p, void *response, size_t responselen);
 static int responseStrings(Parcel &p, void *response, size_t responselen);
 static int responseString(Parcel &p, void *response, size_t responselen);
@@ -622,6 +623,45 @@ dispatchStrings (Parcel &p, RequestInfo *pRI) {
 
     if (pStrings != NULL) {
         for (int i = 0 ; i < countStrings ; i++) {
+#ifdef MEMSET_FREED
+            memsetString (pStrings[i]);
+#endif
+            free(pStrings[i]);
+        }
+
+#ifdef MEMSET_FREED
+        memset(pStrings, 0, datalen);
+#endif
+    }
+
+    return;
+invalid:
+    invalidCommandBlock(pRI);
+    return;
+}
+
+/** Callee expects const char * */
+static void
+dispatchNetworkManual (Parcel& p, RequestInfo *pRI) {
+    status_t status;
+    size_t datalen;
+    char **pStrings;
+
+    datalen = sizeof(char *) * 2;
+
+    startRequest;
+    pStrings = (char **)alloca(datalen);
+
+    pStrings[0] = strdupReadString(p);
+    appendPrintBuf("%s%s,", printBuf, pStrings[0]);
+    pStrings[1] = strdup("NOCHANGE");
+    closeRequest;
+    printRequest(pRI->token, pRI->pCI->requestNumber);
+
+    s_callbacks.onRequest(pRI->pCI->requestNumber, pStrings, datalen, pRI);
+
+    if (pStrings != NULL) {
+        for (int i = 0 ; i < 2 ; i++) {
 #ifdef MEMSET_FREED
             memsetString (pStrings[i]);
 #endif
