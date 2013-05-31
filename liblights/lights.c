@@ -179,25 +179,15 @@ static int set_light_backlight (struct light_device_t *dev, struct light_state_t
 static int set_light_buttons (struct light_device_t *dev, struct light_state_t const* state) {
 	size_t i = 0;
 	int on = is_lit(state);
-	char button_brightness[PROPERTY_VALUE_MAX];
 	int brightness = rgb_to_brightness(state);
 
-	property_get("persist.sys.button_brightness", button_brightness, NULL);
-
-	if (brightness > 0) {
-		if (strcmp(button_brightness, "off")) {
-			brightness = 0;
-		} else {
-			brightness = brightness_apply_gamma(brightness);
-		}
-	}
+	if (brightness > 0)
+		brightness = brightness_apply_gamma(brightness);
 
 	pthread_mutex_lock(&g_lock);
-
 	for (i = 0; i < sizeof(BUTTON_BACKLIGHT_FILE)/sizeof(BUTTON_BACKLIGHT_FILE[0]); i++) {
 		write_int (BUTTON_BACKLIGHT_FILE[i], on ? brightness : 0);
 	}
-
 	pthread_mutex_unlock(&g_lock);
 
 	return 0;
@@ -206,25 +196,15 @@ static int set_light_buttons (struct light_device_t *dev, struct light_state_t c
 static int set_light_keyboard (struct light_device_t* dev, struct light_state_t const* state) {
 	size_t i = 0;
 	int on = is_lit(state);
-	char keyboard_brightness[PROPERTY_VALUE_MAX];
 	int brightness = rgb_to_brightness(state);
 
-	property_get("persist.sys.keyboard_brightness", keyboard_brightness, NULL);
-
-	if (brightness > 0) {
-		if (strcmp(keyboard_brightness, "off")) {
-			brightness = 0;
-		} else {
-			brightness = brightness_apply_gamma(brightness);
-		}
-	}
+	if (brightness > 0)
+		brightness = brightness_apply_gamma(brightness);
 
 	pthread_mutex_lock(&g_lock);
-
 	for (i = 0; i < sizeof(KEYBOARD_BACKLIGHT_FILE)/sizeof(KEYBOARD_BACKLIGHT_FILE[0]); i++) {
 		write_int (KEYBOARD_BACKLIGHT_FILE[i], on ? brightness : 0);
 	}
-
 	pthread_mutex_unlock(&g_lock);
 
 	return 0;
