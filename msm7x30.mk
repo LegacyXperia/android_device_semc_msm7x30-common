@@ -136,8 +136,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
     debug.mdpcomp.logs=0 \
     hwui.disable_vsync=true
-#    debug.composition.type=gpu
-#    hwui.render_dirty_regions=false
 
 # Low Power Audio
 PRODUCT_PROPERTY_OVERRIDES += \
