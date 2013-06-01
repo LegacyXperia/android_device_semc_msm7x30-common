@@ -179,14 +179,10 @@ static int set_light_backlight (struct light_device_t *dev, struct light_state_t
 static int set_light_buttons (struct light_device_t *dev, struct light_state_t const* state) {
 	size_t i = 0;
 	int on = is_lit(state);
-	int brightness = rgb_to_brightness(state);
-
-	if (brightness > 0)
-		brightness = brightness_apply_gamma(brightness);
 
 	pthread_mutex_lock(&g_lock);
 	for (i = 0; i < sizeof(BUTTON_BACKLIGHT_FILE)/sizeof(BUTTON_BACKLIGHT_FILE[0]); i++) {
-		write_int (BUTTON_BACKLIGHT_FILE[i], on ? brightness : 0);
+		write_int (BUTTON_BACKLIGHT_FILE[i], on ? 255 : 0);
 	}
 	pthread_mutex_unlock(&g_lock);
 
@@ -196,14 +192,10 @@ static int set_light_buttons (struct light_device_t *dev, struct light_state_t c
 static int set_light_keyboard (struct light_device_t* dev, struct light_state_t const* state) {
 	size_t i = 0;
 	int on = is_lit(state);
-	int brightness = rgb_to_brightness(state);
-
-	if (brightness > 0)
-		brightness = brightness_apply_gamma(brightness);
 
 	pthread_mutex_lock(&g_lock);
 	for (i = 0; i < sizeof(KEYBOARD_BACKLIGHT_FILE)/sizeof(KEYBOARD_BACKLIGHT_FILE[0]); i++) {
-		write_int (KEYBOARD_BACKLIGHT_FILE[i], on ? brightness : 0);
+		write_int (KEYBOARD_BACKLIGHT_FILE[i], on ? 255 : 0);
 	}
 	pthread_mutex_unlock(&g_lock);
 
