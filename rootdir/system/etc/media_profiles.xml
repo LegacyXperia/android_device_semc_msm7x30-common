@@ -103,7 +103,7 @@
                    height="720"
                    frameRate="30" />
             <Audio codec="aac"
-                   bitRate="96000"
+                   bitRate="128000"
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile> -->
@@ -115,14 +115,14 @@
                    height="480"
                    frameRate="30" />
             <Audio codec="aac"
-                   bitRate="96000"
+                   bitRate="128000"
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile>
 
         <EncoderProfile quality="qvga" fileFormat="3gp" duration="60">
             <Video codec="h263"
-                   bitRate="96000"
+                   bitRate="128000"
                    width="320"
                    height="240"
                    frameRate="15" />
@@ -132,12 +132,12 @@
                    channels="1" />
         </EncoderProfile>
 
-        <EncoderProfile quality="qcif" fileFormat="3gp" duration="30">
-            <Video codec="h264"
-                   bitRate="256000"
+        <EncoderProfile quality="qcif" fileFormat="3gp" duration="20">
+            <Video codec="h263"
+                   bitRate="96000"
                    width="176"
                    height="144"
-                   frameRate="30" />
+                   frameRate="15" />
             <Audio codec="amrnb"
                    bitRate="12200"
                    sampleRate="8000"
@@ -152,7 +152,7 @@
                    frameRate="30" /> -->
             <!-- audio setting is ignored -->
         <!--    <Audio codec="aac"
-                   bitRate="96000"
+                   bitRate="128000"
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile>-->
@@ -165,14 +165,14 @@
                    frameRate="30" />
             <!-- audio setting is ignored -->
             <Audio codec="aac"
-                   bitRate="96000"
+                   bitRate="128000"
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile>
 
         <EncoderProfile quality="timelapseqvga" fileFormat="3gp" duration="60">
             <Video codec="h263"
-                   bitRate="96000"
+                   bitRate="128000"
                    width="320"
                    height="240"
                    frameRate="15" />
@@ -183,12 +183,12 @@
                    channels="1" />
         </EncoderProfile>
 
-        <EncoderProfile quality="timelapseqcif" fileFormat="3gp" duration="30">
-            <Video codec="h264"
-                   bitRate="256000"
+        <EncoderProfile quality="timelapseqcif" fileFormat="3gp" duration="20">
+            <Video codec="h263"
+                   bitRate="96000"
                    width="176"
                    height="144"
-                   frameRate="30" />
+                   frameRate="15" />
             <!-- audio setting is ignored -->
             <Audio codec="amrnb"
                    bitRate="12200"
@@ -216,14 +216,14 @@
                    height="480"
                    frameRate="30" />
            <Audio codec="aac"
-                   bitRate="96000"
+                   bitRate="128000"
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile>
 
         <EncoderProfile quality="qvga" fileFormat="3gp" duration="60">
             <Video codec="h263"
-                   bitRate="96000"
+                   bitRate="128000"
                    width="320"
                    height="240"
                    frameRate="15" />
@@ -253,14 +253,14 @@
                    frameRate="30" />
             <!-- audio setting is ignored -->
             <Audio codec="aac"
-                   bitRate="96000"
+                   bitRate="128000"
                    sampleRate="48000"
                    channels="2" />
         </EncoderProfile>
 
         <EncoderProfile quality="timelapseqvga" fileFormat="3gp" duration="60">
             <Video codec="h263"
-                   bitRate="96000"
+                   bitRate="128000"
                    width="320"
                    height="240"
                    frameRate="15" />
@@ -271,9 +271,9 @@
                    channels="1" />
         </EncoderProfile>
 
-        <EncoderProfile quality="timelapseqcif" fileFormat="3gp" duration="30">
-            <Video codec="h264"
-                   bitRate="256000"
+        <EncoderProfile quality="timelapseqcif" fileFormat="3gp" duration="20">
+            <Video codec="h263"
+                   bitRate="96000"
                    width="176"
                    height="144"
                    frameRate="15" />
@@ -309,9 +309,9 @@
 
     <VideoEncoderCap name="h263" enabled="true"
         minBitRate="96000" maxBitRate="420000"
-        minFrameWidth="176" maxFrameWidth="1280"
-        minFrameHeight="144" maxFrameHeight="720"
-        minFrameRate="15" maxFrameRate="30" />
+        minFrameWidth="176" maxFrameWidth="640"
+        minFrameHeight="144" maxFrameHeight="480"
+        minFrameRate="7" maxFrameRate="30" />
 
     <VideoEncoderCap name="m4v" enabled="true"
         minBitRate="96000" maxBitRate="10000000"
@@ -320,7 +320,7 @@
         minFrameRate="7" maxFrameRate="30" />
 
     <AudioEncoderCap name="aac" enabled="true"
-        minBitRate="8192" maxBitRate="96000"
+        minBitRate="5525" maxBitRate="128000"
         minSampleRate="8000" maxSampleRate="48000"
         minChannels="1" maxChannels="2" />
 
