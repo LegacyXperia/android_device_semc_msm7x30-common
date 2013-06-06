@@ -19,9 +19,7 @@
 #define LOG_TAG "lights.semc"
 
 #include <cutils/log.h>
-#include <cutils/properties.h>
 
-#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <unistd.h>
