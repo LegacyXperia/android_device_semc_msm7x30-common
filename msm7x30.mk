@@ -23,6 +23,8 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
+$(call inherit-product, device/semc/msm7x30-common/resources.mk)
+
 # These are the common hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -49,17 +51,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/fstab.semc:root/fstab.semc \
     $(COMMON_PATH)/rootdir/ueventd.semc.rc:root/ueventd.semc.rc \
     $(COMMON_PATH)/rootdir/sbin/postrecoveryboot.sh:root/sbin/postrecoveryboot.sh
-
-# Offline charging animation & boot logo
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/animations/charging_animation_01_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_01.png \
-    $(COMMON_PATH)/animations/charging_animation_02_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_02.png \
-    $(COMMON_PATH)/animations/charging_animation_03_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_03.png \
-    $(COMMON_PATH)/animations/charging_animation_04_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_04.png \
-    $(COMMON_PATH)/animations/charging_animation_05_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_05.png \
-    $(COMMON_PATH)/animations/charging_animation_06_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_06.png \
-    $(COMMON_PATH)/animations/charging_animation_07_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_07.png \
-    $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).rle:root/logo.rle
 
 # Audio
 PRODUCT_PACKAGES += \
