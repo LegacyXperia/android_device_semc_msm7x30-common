@@ -16,13 +16,13 @@ COMMON_PATH := device/semc/msm7x30-common
 
 # Offline charging animation
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/animations/charging_animation_01_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_01.png \
-    $(COMMON_PATH)/animations/charging_animation_02_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_02.png \
-    $(COMMON_PATH)/animations/charging_animation_03_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_03.png \
-    $(COMMON_PATH)/animations/charging_animation_04_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_04.png \
-    $(COMMON_PATH)/animations/charging_animation_05_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_05.png \
-    $(COMMON_PATH)/animations/charging_animation_06_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_06.png \
-    $(COMMON_PATH)/animations/charging_animation_07_$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).png:system/semc/chargemon/data/charging_animation_07.png
+    $(COMMON_PATH)/animations/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/charging_animation_01.png:system/semc/chargemon/data/charging_animation_01.png \
+    $(COMMON_PATH)/animations/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/charging_animation_02.png:system/semc/chargemon/data/charging_animation_02.png \
+    $(COMMON_PATH)/animations/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/charging_animation_03.png:system/semc/chargemon/data/charging_animation_03.png \
+    $(COMMON_PATH)/animations/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/charging_animation_04.png:system/semc/chargemon/data/charging_animation_04.png \
+    $(COMMON_PATH)/animations/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/charging_animation_05.png:system/semc/chargemon/data/charging_animation_05.png \
+    $(COMMON_PATH)/animations/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/charging_animation_06.png:system/semc/chargemon/data/charging_animation_06.png \
+    $(COMMON_PATH)/animations/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/charging_animation_07.png:system/semc/chargemon/data/charging_animation_07.png
 
 # Animated boot logo
 PRODUCT_COPY_FILES += \
