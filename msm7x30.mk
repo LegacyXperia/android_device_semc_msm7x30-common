@@ -147,6 +147,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.camcorder.disablemeta=1
 
+# Enable repeatable keys in CWM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.enable_key_repeat=true
+
 # Extra debugging props
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=0 \
