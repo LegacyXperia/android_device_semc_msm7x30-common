@@ -114,18 +114,14 @@ char * camera_fixup_setparams(int id, const char * settings)
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
-    // fix params here
 #ifdef USES_AS3676_TORCH
-    if (params.get("flash-mode"))
-    {
+    // fix urushi torch
+    if (params.get(android::CameraParameters::KEY_FLASH_MODE)) {
         const char* flashMode = params.get(android::CameraParameters::KEY_FLASH_MODE);
-        if (strcmp(flashMode, "torch") == 0)
-        {
+        if (strcmp(flashMode, android::CameraParameters::FLASH_MODE_TORCH) == 0) {
             system("echo 255 > /sys/class/leds/torch-rgb1/brightness");
             system("echo 255 > /sys/class/leds/torch-rgb2/brightness");
-        } else
-        if (strcmp(flashMode, "off") == 0)
-        {
+        } else if (strcmp(flashMode, android::CameraParameters::FLASH_MODE_OFF) == 0) {
             system("echo 0 > /sys/class/leds/torch-rgb1/brightness");
             system("echo 0 > /sys/class/leds/torch-rgb2/brightness");
         }
