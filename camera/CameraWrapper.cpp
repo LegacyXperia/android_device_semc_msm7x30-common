@@ -91,8 +91,8 @@ static int check_vendor_module()
     return rv;
 }
 
-const static char * scene_mode_values[] =
-{"auto,portrait,landscape,night,night-portrait,beach,snow,sports,party,barcode", "auto"};
+//const static char * scene_mode_values[] =
+//{"auto,portrait,landscape,night,night-portrait,beach,snow,sports,party,barcode", "auto"};
 
 static char * camera_fixup_getparams(int id, const char * settings)
 {
@@ -100,7 +100,7 @@ static char * camera_fixup_getparams(int id, const char * settings)
     params.unflatten(android::String8(settings));
 
     // fix params here
-    params.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES, scene_mode_values[id]);
+    //params.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES, scene_mode_values[id]);
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
