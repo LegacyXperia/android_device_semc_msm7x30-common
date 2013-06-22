@@ -63,12 +63,15 @@ public class GeneralFragmentActivity extends PreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (isSupported(BUTTON_BRIGHTNESS_FILE)) {
                     Utils.writeValue(BUTTON_BRIGHTNESS_FILE, (String) newValue);
+                    Utils.writeValue(BUTTON_BRIGHTNESS_FILE.replace("max_",""), (String) newValue);
                 }
                 if (isSupported(BUTTON_BRIGHTNESS_RGB1_FILE)) {
                     Utils.writeValue(BUTTON_BRIGHTNESS_RGB1_FILE, (String) newValue);
+                    Utils.writeValue(BUTTON_BRIGHTNESS_RGB1_FILE.replace("max_",""), (String) newValue);
                 }
                 if (isSupported(BUTTON_BRIGHTNESS_RGB2_FILE)) {
                     Utils.writeValue(BUTTON_BRIGHTNESS_RGB2_FILE, (String) newValue);
+                    Utils.writeValue(BUTTON_BRIGHTNESS_RGB2_FILE.replace("max_",""), (String) newValue);
                 }
 
                 return true;
@@ -79,15 +82,19 @@ public class GeneralFragmentActivity extends PreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (isSupported(KEYBOARD_BRIGHTNESS_RGB1_FILE)) {
                     Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB1_FILE, (String) newValue);
+                    Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB1_FILE.replace("max_",""), (String) newValue);
                 }
                 if (isSupported(KEYBOARD_BRIGHTNESS_RGB2_FILE)) {
                     Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB2_FILE, (String) newValue);
+                    Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB2_FILE.replace("max_",""), (String) newValue);
                 }
                 if (isSupported(KEYBOARD_BRIGHTNESS_RGB3_FILE)) {
                     Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB3_FILE, (String) newValue);
+                    Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB3_FILE.replace("max_",""), (String) newValue);
                 }
                 if (isSupported(KEYBOARD_BRIGHTNESS_RGB4_FILE)) {
                     Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB4_FILE, (String) newValue);
+                    Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB4_FILE.replace("max_",""), (String) newValue);
                 }
 
                 return true;
@@ -117,24 +124,31 @@ public class GeneralFragmentActivity extends PreferenceFragment {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         if (isSupported(BUTTON_BRIGHTNESS_FILE)) {
             Utils.writeValue(BUTTON_BRIGHTNESS_FILE, sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
+            Utils.writeValue(BUTTON_BRIGHTNESS_FILE.replace("max_",""), sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
         }
         if (isSupported(BUTTON_BRIGHTNESS_RGB1_FILE)) {
             Utils.writeValue(BUTTON_BRIGHTNESS_RGB1_FILE, sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
+            Utils.writeValue(BUTTON_BRIGHTNESS_RGB1_FILE.replace("max_",""), sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
         }
         if (isSupported(BUTTON_BRIGHTNESS_RGB2_FILE)) {
             Utils.writeValue(BUTTON_BRIGHTNESS_RGB2_FILE, sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
+            Utils.writeValue(BUTTON_BRIGHTNESS_RGB2_FILE.replace("max_",""), sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
         }
         if (isSupported(KEYBOARD_BRIGHTNESS_RGB1_FILE)) {
             Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB1_FILE, sharedPrefs.getString(DeviceSettings.KEYBOARD_BRIGHTNESS, "0"));
+            Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB1_FILE.replace("max_",""), sharedPrefs.getString(DeviceSettings.KEYBOARD_BRIGHTNESS, "0"));
         }
         if (isSupported(KEYBOARD_BRIGHTNESS_RGB2_FILE)) {
             Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB2_FILE, sharedPrefs.getString(DeviceSettings.KEYBOARD_BRIGHTNESS, "0"));
+            Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB2_FILE.replace("max_",""), sharedPrefs.getString(DeviceSettings.KEYBOARD_BRIGHTNESS, "0"));
         }
         if (isSupported(KEYBOARD_BRIGHTNESS_RGB3_FILE)) {
             Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB3_FILE, sharedPrefs.getString(DeviceSettings.KEYBOARD_BRIGHTNESS, "0"));
+            Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB3_FILE.replace("max_",""), sharedPrefs.getString(DeviceSettings.KEYBOARD_BRIGHTNESS, "0"));
         }
         if (isSupported(KEYBOARD_BRIGHTNESS_RGB4_FILE)) {
             Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB4_FILE, sharedPrefs.getString(DeviceSettings.KEYBOARD_BRIGHTNESS, "0"));
+            Utils.writeValue(KEYBOARD_BRIGHTNESS_RGB4_FILE.replace("max_",""), sharedPrefs.getString(DeviceSettings.KEYBOARD_BRIGHTNESS, "0"));
         }
     }
 }
