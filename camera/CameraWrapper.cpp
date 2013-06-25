@@ -35,6 +35,14 @@
 #include <camera/Camera.h>
 #include <camera/CameraParameters.h>
 
+// SEMC parameter names
+static char KEY_SEMC_IMAGE_STABILISER[] = "semc-is";
+static char KEY_SEMC_VIDEO_STABILISER[] = "semc-vs";
+
+// SEMC parameter values
+static char VALUE_SEMC_ON[] = "on";
+static char VALUE_SEMC_OFF[] = "off";
+
 static android::Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
 
@@ -107,6 +115,19 @@ char * camera_fixup_setparams(int id, const char * settings)
 {
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
+
+    // image stabiliser
+    if (params.get(android::CameraParameters::KEY_SCENE_MODE)) {
+        params.set(KEY_SEMC_IMAGE_STABILISER, VALUE_SEMC_ON);
+    }
+
+    // video stabiliser
+    if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
+        if (strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), android::CameraParameters::TRUE) == 0) {
+            params.set(KEY_SEMC_VIDEO_STABILISER, VALUE_SEMC_ON);
+            params.set(KEY_SEMC_IMAGE_STABILISER, VALUE_SEMC_OFF);
+        }
+    }
 
 #ifdef USES_AS3676_TORCH
     // fix urushi torch
