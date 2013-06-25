@@ -32,4 +32,37 @@
         <item>infinity</item>
         <item>macro</item>
     </string-array>
+
+    <!-- Camera Preferences Scene Mode dialog box entries -->
+    <string-array name="pref_camera_scenemode_entries" translatable="false">
+        <item>@string/pref_camera_scenemode_entry_auto</item>
+        <item>@string/pref_camera_scenemode_entry_night</item>
+        <item>@string/pref_camera_scenemode_entry_nightportrait</item>
+        <item>@string/pref_camera_scenemode_entry_party</item>
+        <item>@string/pref_camera_scenemode_entry_landscape</item>
+        <item>@string/pref_camera_scenemode_entry_sports</item>
+        <item>@string/pref_camera_scenemode_entry_beach</item>
+        <item>@string/pref_camera_scenemode_entry_portrait</item>
+        <item>@string/pref_camera_scenemode_entry_snow</item>
+        <item>@string/pref_camera_scenemode_entry_backlight</item>
+        <item>@string/pref_camera_scenemode_entry_backlightportrait</item>
+        <item>@string/pref_camera_scenemode_entry_document</item>
+        <item>@string/pref_camera_scenemode_entry_barcode</item>
+    </string-array>
+
+    <string-array name="pref_camera_scenemode_entryvalues" translatable="false">
+        <item>auto</item>
+        <item>night</item>
+        <item>night-portrait</item>
+        <item>party</item>
+        <item>landscape</item>
+        <item>sports</item>
+        <item>beach</item>
+        <item>portrait</item>
+        <item>snow</item>
+        <item>backlight</item>
+        <item>backlight-portrait</item>
+        <item>document</item>
+        <item>barcode</item>
+    </string-array>
 </resources>
