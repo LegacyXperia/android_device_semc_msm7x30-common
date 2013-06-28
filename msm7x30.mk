@@ -109,7 +109,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=15 \
-    keyguard.no_require_sim=true \
     ro.com.google.locationfeatures=1 \
     ro.product.locale.language=en \
     ro.product.locale.region=US \
