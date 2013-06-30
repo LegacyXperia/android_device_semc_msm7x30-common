@@ -168,6 +168,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     use.non-omx.mp3.decoder=false \
     use.non-omx.aac.decoder=false
 
+# Resampler quality
+PRODUCT_PROPERTY_OVERRIDES += \
+    af.resampler.quality=255
+
 # Set default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
