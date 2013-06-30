@@ -116,6 +116,7 @@ char * camera_fixup_setparams(int id, const char * settings)
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
+#if 0
     if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
         const char* recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
         if (strcmp(recordingHint, android::CameraParameters::TRUE) == 0) {
@@ -128,6 +129,7 @@ char * camera_fixup_setparams(int id, const char * settings)
             params.set(KEY_SEMC_IMAGE_STABILISER, VALUE_SEMC_ON);
         }
     }
+#endif
 
 #ifdef USES_AS3676_TORCH
     /* Fix urushi as3676 torch */
