@@ -134,6 +134,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     lpa.use-stagefright=false \
     use.non-omx.mp3.decoder=true
 
+# Resampler quality
+PRODUCT_PROPERTY_OVERRIDES += \
+    af.resampler.quality=255
+
 # Set default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb
