@@ -35,11 +35,11 @@
 #include <camera/Camera.h>
 #include <camera/CameraParameters.h>
 
-// SEMC parameter names
+/* SEMC parameter names */
 static char KEY_SEMC_IMAGE_STABILISER[] = "semc-is";
 static char KEY_SEMC_VIDEO_STABILISER[] = "semc-vs";
 
-// SEMC parameter values
+/* SEMC parameter values */
 static char VALUE_SEMC_ON[] = "on";
 static char VALUE_SEMC_OFF[] = "off";
 
@@ -116,21 +116,21 @@ char * camera_fixup_setparams(int id, const char * settings)
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
-    // image stabiliser
-    if (params.get(android::CameraParameters::KEY_SCENE_MODE)) {
-        params.set(KEY_SEMC_IMAGE_STABILISER, VALUE_SEMC_ON);
-    }
-
-    // video stabiliser
     if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
-        if (strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), android::CameraParameters::TRUE) == 0) {
+        const char* recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
+        if (strcmp(recordingHint, android::CameraParameters::TRUE) == 0) {
+            /* Video stabiliser */
             params.set(KEY_SEMC_VIDEO_STABILISER, VALUE_SEMC_ON);
             params.set(KEY_SEMC_IMAGE_STABILISER, VALUE_SEMC_OFF);
+        } else if (strcmp(recordingHint, android::CameraParameters::FALSE) == 0) {
+            /* Image stabiliser */
+            params.set(KEY_SEMC_VIDEO_STABILISER, VALUE_SEMC_OFF);
+            params.set(KEY_SEMC_IMAGE_STABILISER, VALUE_SEMC_ON);
         }
     }
 
 #ifdef USES_AS3676_TORCH
-    // fix urushi torch
+    /* Fix urushi as3676 torch */
     if (params.get(android::CameraParameters::KEY_FLASH_MODE)) {
         const char* flashMode = params.get(android::CameraParameters::KEY_FLASH_MODE);
         if (strcmp(flashMode, android::CameraParameters::FLASH_MODE_TORCH) == 0) {
