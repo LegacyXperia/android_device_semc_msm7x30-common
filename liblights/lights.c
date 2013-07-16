@@ -65,7 +65,7 @@ char const*const LED_FILE_PATTERNLEN  = "/sys/devices/i2c-0/0-0040/pattern_durat
 char const*const LED_FILE_DIMONOFF    = "/sys/devices/i2c-0/0-0040/pattern_use_softdim";
 char const*const LED_FILE_DIMTIME     = "/sys/devices/i2c-0/0-0040/dim_time";
 
-const int LCD_BRIGHTNESS_MIN = 5;
+const int LCD_BRIGHTNESS_MIN = 1;
 
 char const*const ON  = "1";
 char const*const OFF = "0";
