@@ -24,6 +24,11 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/animations/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/charging_animation_06.png:system/semc/chargemon/data/charging_animation_06.png \
     $(COMMON_PATH)/animations/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/charging_animation_07.png:system/semc/chargemon/data/charging_animation_07.png
 
+ifeq ($(BUILD_WITH_STATIC_INITLOGO),true)
+# Static boot logo
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/30.rle:root/logo.rle
+else
 # Animated boot logo
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/1.rle:root/bootlogo/1.rle \
@@ -56,3 +61,4 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/28.rle:root/bootlogo/28.rle \
     $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/29.rle:root/bootlogo/29.rle \
     $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT)/30.rle:root/bootlogo/30.rle
+endif

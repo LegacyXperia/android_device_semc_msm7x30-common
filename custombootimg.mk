@@ -27,8 +27,12 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel $(uncompressed_ramdisk) $(r
 	$(hide) rm -fr $(PRODUCT_OUT)/combinedroot
 	$(hide) mkdir -p $(PRODUCT_OUT)/combinedroot/sbin
 
+ifeq ($(BUILD_WITH_STATIC_INITLOGO),true)
+	$(hide) mv $(PRODUCT_OUT)/root/logo.rle $(PRODUCT_OUT)/combinedroot/logo.rle
+else
 	$(hide) mv $(PRODUCT_OUT)/root/bootlogo $(PRODUCT_OUT)/combinedroot
 	$(hide) rm -fr $(PRODUCT_OUT)/recovery/root/bootlogo
+endif
 	$(hide) cp $(uncompressed_ramdisk) $(PRODUCT_OUT)/combinedroot/sbin/
 	$(hide) cp $(recovery_uncompressed_ramdisk) $(PRODUCT_OUT)/combinedroot/sbin/
 	$(hide) cp $(PRODUCT_OUT)/utilities/busybox $(PRODUCT_OUT)/combinedroot/sbin/
