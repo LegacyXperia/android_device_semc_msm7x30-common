@@ -26,7 +26,6 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <pthread.h>
-#include <math.h>
 
 #include <sys/ioctl.h>
 #include <sys/types.h>
@@ -139,28 +138,11 @@ static int rgb_to_brightness (struct light_state_t const* state) {
 			+ (150*((color>>8)&0x00ff)) + (29*(color&0x00ff))) >> 8;
 }
 
-static int brightness_apply_gamma (int brightness) {
-	double floatbrt = (double) brightness;
-	floatbrt /= 255.0;
-	ALOGV("%s: brightness = %d, floatbrt = %f", __func__, brightness, floatbrt);
-	floatbrt = pow(floatbrt,2.2);
-	ALOGV("%s: gamma corrected floatbrt = %f", __func__, floatbrt);
-	floatbrt *= 255.0;
-	brightness = (int) floatbrt;
-	if (brightness < LCD_BRIGHTNESS_MIN)
-		brightness = LCD_BRIGHTNESS_MIN;
-	ALOGV("%s: gamma corrected brightness = %d", __func__, brightness);
-	return brightness;
-}
-
 /* The actual lights controlling section */
 static int set_light_backlight (struct light_device_t *dev, struct light_state_t const *state) {
 	int err = 0;
 	int enable = 0;
 	int brightness = rgb_to_brightness(state);
-
-	if (brightness > 0)
-		brightness = brightness_apply_gamma(brightness);
 
 	if ((state->brightnessMode == BRIGHTNESS_MODE_SENSOR) && (brightness > 0))
 		enable = 1;
