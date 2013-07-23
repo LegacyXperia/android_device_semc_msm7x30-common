@@ -43,6 +43,8 @@ static char KEY_SEMC_VIDEO_STABILISER[] = "semc-vs";
 static char VALUE_SEMC_ON[] = "on";
 static char VALUE_SEMC_OFF[] = "off";
 
+static char preview_sizes[] = "1280x720";
+
 static android::Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
 
@@ -104,6 +106,8 @@ static char * camera_fixup_getparams(int id, const char * settings)
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
+    params.set(android::CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES, preview_sizes);
+
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
 
@@ -144,6 +148,8 @@ char * camera_fixup_setparams(int id, const char * settings)
         }
     }
 #endif
+
+
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
