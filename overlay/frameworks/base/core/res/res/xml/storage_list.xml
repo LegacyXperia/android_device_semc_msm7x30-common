@@ -35,14 +35,14 @@
 -->
 
 <StorageList xmlns:android="http://schemas.android.com/apk/res/android">
-    <storage android:mountPoint="/storage/primary/legacy"
+    <storage android:mountPoint="/storage/sdcard0"
         android:storageDescription="@string/storage_sd_card"
         android:primary="true"
         android:allowMassStorage="true"
         android:removable="true"
         android:maxFileSize="4096" />
 
-    <storage android:mountPoint="/storage/usbdisk"
+    <storage android:mountPoint="/storage/usbdisk0"
         android:storageDescription="@string/storage_usb"
         android:primary="false"
         android:removable="true" />

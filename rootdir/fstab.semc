@@ -8,8 +8,9 @@ cache                                         /cache                     yaffs2 
 userdata                                      /data                      yaffs2    rw,noatime,nosuid,nodev   wait
 
 # Recovery only devices
-/dev/block/mmcblk0p1                          /sdcard                    auto      defaults                  recoveryonly,lun=/sys/devices/platform/msm_hsusb/gadget/lun0/file
+/dev/block/mmcblk0p1                          /sdcard                    auto      defaults                  recoveryonly
+/dev/block/mmcblk0p2                          /sd-ext                    auto      defaults                  recoveryonly
 
 # Vold managed devices
-/devices/platform/msm_sdcc.4/mmc_host/mmc1    /storage/primary/legacy    auto      defaults                  voldmanaged=sdcard:auto
-/devices/platform/msm_hsusb_host.0            /storage/usbdisk           auto      defaults                  voldmanaged=usbdisk:auto
+/devices/platform/msm_sdcc.4/mmc_host/mmc1    /storage/sdcard0           auto      defaults                  voldmanaged=sdcard0:auto
+/devices/platform/msm_hsusb_host.0            /storage/usbdisk0          auto      defaults                  voldmanaged=usbdisk0:auto
