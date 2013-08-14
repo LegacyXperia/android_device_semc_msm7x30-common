@@ -164,6 +164,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bq.gpu_to_cpu_unsupported=1
 
+# Set default number of background apps to 10
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.fw.bg_apps_limit=10
+
 # Extra debugging props
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=0 \
