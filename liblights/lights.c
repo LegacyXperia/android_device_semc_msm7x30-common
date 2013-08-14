@@ -51,8 +51,6 @@ char const*const KEYBOARD_BACKLIGHT_FILE[] = {
   "/sys/class/leds/keyboard-backlight-rgb4/brightness"
 };
 
-char const*const ALS_FILE = "/sys/devices/i2c-0/0-0040/als_on";
-
 char const*const LED_FILE_TRIGGER[]  = {
   "/sys/class/leds/red/use_pattern",
   "/sys/class/leds/green/use_pattern",
@@ -156,18 +154,13 @@ static int brightness_apply_gamma (int brightness) {
 /* The actual lights controlling section */
 static int set_light_backlight (struct light_device_t *dev, struct light_state_t const *state) {
 	int err = 0;
-	int enable = 0;
 	int brightness = rgb_to_brightness(state);
 
 	if (brightness > 0)
 		brightness = brightness_apply_gamma(brightness);
 
-	if ((state->brightnessMode == BRIGHTNESS_MODE_SENSOR) && (brightness > 0))
-		enable = 1;
-
 	ALOGV("%s brightness = %d", __func__, brightness);
 	pthread_mutex_lock(&g_lock);
-	err = write_int (ALS_FILE, enable);
 	err |= write_int (LCD_BACKLIGHT_FILE, brightness);
 	pthread_mutex_unlock(&g_lock);
 
