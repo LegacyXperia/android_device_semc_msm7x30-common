@@ -40,18 +40,19 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>2</item>
-        <item>5</item>
-        <item>25</item>
-        <item>75</item>
-        <item>100</item>
+        <item>12</item>
+        <item>24</item>
+        <item>36</item>
+        <item>72</item>
+        <item>156</item>
+        <item>192</item>
+        <item>240</item>
         <item>420</item>
-        <item>673</item>
-        <item>1248</item>
-        <item>2099</item>
-        <item>4422</item>
-        <item>7724</item>
-        <item>10724</item>
+        <item>756</item>
+        <item>1024</item>
+        <item>2048</item>
+        <item>4096</item>
+        <item>8192</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -59,19 +60,20 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>1</item>
-        <item>5</item>
-        <item>10</item>
-        <item>20</item>
-        <item>30</item>
-        <item>70</item>
-        <item>93</item>
-        <item>105</item>
-        <item>120</item>
-        <item>162</item>
-        <item>200</item>
-        <item>236</item>
-        <item>255</item>
+        <item>1</item>   <!--    0 -   12 -->
+        <item>5</item>   <!--   12 -   24 -->
+        <item>10</item>  <!--   24 -   36 -->
+        <item>20</item>  <!--   36 -   72 -->
+        <item>30</item>  <!--   72 -  156 -->
+        <item>50</item>  <!--  156 -  192 -->
+        <item>70</item>  <!--  192 -  240 -->
+        <item>93</item>  <!--  240 -  420 -->
+        <item>105</item> <!--  420 -  756 -->
+        <item>120</item> <!--  756 - 1024 -->
+        <item>162</item> <!-- 1024 - 2048 -->
+        <item>200</item> <!-- 2048 - 4096 -->
+        <item>236</item> <!-- 4096 - 8192 -->
+        <item>255</item> <!-- 8192+ -->
     </integer-array>
 
     <!-- Array of output values for button backlight corresponding to the LUX values
@@ -79,38 +81,41 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessButtonBacklightValues">
-        <item>255</item>
-        <item>240</item>
-        <item>230</item>
-        <item>220</item>
-        <item>200</item>
-        <item>175</item>
-        <item>150</item>
-        <item>125</item>
-        <item>100</item>
-        <item>70</item>
-        <item>45</item>
-        <item>20</item>
-        <item>10</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </integer-array>
+
     <!-- Array of output values for keyboard backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>255</item>
-        <item>240</item>
-        <item>230</item>
-        <item>220</item>
-        <item>200</item>
-        <item>175</item>
-        <item>150</item>
-        <item>125</item>
-        <item>100</item>
-        <item>70</item>
-        <item>45</item>
-        <item>20</item>
-        <item>10</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </integer-array>
 
     <!-- Specifies the amount of time to disable virtual keys after the screen is touched
