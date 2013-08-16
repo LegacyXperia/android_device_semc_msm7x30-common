@@ -491,10 +491,11 @@ free(device_list);
 // ----------------------------------------------------------------------------
 
 AudioHardware::AudioHardware() :
-    mInit(false), mMicMute(true), mBluetoothNrec(true), mBluetoothId(0),
-    mOutput(0),mBluetoothVGS(false), mVoiceVolume(1),
-    mCurSndDevice(-1),mTtyMode(TTY_OFF), mDualMicEnabled(false), mFmFd(-1),
-    mVoipFd(-1), mVoipInActive(false), mVoipOutActive(false), mDirectOutput(0)
+    mInit(false), mMicMute(true), mFmFd(-1),
+    mBluetoothNrec(true), mBluetoothVGS(false), mBluetoothId(0),
+    mVoiceVolume(1), mOutput(0), mDirectOutput(0),
+    mCurSndDevice(SND_DEVICE_CURRENT), mDualMicEnabled(false),
+    mTtyMode(TTY_OFF), mVoipFd(-1), mVoipInActive(false), mVoipOutActive(false)
 {
 
         int control;
