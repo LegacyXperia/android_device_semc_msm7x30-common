@@ -39,7 +39,6 @@ char const*const GREEN_LED_FILE     = "/sys/class/leds/green/brightness";
 char const*const BLUE_LED_FILE      = "/sys/class/leds/blue/brightness";
 
 char const*const BUTTON_BACKLIGHT_FILE[] = {
-  "/sys/class/leds/button-backlight/brightness",
   "/sys/class/leds/button-backlight-rgb1/brightness",
   "/sys/class/leds/button-backlight-rgb2/brightness"
 };
