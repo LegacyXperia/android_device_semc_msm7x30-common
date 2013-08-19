@@ -103,3 +103,6 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/msm7x30-common/releaset
 
 # Workaround to avoid issues with legacy liblights on QCOM platforms
 TARGET_PROVIDES_LIBLIGHT := true
+
+# CM Hardware
+BOARD_HARDWARE_CLASS := device/semc/msm7x30-common/cmhw
