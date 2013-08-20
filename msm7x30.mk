@@ -157,7 +157,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Set default number of background apps to 10
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.fw.bg_apps_limit=10
+    sys.mem.max_hidden_apps=10
 
 # Extra debugging props
 PRODUCT_PROPERTY_OVERRIDES += \
