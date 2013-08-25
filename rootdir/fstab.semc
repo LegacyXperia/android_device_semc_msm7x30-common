@@ -8,7 +8,6 @@ cache                                         /cache                     yaffs2 
 userdata                                      /data                      yaffs2    rw,noatime,nosuid,nodev   wait
 
 # Recovery only devices
-/dev/block/mmcblk0p1                          /sdcard                    auto      defaults                  recoveryonly
 /dev/block/mmcblk0p2                          /sd-ext                    auto      defaults                  recoveryonly
 
 # Vold managed devices
