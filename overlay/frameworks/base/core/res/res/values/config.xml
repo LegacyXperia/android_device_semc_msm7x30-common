@@ -27,7 +27,7 @@
     <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">10</integer>
+    <integer name="config_screenBrightnessDim">40</integer>
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N + 1 zones as follows:
@@ -60,11 +60,11 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>26</item>  <!--    0 -   12 -->
-        <item>26</item>  <!--   12 -   24 -->
-        <item>26</item>  <!--   24 -   36 -->
-        <item>26</item>  <!--   36 -   72 -->
-        <item>30</item>  <!--   72 -  156 -->
+        <item>35</item>  <!--    0 -   12 -->
+        <item>35</item>  <!--   12 -   24 -->
+        <item>35</item>  <!--   24 -   36 -->
+        <item>35</item>  <!--   36 -   72 -->
+        <item>35</item>  <!--   72 -  156 -->
         <item>50</item>  <!--  156 -  192 -->
         <item>70</item>  <!--  192 -  240 -->
         <item>93</item>  <!--  240 -  420 -->
