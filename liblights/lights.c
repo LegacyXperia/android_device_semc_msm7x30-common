@@ -32,7 +32,9 @@
 #include <sys/types.h>
 
 #include <hardware/lights.h>
+#ifndef NO_BUTTON_BACKLIGHT
 #include "semc_lights.h"
+#endif
 
 char const*const LCD_BACKLIGHT_FILE = "/sys/class/leds/lcd-backlight/brightness";
 char const*const RED_LED_FILE       = "/sys/class/leds/red/brightness";
@@ -156,6 +158,7 @@ static int set_light_backlight (struct light_device_t *dev, struct light_state_t
 }
 
 static int set_light_buttons (struct light_device_t *dev, struct light_state_t const* state) {
+#ifndef NO_BUTTON_BACKLIGHT
 	size_t i = 0;
 	int on = is_lit(state);
 
@@ -164,11 +167,12 @@ static int set_light_buttons (struct light_device_t *dev, struct light_state_t c
 		write_int (BUTTON_BACKLIGHT_FILE[i], on ? 255 : 0);
 	}
 	pthread_mutex_unlock(&g_lock);
-
+#endif
 	return 0;
 }
 
 static int set_light_keyboard (struct light_device_t* dev, struct light_state_t const* state) {
+#ifdef HAVE_KEYBOARD_BACKLIGHT
 	size_t i = 0;
 	int on = is_lit(state);
 
@@ -177,7 +181,7 @@ static int set_light_keyboard (struct light_device_t* dev, struct light_state_t 
 		write_int (KEYBOARD_BACKLIGHT_FILE[i], on ? 255 : 0);
 	}
 	pthread_mutex_unlock(&g_lock);
-
+#endif
 	return 0;
 }
 

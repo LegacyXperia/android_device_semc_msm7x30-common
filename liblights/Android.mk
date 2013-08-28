@@ -26,6 +26,14 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 
 LOCAL_SHARED_LIBRARIES := liblog
 
+ifneq ($(filter iyokan mango, $(TARGET_DEVICE)),)
+    LOCAL_CFLAGS += -DHAVE_KEYBOARD_BACKLIGHT
+endif
+
+ifneq ($(filter phoenix urushi zeus zeusc, $(TARGET_DEVICE)),)
+    LOCAL_CFLAGS += -DNO_BUTTON_BACKLIGHT
+endif
+
 LOCAL_MODULE := lights.$(TARGET_BOARD_PLATFORM)
 
 LOCAL_MODULE_TAGS := optional
