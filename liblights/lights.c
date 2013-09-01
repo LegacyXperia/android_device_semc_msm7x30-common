@@ -151,38 +151,42 @@ static int set_light_backlight (struct light_device_t *dev, struct light_state_t
 
 	ALOGV("%s brightness = %d", __func__, brightness);
 	pthread_mutex_lock(&g_lock);
-	err |= write_int (LCD_BACKLIGHT_FILE, brightness);
+	err = write_int (LCD_BACKLIGHT_FILE, brightness);
 	pthread_mutex_unlock(&g_lock);
 
 	return err;
 }
 
 static int set_light_buttons (struct light_device_t *dev, struct light_state_t const* state) {
+	int err = 0;
 #ifndef NO_BUTTON_BACKLIGHT
 	size_t i = 0;
-	int on = is_lit(state);
+	int brightness = rgb_to_brightness(state);
 
 	pthread_mutex_lock(&g_lock);
+	ALOGV("%s brightness = %d", __func__, brightness);
 	for (i = 0; i < sizeof(BUTTON_BACKLIGHT_FILE)/sizeof(BUTTON_BACKLIGHT_FILE[0]); i++) {
-		write_int (BUTTON_BACKLIGHT_FILE[i], on ? 255 : 0);
+		err |= write_int (BUTTON_BACKLIGHT_FILE[i], brightness);
 	}
 	pthread_mutex_unlock(&g_lock);
 #endif
-	return 0;
+	return err;
 }
 
 static int set_light_keyboard (struct light_device_t* dev, struct light_state_t const* state) {
+	int err = 0;
 #ifdef HAVE_KEYBOARD_BACKLIGHT
 	size_t i = 0;
-	int on = is_lit(state);
+	int brightness = rgb_to_brightness(state);
 
 	pthread_mutex_lock(&g_lock);
+	ALOGV("%s brightness = %d", __func__, brightness);
 	for (i = 0; i < sizeof(KEYBOARD_BACKLIGHT_FILE)/sizeof(KEYBOARD_BACKLIGHT_FILE[0]); i++) {
-		write_int (KEYBOARD_BACKLIGHT_FILE[i], on ? 255 : 0);
+		err |= write_int (KEYBOARD_BACKLIGHT_FILE[i], brightness);
 	}
 	pthread_mutex_unlock(&g_lock);
 #endif
-	return 0;
+	return err;
 }
 
 static void set_shared_light_locked (struct light_device_t *dev, struct light_state_t *state) {
