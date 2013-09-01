@@ -128,8 +128,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Low Power Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     lpa.decode=false \
-    lpa.use-stagefright=false \
-    use.non-omx.mp3.decoder=true
+    lpa.use-stagefright=false
 
 # Resampler quality
 PRODUCT_PROPERTY_OVERRIDES += \
