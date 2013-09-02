@@ -33,7 +33,7 @@ import com.cyanogenmod.settings.device.R;
 
 public class HapticFragmentActivity extends PreferenceFragment {
 
-    private static final String TAG = "XperiaSettings_Haptic";
+    private static final String TAG = "DeviceSettings_Haptic";
     public static final String KEY_VIBRATOR_TUNING = "vibrator_tuning";
 
     private static boolean sVibratorTuning;
@@ -43,16 +43,10 @@ public class HapticFragmentActivity extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Resources res = getResources();
-        sVibratorTuning = res.getBoolean(R.bool.has_vibrator_tuning);
-
         addPreferencesFromResource(R.xml.haptic_preferences);
 
-        if (sVibratorTuning) {
-            String vibratorFilePath = res.getString(R.string.vibrator_sysfs_file);
-            mVibratorTuning = (VibratorTuningPreference) findPreference(KEY_VIBRATOR_TUNING);
-            mVibratorTuning.setEnabled(VibratorTuningPreference.isSupported(vibratorFilePath));
-        }
+        mVibratorTuning = (VibratorTuningPreference) findPreference(KEY_VIBRATOR_TUNING);
+        mVibratorTuning.setEnabled(VibratorTuningPreference.isSupported(DeviceSettings.VIBRATOR_FILE));
     }
 
     @Override

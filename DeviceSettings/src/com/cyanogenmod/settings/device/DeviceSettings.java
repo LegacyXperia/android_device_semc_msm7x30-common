@@ -45,6 +45,10 @@ public class DeviceSettings extends Activity {
     public static final String BUTTON_BRIGHTNESS = "button_brightness";
     public static final String KEYBOARD_BRIGHTNESS = "keyboard_brightness";
 
+    private static final String BUTTON_FILE = "/sys/class/leds/button-backlight-rgb1/max_brightness";
+    private static final String KEYBOARD_FILE = "/sys/class/leds/keyboard-backlight-rgb1/max_brightness";
+    public static final String VIBRATOR_FILE = "/sys/class/timed_output/vibrator/voltage_level";
+
     ViewPager mViewPager;
     TabsAdapter mTabsAdapter;
 
@@ -63,10 +67,14 @@ public class DeviceSettings extends Activity {
         bar.setTitle(R.string.app_name);
 
         mTabsAdapter = new TabsAdapter(this, mViewPager);
-        mTabsAdapter.addTab(bar.newTab().setText(R.string.general_title),
-                GeneralFragmentActivity.class, null);
-        mTabsAdapter.addTab(bar.newTab().setText(R.string.category_haptic_title),
-                HapticFragmentActivity.class, null);
+        if (Utils.fileExists(BUTTON_FILE) || Utils.fileExists(KEYBOARD_FILE)) {
+            mTabsAdapter.addTab(bar.newTab().setText(R.string.general_title),
+                    GeneralFragmentActivity.class, null);
+        }
+        if (Utils.fileExists(VIBRATOR_FILE)) {
+            mTabsAdapter.addTab(bar.newTab().setText(R.string.category_haptic_title),
+                    HapticFragmentActivity.class, null);
+        }
 
         if (savedInstanceState != null) {
             bar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
