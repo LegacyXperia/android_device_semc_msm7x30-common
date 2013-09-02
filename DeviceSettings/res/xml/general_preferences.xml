@@ -21,14 +21,12 @@
 
         <ListPreference android:key="button_brightness"
             android:title="@string/button_brightness_title_head"
-            android:summary="@string/button_brightness_summary_head"
             android:entries="@array/brightness_entries"
             android:entryValues="@array/brightness_values"
             android:defaultValue="255" />
 
         <ListPreference android:key="keyboard_brightness"
             android:title="@string/keyboard_brightness_title_head"
-            android:summary="@string/keyboard_brightness_summary_head"
             android:entries="@array/brightness_entries"
             android:entryValues="@array/brightness_values"
             android:defaultValue="255" />

@@ -14,14 +14,10 @@
      limitations under the License.
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">高级设置</string>
-    <string name="general_title">常规</string>
-    <string name="category_backlight_title">背光</string>
-    <string name="button_brightness_title_head">按键背光亮度</string>
-    <string name="keyboard_brightness_title_head">键盘背光亮度</string>
-    <string name="defaults_button">重置为默认值</string>
-    <string name="category_haptic_title">振动</string>
-    <string name="vibrator_title">振动器</string>
-    <string name="vibrator_tuning_title">振动强度</string>
-    <string name="vibrator_warning">不建议使用超过 %1$d 的值</string>
+    <string name="app_name">Lisäasetukset</string>
+    <string name="defaults_button">Palauta oletusasetukset</string>
+    <string name="category_haptic_title">Haptinen</string>
+    <string name="vibrator_title">Värinä</string>
+    <string name="vibrator_tuning_title">Värinän voimakkuus</string>
+    <string name="vibrator_warning">Korkeampia arvoja kuin %1$d ei suositella</string>
 </resources>
