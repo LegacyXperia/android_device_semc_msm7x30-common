@@ -65,6 +65,8 @@ public class DeviceSettings extends Activity {
         mTabsAdapter = new TabsAdapter(this, mViewPager);
         mTabsAdapter.addTab(bar.newTab().setText(R.string.general_title),
                 GeneralFragmentActivity.class, null);
+        mTabsAdapter.addTab(bar.newTab().setText(R.string.category_haptic_title),
+                HapticFragmentActivity.class, null);
 
         if (savedInstanceState != null) {
             bar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
