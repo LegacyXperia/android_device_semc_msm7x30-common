@@ -34,7 +34,6 @@ import com.cyanogenmod.settings.device.R;
 
 public class GeneralFragmentActivity extends PreferenceFragment {
 
-    private static final String BUTTON_BRIGHTNESS_FILE = "/sys/class/leds/button-backlight/max_brightness";
     private static final String BUTTON_BRIGHTNESS_RGB1_FILE = "/sys/class/leds/button-backlight-rgb1/max_brightness";
     private static final String BUTTON_BRIGHTNESS_RGB2_FILE = "/sys/class/leds/button-backlight-rgb2/max_brightness";
 
@@ -61,10 +60,6 @@ public class GeneralFragmentActivity extends PreferenceFragment {
 
         mButtonBrightness.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (isSupported(BUTTON_BRIGHTNESS_FILE)) {
-                    Utils.writeValue(BUTTON_BRIGHTNESS_FILE, (String) newValue);
-                    Utils.writeValue(BUTTON_BRIGHTNESS_FILE.replace("max_",""), (String) newValue);
-                }
                 if (isSupported(BUTTON_BRIGHTNESS_RGB1_FILE)) {
                     Utils.writeValue(BUTTON_BRIGHTNESS_RGB1_FILE, (String) newValue);
                     Utils.writeValue(BUTTON_BRIGHTNESS_RGB1_FILE.replace("max_",""), (String) newValue);
@@ -101,16 +96,11 @@ public class GeneralFragmentActivity extends PreferenceFragment {
             }
         });
 
-        if (!isSupported(BUTTON_BRIGHTNESS_FILE)
-                && !isSupported(BUTTON_BRIGHTNESS_RGB1_FILE)
-                && !isSupported(BUTTON_BRIGHTNESS_RGB2_FILE)) {
+        if (!isSupported(BUTTON_BRIGHTNESS_RGB1_FILE)) {
             mButtonBrightness.setEnabled(false);
         }
 
-        if (!isSupported(KEYBOARD_BRIGHTNESS_RGB1_FILE)
-                && !isSupported(KEYBOARD_BRIGHTNESS_RGB2_FILE)
-                && !isSupported(KEYBOARD_BRIGHTNESS_RGB3_FILE)
-                && !isSupported(KEYBOARD_BRIGHTNESS_RGB4_FILE)) {
+        if (!isSupported(KEYBOARD_BRIGHTNESS_RGB1_FILE)) {
             mKeyboardBrightness.setEnabled(false);
         }
 
@@ -122,10 +112,6 @@ public class GeneralFragmentActivity extends PreferenceFragment {
 
     public static void restore(Context context) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        if (isSupported(BUTTON_BRIGHTNESS_FILE)) {
-            Utils.writeValue(BUTTON_BRIGHTNESS_FILE, sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
-            Utils.writeValue(BUTTON_BRIGHTNESS_FILE.replace("max_",""), sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
-        }
         if (isSupported(BUTTON_BRIGHTNESS_RGB1_FILE)) {
             Utils.writeValue(BUTTON_BRIGHTNESS_RGB1_FILE, sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
             Utils.writeValue(BUTTON_BRIGHTNESS_RGB1_FILE.replace("max_",""), sharedPrefs.getString(DeviceSettings.BUTTON_BRIGHTNESS, "0"));
