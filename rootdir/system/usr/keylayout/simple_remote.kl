@@ -1,0 +1,8 @@
+# file simple_remote.kl
+# this corresponds to kernel/arch/arm/mach-msm/board-semc_mogami.c
+#
+# defines for values are in frameworks/base/include/ui/KeycodeLabels.h
+
+key 256    HEADSETHOOK         WAKE
+key 257    VOLUME_UP           WAKE
+key 258    VOLUME_DOWN         WAKE
