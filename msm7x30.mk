@@ -49,6 +49,12 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/ueventd.semc.rc:root/ueventd.semc.rc \
     $(COMMON_PATH)/rootdir/sbin/postrecoveryboot.sh:root/sbin/postrecoveryboot.sh
 
+# Common keylayouts
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/usr/keylayout/atdaemon.kl:system/usr/keylayout/atdaemon.kl \
+    $(COMMON_PATH)/rootdir/system/usr/keylayout/msm_pmic_pwr_key.kl:system/usr/keylayout/msm_pmic_pwr_key.kl \
+    $(COMMON_PATH)/rootdir/system/usr/keylayout/simple_remote.kl:system/usr/keylayout/simple_remote.kl
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \

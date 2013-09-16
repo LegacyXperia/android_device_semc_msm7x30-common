@@ -1,0 +1,6 @@
+# file msm_pmic_pwr_key.kl
+# this corresponds to kernel/arch/arm/mach-msm/board-semc_mogami.c
+#
+# defines for values are in frameworks/base/include/ui/KeycodeLabels.h
+
+key 116   POWER             WAKE
