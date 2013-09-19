@@ -1,0 +1,141 @@
+import init.semc.usb.rc
+import init.board.rc
+
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 666 /proc/cmdline
+
+on init
+    export EXTERNAL_STORAGE /storage/sdcard0
+
+    mkdir /storage 0050 system sdcard_r
+    mkdir /storage/sdcard0 0000 system system
+    mkdir /storage/usbdisk0 0000 system system
+
+    # for backwards compatibility
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
+    symlink /storage/usbdisk0 /usbdisk
+    symlink /storage/usbdisk0 /mnt/usbdisk
+
+on early-boot
+    # Offline charging
+    exec /system/bin/chargemon
+
+    # set RLIMIT_MEMLOCK to 64MB
+    setrlimit 8 67108864 67108864
+
+on boot
+    # Disable idle power collapse during boot.
+    # These features will be enabled at the end of boot
+    write /sys/module/pm2/parameters/idle_sleep_mode 3
+
+    # Radio fix
+    mkdir /data/radio 0775 radio radio
+    mkdir /data/radio/log 0775 radio radio
+
+    # To prevent out of order acknowledgements from making
+    # connection tracking to treat them as not belonging to
+    # the connection they belong to.
+    # Otherwise, a weird issue happens in which some long
+    # connections on high-throughput links get dropped when
+    # an ack packet comes out of order
+    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
+
+    chown root system /proc/net/ip_conntrack
+
+    # Panel backlight
+    chown system system /sys/class/leds/lcd-backlight/brightness
+    chmod 660 /sys/class/leds/lcd-backlight/brightness
+
+    # LED
+    chown system system /sys/class/leds/red/brightness
+    chmod 660 /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/red/use_pattern
+    chmod 660 /sys/class/leds/red/use_pattern
+    chown system system /sys/class/leds/green/brightness
+    chmod 660 /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/green/use_pattern
+    chmod 660 /sys/class/leds/green/use_pattern
+    chown system system /sys/class/leds/blue/brightness
+    chmod 660 /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/blue/use_pattern
+    chmod 660 /sys/class/leds/blue/use_pattern
+    chown system system /sys/devices/i2c-0/0-0040/pattern_data
+    chmod 660 /sys/devices/i2c-0/0-0040/pattern_data
+    chown system system /sys/devices/i2c-0/0-0040/pattern_delay
+    chmod 660 /sys/devices/i2c-0/0-0040/pattern_delay
+    chown system system /sys/devices/i2c-0/0-0040/pattern_duration_secs
+    chmod 660 /sys/devices/i2c-0/0-0040/pattern_duration_secs
+    chown system system /sys/devices/i2c-0/0-0040/pattern_use_softdim
+    chmod 660 /sys/devices/i2c-0/0-0040/pattern_use_softdim
+    chown system system /sys/devices/i2c-0/0-0040/dim_time
+    chmod 660 /sys/devices/i2c-0/0-0040/dim_time
+
+    # Vibrator intensity tuning
+    chown system system /sys/class/timed_output/vibrator/voltage_level
+
+    # Fix permissions for bma150 (accelerometer). Can be at different adresses.
+    chown system system /sys/devices/i2c-0/0-0038/rate
+    chown system system /sys/devices/i2c-4/4-0038/rate
+
+    class_start default
+
+    # USB host support
+    mkdir /dev/bus 0771 system system
+    mkdir /dev/bus/usb 0771 system system
+
+    chmod 0660 /sys/devices/platform/msm_hsusb/gadget/lun1/file
+    chown usb usb /sys/devices/platform/msm_hsusb/gadget/lun1/file
+    chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
+    chown system system /sys/devices/platform/msm_hsusb/gadget/wakeup
+
+    # power-management
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1017600
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 122000
+    chmod 0666 /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+
+    # Don't disable dmesg access for apps
+    write /proc/sys/kernel/dmesg_restrict 0
+
+    # Flash storage isn't a good entropy source, and only causes locking
+    # overhead in the kernel. Turn it off.
+    write /sys/block/mmcblk0/queue/add_random 0
+
+on fs
+    mount_all /fstab.semc
+
+on property:init.svc.bluetoothd=running
+    write /sys/devices/virtual/bluetooth/hci0/link_supervision_timeout 6400
+
+on property:init.svc.wpa_supplicant=stopped
+    stop dhcpcd
+
+service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0 &
+    class main
+    disabled
+    oneshot
+
+service qmuxd /system/bin/qmuxd
+    class core
+    user radio
+    group radio audio bluetooth gps
+
+service netmgrd /system/bin/netmgrd -E
+    class core
+
+on property:ro.use_data_netmgrd=false
+    # netmgr not supported on specific target
+    stop netmgrd
+
+service akmd8975 /system/bin/akmd8975
+    class main
+
+service hw_config /system/bin/sh /system/etc/hw_config.sh
+    class main
+    user root
+    oneshot
+
+on property:sys.boot_completed=1
+    write /sys/module/pm2/parameters/idle_sleep_mode 1
