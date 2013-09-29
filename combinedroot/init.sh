@@ -53,7 +53,6 @@ busybox mknod -m 600 /dev/block/mtdblock${MTDCACHE} b 31 $MTDCACHE
 BOOTREC_LED_RED="/sys/class/leds/red/brightness"
 BOOTREC_LED_GREEN="/sys/class/leds/green/brightness"
 BOOTREC_LED_BLUE="/sys/class/leds/blue/brightness"
-BOOTREC_LED_BUTTONS="/sys/class/leds/button-backlight/brightness"
 BOOTREC_LED_BUTTONS_RGB1="/sys/class/leds/button-backlight-rgb1/brightness"
 BOOTREC_LED_BUTTONS_RGB2="/sys/class/leds/button-backlight-rgb2/brightness"
 
@@ -68,10 +67,10 @@ do
 done
 
 # trigger amber LED & button-backlight
+busybox echo 30 > /sys/class/timed_output/vibrator/enable
 busybox echo 255 > ${BOOTREC_LED_RED}
 busybox echo 0 > ${BOOTREC_LED_GREEN}
 busybox echo 255 > ${BOOTREC_LED_BLUE}
-busybox echo 255 > ${BOOTREC_LED_BUTTONS}
 busybox echo 255 > ${BOOTREC_LED_BUTTONS_RGB1}
 busybox echo 255 > ${BOOTREC_LED_BUTTONS_RGB2}
 
@@ -79,7 +78,7 @@ busybox echo 255 > ${BOOTREC_LED_BUTTONS_RGB2}
 busybox cat /dev/input/event${keypad_input} > /dev/keycheck&
 busybox echo $! > /dev/keycheck.pid
 busybox sleep 3
-echo 30 > /sys/class/timed_output/vibrator/enable
+busybox echo 30 > /sys/class/timed_output/vibrator/enable
 busybox kill -9 $(cat /dev/keycheck.pid)
 
 # mount cache
@@ -97,7 +96,6 @@ then
 	busybox echo 0 > ${BOOTREC_LED_RED}
 	busybox echo 0 > ${BOOTREC_LED_GREEN}
 	busybox echo 255 > ${BOOTREC_LED_BLUE}
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS}
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB1}
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB2}
 	# framebuffer fix
@@ -111,7 +109,6 @@ else
 	busybox echo 0 > ${BOOTREC_LED_RED}
 	busybox echo 0 > ${BOOTREC_LED_GREEN}
 	busybox echo 0 > ${BOOTREC_LED_BLUE}
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS}
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB1}
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB2}
 	# framebuffer fix
