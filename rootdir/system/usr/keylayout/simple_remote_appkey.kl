@@ -1,0 +1,6 @@
+# file simple_remote.kl
+# this corresponds to kernel/arch/arm/mach-msm/board-semc_mogami.c
+#
+# defines for values are in frameworks/base/include/ui/KeycodeLabels.h
+
+key 259    VENDOR_1
