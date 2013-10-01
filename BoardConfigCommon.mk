@@ -49,6 +49,9 @@ TARGET_NO_HW_VSYNC := true
 BOARD_EGL_CFG := device/semc/msm7x30-common/rootdir/system/etc/egl.cfg
 TARGET_NO_INITLOGO := true
 
+# QCOM enhanced A/V
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+
 # Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
 BOARD_USES_GENERIC_AUDIO := false
