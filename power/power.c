@@ -32,9 +32,9 @@
 #define BOOSTPULSE_SMARTASS2 "/sys/devices/system/cpu/cpufreq/smartass/boost_pulse"
 #define BOOSTPULSE_SMARTASSH3 "/sys/devices/system/cpu/cpufreq/smartassH3/boost_pulse"
 #define SAMPLING_RATE_SCREEN_ON "50000"
-#define SAMPLING_RATE_SCREEN_OFF "500000"
-#define TIMER_RATE_SCREEN_ON "30000"
-#define TIMER_RATE_SCREEN_OFF "500000"
+#define SAMPLING_RATE_SCREEN_OFF "50000"
+#define TIMER_RATE_SCREEN_ON "50000"
+#define TIMER_RATE_SCREEN_OFF "50000"
 
 struct cm_power_module {
     struct power_module base;
