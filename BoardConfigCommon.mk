@@ -109,8 +109,5 @@ SOMC_CFG_SENSORS_LIGHT_AS3676 := yes
 SOMC_CFG_SENSORS_LIGHT_AS3676_PATH := "/sys/devices/i2c-0/0-0040"
 SOMC_CFG_SENSORS_LIGHT_AS3676_MAXRANGE := 9000
 
-# A custom ota package maker for a device without an exposed boot partition
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/msm7x30-common/releasetools/semc_ota_from_target_files
-
 # CM Hardware tunables
 BOARD_HARDWARE_CLASS := device/semc/msm7x30-common/cmhw
