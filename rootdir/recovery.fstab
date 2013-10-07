@@ -4,6 +4,7 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
 # Recovery only devices
+/dev/null                             /boot          mtd       defaults                   defaults
 system                                /system        yaffs2    ro                         wait
 cache                                 /cache         yaffs2    rw,noatime,nosuid,nodev    wait
 userdata                              /data          yaffs2    rw,noatime,nosuid,nodev    wait
