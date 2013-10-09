@@ -36,12 +36,13 @@
 #include <camera/CameraParameters.h>
 
 /* SEMC parameter names */
-static char KEY_SEMC_IMAGE_STABILISER[] = "semc-is";
-static char KEY_SEMC_VIDEO_STABILISER[] = "semc-vs";
+static char KEY_EX_IMAGE_STABILIZER[] = "semc-is";
+static char KEY_EX_VIDEO_STABILIZER[] = "semc-vs";
 
 /* SEMC parameter values */
-static char VALUE_SEMC_ON[] = "on";
-static char VALUE_SEMC_OFF[] = "off";
+static char EX_ON[] = "on";
+static char EX_OFF[] = "off";
+
 
 static android::Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
@@ -124,20 +125,15 @@ char * camera_fixup_setparams(int id, const char * settings)
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
-#if 0
-    if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
-        const char* recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
+    /* Video stabilization */
+    const char* recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
+    if (recordingHint) {
         if (strcmp(recordingHint, android::CameraParameters::TRUE) == 0) {
-            /* Video stabiliser */
-            params.set(KEY_SEMC_VIDEO_STABILISER, VALUE_SEMC_ON);
-            params.set(KEY_SEMC_IMAGE_STABILISER, VALUE_SEMC_OFF);
+            params.set(KEY_EX_VIDEO_STABILIZER, EX_ON);
         } else if (strcmp(recordingHint, android::CameraParameters::FALSE) == 0) {
-            /* Image stabiliser */
-            params.set(KEY_SEMC_VIDEO_STABILISER, VALUE_SEMC_OFF);
-            params.set(KEY_SEMC_IMAGE_STABILISER, VALUE_SEMC_ON);
+            params.set(KEY_EX_VIDEO_STABILIZER, EX_OFF);
         }
     }
-#endif
 
 #ifdef USES_AS3676_TORCH
     /* Fix urushi as3676 torch */
