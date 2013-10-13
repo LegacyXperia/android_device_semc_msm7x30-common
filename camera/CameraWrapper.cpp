@@ -101,18 +101,14 @@ static int check_vendor_module()
     return rv;
 }
 
-/* Preferred panorama viewing angles */
-const static char * preferred_horizontal_viewing_angle = "51.2";
-const static char * preferred_vertical_viewing_angle = "39.4";
-
 static char * camera_fixup_getparams(int id, const char * settings)
 {
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
     /* Fix panorama - set correct viewing angles */
-    params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, preferred_horizontal_viewing_angle);
-    params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, preferred_vertical_viewing_angle);
+    params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "51.2");
+    params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, "39.4");
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
@@ -139,9 +135,9 @@ char * camera_fixup_setparams(int id, const char * settings)
     }
 
 #ifdef USES_AS3676_TORCH
-    /* Fix urushi as3676 torch */
-    if (params.get(android::CameraParameters::KEY_FLASH_MODE)) {
-        const char* flashMode = params.get(android::CameraParameters::KEY_FLASH_MODE);
+    /* HACK - Fix urushi as3676 torch */
+    const char* flashMode = params.get(android::CameraParameters::KEY_FLASH_MODE);
+    if (flashMode) {
         if (strcmp(flashMode, android::CameraParameters::FLASH_MODE_TORCH) == 0) {
             system("echo 255 > /sys/class/leds/torch-rgb1/brightness");
             system("echo 255 > /sys/class/leds/torch-rgb2/brightness");
