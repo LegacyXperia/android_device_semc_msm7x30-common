@@ -101,14 +101,36 @@ static int check_vendor_module()
     return rv;
 }
 
+void camera_fixup_capability(android::CameraParameters *params)
+{
+    ALOGV("%s", __FUNCTION__);
+
+    if (params->get(KEY_EX_IMAGE_STABILIZER)) {
+        char buffer[255];
+        const char* supportedSceneModes = params->get(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES);
+        sprintf(buffer, "%s,hdr", supportedSceneModes);
+        params->set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES, buffer);
+    }
+}
+
 static char * camera_fixup_getparams(int id, const char * settings)
 {
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
+    camera_fixup_capability(&params);
+
     /* Fix panorama - set correct viewing angles */
     params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "51.2");
     params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, "39.4");
+
+    /* Set HDR scene mode when image stabilizer is enabled */
+    const char* isMode = params.get(KEY_EX_IMAGE_STABILIZER);
+    if (isMode) {
+        if (strcmp(isMode, EX_ON) == 0) {
+            params.set(android::CameraParameters::KEY_SCENE_MODE, "hdr");
+        }
+    }
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
@@ -131,6 +153,17 @@ char * camera_fixup_setparams(int id, const char * settings)
         } else if (strcmp(recordingHint, android::CameraParameters::FALSE) == 0) {
             params.set(KEY_EX_VIDEO_MODE, EX_OFF);
             params.set(KEY_EX_VIDEO_STABILIZER, EX_OFF);
+        }
+    }
+
+    /* Enable image stabilizer when HDR scene mode is selected */
+    const char* sceneMode = params.get(android::CameraParameters::KEY_SCENE_MODE);
+    if (sceneMode) {
+        if (strcmp(sceneMode, "hdr") == 0) {
+            params.set(KEY_EX_IMAGE_STABILIZER, EX_ON);
+            params.set(android::CameraParameters::KEY_SCENE_MODE, android::CameraParameters::SCENE_MODE_AUTO);
+        } else {
+            params.set(KEY_EX_IMAGE_STABILIZER, EX_OFF);
         }
     }
 
