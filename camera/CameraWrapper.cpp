@@ -37,6 +37,8 @@
 /* SEMC parameter names */
 static char KEY_EX_VIDEO_STABILIZER[] = "semc-vs";
 static char KEY_EX_VIDEO_MODE[] = "semc-video-mode";
+static char KEY_EX_METERING_MODE[] = "semc-metering-mode";
+static char KEY_EX_SUPPORTED_METERING_MODES[] = "semc-metering-mode-values";
 static char KEY_EX_MAX_MULTI_FOCUS_NUM[] = "semc-max-multi-focus-num";
 
 /* SEMC parameter values */
@@ -100,6 +102,19 @@ static int check_vendor_module()
     return rv;
 }
 
+void camera_fixup_capability(android::CameraParameters *params)
+{
+    ALOGV("%s", __FUNCTION__);
+
+    /* Metering mode */
+    if (params->get(KEY_EX_METERING_MODE)) {
+        char buffer[255];
+        const char *supportedMeteringModes = params->get(KEY_EX_SUPPORTED_METERING_MODES);
+        sprintf(buffer, "%s-metering", supportedMeteringModes);
+        params->set(android::CameraParameters::KEY_SUPPORTED_AUTO_EXPOSURE, buffer);
+    }
+}
+
 static char *camera_fixup_getparams(int id, const char *settings)
 {
     android::CameraParameters params;
@@ -112,12 +127,26 @@ static char *camera_fixup_getparams(int id, const char *settings)
 
     /* Back Camera */
     if (id == 0) {
+        camera_fixup_capability(&params);
+
         /* Fix panorama - set correct viewing angles */
         params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "51.2");
         params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, "39.4");
 
         /* Fix exposure compensation step */
         params.set(android::CameraParameters::KEY_EXPOSURE_COMPENSATION_STEP, "1");
+    }
+
+    /* Metering mode */
+    const char* meteringMode = params.get(KEY_EX_METERING_MODE);
+    if (meteringMode) {
+        if (strcmp(meteringMode, "frame-average") == 0) {
+            params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, android::CameraParameters::AUTO_EXPOSURE_FRAME_AVG);
+        } else if (strcmp(meteringMode, "center-weighted") == 0) {
+            params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, android::CameraParameters::AUTO_EXPOSURE_CENTER_WEIGHTED);
+        } else if (strcmp(meteringMode, "spot") == 0) {
+            params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, android::CameraParameters::AUTO_EXPOSURE_SPOT_METERING);
+        }
     }
 
     /* Max focus areas */
@@ -156,6 +185,18 @@ static char *camera_fixup_setparams(int id, const char *settings)
         } else if (strcmp(recordingHint, android::CameraParameters::FALSE) == 0) {
             params.set(KEY_EX_VIDEO_MODE, EX_OFF);
             params.set(KEY_EX_VIDEO_STABILIZER, EX_OFF);
+        }
+    }
+
+    /* Metering mode */
+    const char *meteringMode = params.get(android::CameraParameters::KEY_AUTO_EXPOSURE);
+    if (meteringMode) {
+        if (strcmp(meteringMode, android::CameraParameters::AUTO_EXPOSURE_FRAME_AVG) == 0) {
+            params.set(KEY_EX_METERING_MODE, "frame-average");
+        } else if (strcmp(meteringMode, android::CameraParameters::AUTO_EXPOSURE_CENTER_WEIGHTED) == 0) {
+            params.set(KEY_EX_METERING_MODE, "center-weighted");
+        } else if (strcmp(meteringMode, android::CameraParameters::AUTO_EXPOSURE_SPOT_METERING) == 0) {
+            params.set(KEY_EX_METERING_MODE, "spot");
         }
     }
 
