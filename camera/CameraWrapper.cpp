@@ -41,6 +41,7 @@ static char KEY_EX_VIDEO_STABILIZER[] = "semc-vs";
 static char KEY_EX_VIDEO_MODE[] = "semc-video-mode";
 static char KEY_EX_METERING_MODE[] = "semc-metering-mode";
 static char KEY_EX_SUPPORTED_METERING_MODES[] = "semc-metering-mode-values";
+static char KEY_EX_MAX_MULTI_FOCUS_NUM[] = "semc-max-multi-focus-num";
 
 /* SEMC parameter values */
 static char EX_ON[] = "on";
@@ -153,6 +154,12 @@ static char * camera_fixup_getparams(int id, const char * settings)
         } else if (strcmp(meteringMode, "spot") == 0) {
             params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, android::CameraParameters::AUTO_EXPOSURE_SPOT_METERING);
         }
+    }
+
+    /* Max focus areas */
+    const char* multiFocusNum = params.get(KEY_EX_MAX_MULTI_FOCUS_NUM);
+    if (multiFocusNum) {
+        params.set(android::CameraParameters::KEY_MAX_NUM_FOCUS_AREAS, multiFocusNum);
     }
 
     android::String8 strParams = params.flatten();
