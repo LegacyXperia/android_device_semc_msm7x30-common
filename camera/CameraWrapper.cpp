@@ -38,6 +38,7 @@
 /* SEMC parameter names */
 static char KEY_EX_IMAGE_STABILIZER[] = "semc-is";
 static char KEY_EX_VIDEO_STABILIZER[] = "semc-vs";
+static char KEY_EX_VIDEO_MODE[] = "semc-video-mode";
 
 /* SEMC parameter values */
 static char EX_ON[] = "on";
@@ -129,8 +130,10 @@ char * camera_fixup_setparams(int id, const char * settings)
     const char* recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
     if (recordingHint) {
         if (strcmp(recordingHint, android::CameraParameters::TRUE) == 0) {
+            params.set(KEY_EX_VIDEO_MODE, EX_ON);
             params.set(KEY_EX_VIDEO_STABILIZER, EX_ON);
         } else if (strcmp(recordingHint, android::CameraParameters::FALSE) == 0) {
+            params.set(KEY_EX_VIDEO_MODE, EX_OFF);
             params.set(KEY_EX_VIDEO_STABILIZER, EX_OFF);
         }
     }
