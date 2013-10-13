@@ -42,6 +42,7 @@ static char KEY_EX_VIDEO_MODE[] = "semc-video-mode";
 static char KEY_EX_METERING_MODE[] = "semc-metering-mode";
 static char KEY_EX_SUPPORTED_METERING_MODES[] = "semc-metering-mode-values";
 static char KEY_EX_MAX_MULTI_FOCUS_NUM[] = "semc-max-multi-focus-num";
+static char KEY_EX_SUPPORTED_SCENE_DETECTIONS[] = "semc-scene-detect-supported";
 
 /* SEMC parameter values */
 static char EX_ON[] = "on";
@@ -192,8 +193,10 @@ char * camera_fixup_setparams(int id, const char * settings)
         if (strcmp(sceneMode, "hdr") == 0) {
             params.set(KEY_EX_IMAGE_STABILIZER, EX_ON);
             params.set(android::CameraParameters::KEY_SCENE_MODE, android::CameraParameters::SCENE_MODE_AUTO);
+            params.set(KEY_EX_SUPPORTED_SCENE_DETECTIONS, android::CameraParameters::FALSE);
         } else {
             params.set(KEY_EX_IMAGE_STABILIZER, EX_OFF);
+            params.set(KEY_EX_SUPPORTED_SCENE_DETECTIONS, android::CameraParameters::TRUE);
         }
     }
 
