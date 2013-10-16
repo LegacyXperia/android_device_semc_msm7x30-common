@@ -72,6 +72,10 @@ on boot
     chown system system /sys/devices/i2c-0/0-0040/dim_time
     chmod 660 /sys/devices/i2c-0/0-0040/dim_time
 
+    # Ambient Light Sensor
+    chown system system /sys/devices/i2c-0/0-0040/als_on
+    chmod 660 /sys/devices/i2c-0/0-0040/als_on
+
     # Vibrator intensity tuning
     chown system system /sys/class/timed_output/vibrator/voltage_level
 
