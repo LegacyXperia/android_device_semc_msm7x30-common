@@ -19,3 +19,12 @@ lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libGLESv2S3D_adreno200.so
 lib/egl/libq3dtools_adreno200.so
+
+# Media libs
+lib/libDivxDrm.so
+lib/libExtendedExtractor.so
+lib/libmm-color-convertor.so
+lib/libmmipl.so
+lib/libmmosal.so
+lib/libmmparser.so
+lib/libSHIMDivxDrm.so
