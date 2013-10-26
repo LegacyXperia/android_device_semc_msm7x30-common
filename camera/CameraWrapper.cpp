@@ -131,7 +131,10 @@ static char * camera_fixup_getparams(int id, const char * settings)
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
-    camera_fixup_capability(&params);
+    /* Back Camera */
+    if (id == 0) {
+        camera_fixup_capability(&params);
+    }
 
     /* Fix panorama - set correct viewing angles */
     params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "51.2");
