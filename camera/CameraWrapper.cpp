@@ -134,11 +134,14 @@ static char * camera_fixup_getparams(int id, const char * settings)
     /* Back Camera */
     if (id == 0) {
         camera_fixup_capability(&params);
-    }
 
-    /* Fix panorama - set correct viewing angles */
-    params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "51.2");
-    params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, "39.4");
+        /* Fix panorama - set correct viewing angles */
+        params.set(android::CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "51.2");
+        params.set(android::CameraParameters::KEY_VERTICAL_VIEW_ANGLE, "39.4");
+
+        /* Fix exposure compensation step */
+        params.set(android::CameraParameters::KEY_EXPOSURE_COMPENSATION_STEP, "1");
+    }
 
     /* Set HDR scene mode when image stabilizer is enabled */
     const char* isMode = params.get(KEY_EX_IMAGE_STABILIZER);
