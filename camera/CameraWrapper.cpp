@@ -56,26 +56,26 @@ static int camera_get_number_of_cameras(void);
 static int camera_get_camera_info(int camera_id, struct camera_info *info);
 
 static struct hw_module_methods_t camera_module_methods = {
-    open: camera_device_open
+    .open = camera_device_open
 };
 
 camera_module_t HAL_MODULE_INFO_SYM = {
-    common: {
-         tag: HARDWARE_MODULE_TAG,
-         module_api_version: 1,
-         hal_api_version: 0,
-         id: CAMERA_HARDWARE_MODULE_ID,
-         name: "Xperia msm7x30 Camera Wrapper",
-         author: "The CyanogenMod Project, Michael Bestas",
-         methods: &camera_module_methods,
-         dso: NULL, /* remove compilation warnings */
-         reserved: {0}, /* remove compilation warnings */
+    .common = {
+         .tag = HARDWARE_MODULE_TAG,
+         .module_api_version = 1,
+         .hal_api_version = 0,
+         .id = CAMERA_HARDWARE_MODULE_ID,
+         .name = "Xperia msm7x30 Camera Wrapper",
+         .author = "The CyanogenMod Project, Michael Bestas",
+         .methods = &camera_module_methods,
+         .dso = NULL, /* remove compilation warnings */
+         .reserved = {0}, /* remove compilation warnings */
     },
-    get_number_of_cameras: camera_get_number_of_cameras,
-    get_camera_info: camera_get_camera_info,
-    set_callbacks: NULL, /* remove compilation warnings */
-    get_vendor_tag_ops: NULL, /* remove compilation warnings */
-    reserved: {0}, /* remove compilation warnings */
+    .get_number_of_cameras = camera_get_number_of_cameras,
+    .get_camera_info = camera_get_camera_info,
+    .set_callbacks = NULL, /* remove compilation warnings */
+    .get_vendor_tag_ops = NULL, /* remove compilation warnings */
+    .reserved = {0}, /* remove compilation warnings */
 };
 
 typedef struct wrapper_camera_device {
