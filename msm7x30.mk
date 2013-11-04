@@ -42,7 +42,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(COMMON_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(COMMON_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    $(COMMON_PATH)/rootdir/system/etc/init.d/10read_ahead_kb:system/etc/init.d/10read_ahead_kb \
     $(COMMON_PATH)/rootdir/system/etc/vold.fstab:system/etc/vold.fstab \
     $(COMMON_PATH)/rootdir/fstab.semc:root/fstab.semc \
     $(COMMON_PATH)/rootdir/init.semc.rc:root/init.semc.rc \
