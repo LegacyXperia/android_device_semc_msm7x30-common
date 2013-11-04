@@ -109,14 +109,6 @@ void camera_fixup_capability(android::CameraParameters *params)
 {
     ALOGV("%s", __FUNCTION__);
 
-    /* Scene mode */
-    if (params->get(KEY_EX_IMAGE_STABILIZER)) {
-        char buffer[255];
-        const char* supportedSceneModes = params->get(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES);
-        sprintf(buffer, "%s,hdr", supportedSceneModes);
-        params->set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES, buffer);
-    }
-
     /* Metering mode */
     if (params->get(KEY_EX_METERING_MODE)) {
         char buffer[255];
@@ -141,14 +133,6 @@ static char * camera_fixup_getparams(int id, const char * settings)
 
         /* Fix exposure compensation step */
         params.set(android::CameraParameters::KEY_EXPOSURE_COMPENSATION_STEP, "1");
-    }
-
-    /* Set HDR scene mode when image stabilizer is enabled */
-    const char* isMode = params.get(KEY_EX_IMAGE_STABILIZER);
-    if (isMode) {
-        if (strcmp(isMode, EX_ON) == 0) {
-            params.set(android::CameraParameters::KEY_SCENE_MODE, "hdr");
-        }
     }
 
     /* Metering mode */
@@ -187,22 +171,11 @@ char * camera_fixup_setparams(int id, const char * settings)
         if (strcmp(recordingHint, android::CameraParameters::TRUE) == 0) {
             params.set(KEY_EX_VIDEO_MODE, EX_ON);
             params.set(KEY_EX_VIDEO_STABILIZER, EX_ON);
+            params.set(KEY_EX_IMAGE_STABILIZER, EX_OFF);
         } else if (strcmp(recordingHint, android::CameraParameters::FALSE) == 0) {
             params.set(KEY_EX_VIDEO_MODE, EX_OFF);
             params.set(KEY_EX_VIDEO_STABILIZER, EX_OFF);
-        }
-    }
-
-    /* Enable image stabilizer when HDR scene mode is selected */
-    const char* sceneMode = params.get(android::CameraParameters::KEY_SCENE_MODE);
-    if (sceneMode) {
-        if (strcmp(sceneMode, "hdr") == 0) {
             params.set(KEY_EX_IMAGE_STABILIZER, EX_ON);
-            params.set(android::CameraParameters::KEY_SCENE_MODE, android::CameraParameters::SCENE_MODE_AUTO);
-            params.set(KEY_EX_SUPPORTED_SCENE_DETECTIONS, android::CameraParameters::FALSE);
-        } else {
-            params.set(KEY_EX_IMAGE_STABILIZER, EX_OFF);
-            params.set(KEY_EX_SUPPORTED_SCENE_DETECTIONS, android::CameraParameters::TRUE);
         }
     }
 
