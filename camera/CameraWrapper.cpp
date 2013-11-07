@@ -472,6 +472,12 @@ int camera_device_close(hw_device_t* device)
         goto done;
     }
 
+#ifdef USES_AS3676_TORCH
+    /* HACK - Fix urushi as3676 torch */
+    system("echo 0 > /sys/class/leds/torch-rgb1/brightness");
+    system("echo 0 > /sys/class/leds/torch-rgb2/brightness");
+#endif
+
     wrapper_dev = (wrapper_camera_device_t*) device;
 
     wrapper_dev->vendor->common.close((hw_device_t*)wrapper_dev->vendor);
