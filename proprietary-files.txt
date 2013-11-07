@@ -24,7 +24,6 @@ lib/egl/libq3dtools_adreno200.so
 lib/libDivxDrm.so
 lib/libExtendedExtractor.so
 lib/libmm-color-convertor.so
-lib/libmmipl.so
 lib/libmmosal.so
 lib/libmmparser.so
 lib/libSHIMDivxDrm.so
