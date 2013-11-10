@@ -32,13 +32,6 @@
          in to AC and 2 to stay on when plugged in to USB.  (So 3 for both.) -->
     <integer name="config_deskDockKeepsScreenOn">0</integer>
 
-    <string-array name="config_locationProviderPackageNames" translatable="false">
-        <!-- The standard AOSP fused location provider -->
-        <item>com.android.location.fused</item>
-        <!-- The Google Network Location Services location provider -->
-        <item>com.google.android.location</item>
-    </string-array>
-
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings. -->
     <bool name="config_automatic_brightness_available">true</bool>
 
