@@ -1,22 +1,26 @@
-import init.semc.usb.rc
-import init.board.rc
+# Common init for semc msm7x30 devices
+
+import /init.semc.usb.rc
+import /init.board.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 666 /proc/cmdline
 
 on init
-    export EXTERNAL_STORAGE /storage/sdcard0
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+    mkdir /storage/sdcard0 0700 root root
+    mkdir /storage/usbdisk 0700 root root
 
-    mkdir /storage 0050 system sdcard_r
-    mkdir /storage/sdcard0 0000 system system
-    mkdir /storage/usbdisk0 0000 system system
+    export EXTERNAL_STORAGE /storage/sdcard0
+    export SECONDARY_STORAGE /storage/usbdisk
 
     # for backwards compatibility
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
-    symlink /storage/usbdisk0 /usbdisk
-    symlink /storage/usbdisk0 /mnt/usbdisk
+    symlink /storage/usbdisk /usbdisk
+    symlink /storage/usbdisk /mnt/usbdisk
 
 on early-boot
     # Offline charging
@@ -134,6 +138,14 @@ on property:init.svc.bluetoothd=running
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
+
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
+    class late_start
+    disabled
+
+service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
+    class late_start
+    disabled
 
 service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0 &
     class main
