@@ -3,9 +3,9 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
-system                                        /system        yaffs2    ro                        wait
-cache                                         /cache         yaffs2    rw,noatime,nosuid,nodev   wait
-userdata                                      /data          yaffs2    rw,noatime,nosuid,nodev   wait
+system                                        /system        yaffs2    ro                        wait,recoveryonly
+cache                                         /cache         yaffs2    rw,noatime,nosuid,nodev   wait,recoveryonly
+userdata                                      /data          yaffs2    rw,noatime,nosuid,nodev   wait,recoveryonly
 
 # Recovery only devices
 /dev/block/mmcblk0p2                          /sd-ext        auto      defaults                  recoveryonly
