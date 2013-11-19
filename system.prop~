@@ -1,0 +1,34 @@
+ 
+#ADB
+ro.debuggable=1
+persist.sys.usb.config=adb
+ 
+# Android defaults EGL preserved swap behaviour
+# This gives bad performace for deferred renderers
+# such as Mali.
+hwui.render_dirty_regions=false
+
+# System props for SOLS
+ro.semc.sols.product-code=105
+ro.semc.sols.company-code=5
+
+# STE: UNSOL_CALL_RING is only sent once from RIL.
+# Android needs to generate more rings if needed.
+ro.telephony.call_ring.multiple=false
+
+# NFC
+ro.nfc.on.default=false
+ro.nfc.se.sim.enable=fasle
+ro.nfc.se.smx.enable=false
+ro.nfc.icon.enable=false
+
+#STE: Fast Dormancy Flag
+# Fast Dormancy based on USB Tether Events and Screen States
+ste.special_fast_dormancy=false
+
+# System props for audio
+persist.audio.hp=true
+
+ro.service.swiqi.supported=false
+persist.service.swiqi.enable=0
+
