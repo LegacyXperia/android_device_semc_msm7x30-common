@@ -164,6 +164,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bq.gpu_to_cpu_unsupported=1
 
+# Fix legacy fb on kitkat
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.zygote.disable_gl_preload=1
+
 # Set default number of background apps to 10
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.mem.max_hidden_apps=10
