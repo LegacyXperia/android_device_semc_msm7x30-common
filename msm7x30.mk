@@ -74,7 +74,7 @@ PRODUCT_PACKAGES += \
     power.msm7x30 \
     gps.msm7x30 \
     lights.msm7x30 \
-    sensors.default
+    sensors.msm7x30
 
 # QCOM OMX
 PRODUCT_PACKAGES += \
