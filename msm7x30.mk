@@ -172,6 +172,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.mem.max_hidden_apps=10
 
+# For applications to determine if they should turn off specific memory-intensive
+# features that work poorly on low-memory devices.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.low_ram=true
+
 # Extra debugging props
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=0 \
