@@ -102,7 +102,6 @@ then
 	busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
 	# recovery ramdisk
 	load_image=/sbin/ramdisk-recovery.cpio
-	busybox sleep 2
 else
 	busybox echo 'ANDROID BOOT' >>boot.txt
 	# poweroff LED & button-backlight
