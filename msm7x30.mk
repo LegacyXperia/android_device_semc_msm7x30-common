@@ -180,10 +180,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.zygote.disable_gl_preload=1
 
-# Set default number of background apps to 10
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.mem.max_hidden_apps=10
-
 # For applications to determine if they should turn off specific memory-intensive
 # features that work poorly on low-memory devices.
 PRODUCT_PROPERTY_OVERRIDES += \
