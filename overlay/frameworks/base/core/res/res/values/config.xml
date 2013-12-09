@@ -26,6 +26,9 @@
     <!-- True will enable the screen-on animation. -->
     <!--<bool name="config_screenOnAnimation">true</bool>-->
 
+    <!-- Disable lockscreen rotation by default -->
+    <bool name="config_enableLockScreenRotation">true</bool>
+
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
 
