@@ -163,6 +163,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.mem.max_hidden_apps=10
 
+# zRAM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.zram.default=18
+
 # Extra debugging props
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=0 \
