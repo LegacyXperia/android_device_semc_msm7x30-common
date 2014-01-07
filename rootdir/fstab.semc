@@ -12,3 +12,6 @@ userdata                                      /data          yaffs2    rw,noatim
 # Vold managed devices
 /devices/platform/msm_sdcc.4/mmc_host/mmc1    auto           auto      defaults                  voldmanaged=sdcard0:auto,noemulatedsd
 /devices/platform/msm_hsusb_host.0            auto           auto      defaults                  voldmanaged=usbdisk:auto
+
+# zRAM
+/dev/block/zram0                              none           swap      defaults                  zramsize=134217728

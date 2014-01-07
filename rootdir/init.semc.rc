@@ -132,6 +132,7 @@ on fs
     mount yaffs2 mtd@cache /cache rw noatime nosuid nodev
     mount yaffs2 mtd@userdata /data rw noatime nosuid nodev
     mount_all /fstab.semc
+    swapon_all /fstab.semc
 
 on property:init.svc.bluetoothd=running
     write /sys/devices/virtual/bluetooth/hci0/link_supervision_timeout 6400
