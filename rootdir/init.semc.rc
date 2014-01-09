@@ -129,9 +129,6 @@ on boot
 on fs
     mount_all /fstab.semc
 
-on property:init.svc.bluetoothd=running
-    write /sys/devices/virtual/bluetooth/hci0/link_supervision_timeout 6400
-
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
