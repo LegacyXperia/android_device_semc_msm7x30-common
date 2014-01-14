@@ -166,6 +166,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cwm.enable_key_repeat=true
 
+# Prefer .tar backup format in CWM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.prefer_tar=true
+
 # Fix screenshots with legacy FB
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bq.gpu_to_cpu_unsupported=1
