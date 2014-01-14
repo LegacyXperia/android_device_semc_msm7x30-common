@@ -164,6 +164,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cwm.enable_key_repeat=true
 
+# Prefer .tar backup format in CWM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.prefer_tar=true
+
 # Disable excessive dalvik debug messages
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.debug.alloc=0
