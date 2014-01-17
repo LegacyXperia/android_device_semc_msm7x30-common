@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
  * Copyright (C) 2011 Diogo Ferreira <defer@cyanogenmod.com>
- * Copyright (C) 2012-2013 The CyanogenMod Project <http://www.cyanogenmod.org>
+ * Copyright (C) 2012-2014 The CyanogenMod Project <http://www.cyanogenmod.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -333,11 +333,11 @@ static struct hw_module_methods_t lights_module_methods = {
 };
 
 struct hw_module_t HAL_MODULE_INFO_SYM = {
-	.tag		= HARDWARE_MODULE_TAG,
-	.version_major	= 1,
-	.version_minor	= 0,
-	.id		= LIGHTS_HARDWARE_MODULE_ID,
-	.name		= "SEMC lights module",
-	.author		= "Diogo Ferreira <defer@cyanogenmod.com>, Andreas Makris <Andreas.Makris@gmail.com>",
-	.methods	= &lights_module_methods,
+	.tag = HARDWARE_MODULE_TAG,
+	.module_api_version = 1,
+	.hal_api_version = HARDWARE_HAL_API_VERSION,
+	.id = LIGHTS_HARDWARE_MODULE_ID,
+	.name = "SEMC lights module",
+	.author = "Diogo Ferreira <defer@cyanogenmod.com>, Andreas Makris <Andreas.Makris@gmail.com>",
+	.methods = &lights_module_methods,
 };
