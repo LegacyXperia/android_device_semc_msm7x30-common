@@ -151,3 +151,6 @@ service hw_config /system/bin/sh /system/etc/hw_config.sh
 
 on property:sys.boot_completed=1
     write /sys/module/pm2/parameters/idle_sleep_mode 1
+
+on property:sys.sysctl.extra_free_kbytes=*
+    write /proc/sys/vm/extra_free_kbytes ${sys.sysctl.extra_free_kbytes}
