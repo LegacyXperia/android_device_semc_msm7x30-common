@@ -295,7 +295,8 @@ static int camera_store_meta_data_in_buffers(struct camera_device *device,
     if (!device)
         return -EINVAL;
 
-    return VENDOR_CALL(device, store_meta_data_in_buffers, enable);
+    // Our ICS camera blobs do not support storing metadata in buffers
+    return -EINVAL;
 }
 
 static int camera_start_recording(struct camera_device *device)
