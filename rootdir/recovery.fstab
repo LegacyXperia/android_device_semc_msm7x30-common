@@ -3,5 +3,5 @@
 /cache          yaffs2    cache
 /data           yaffs2    userdata
 /system         yaffs2    system
-/sdcard         auto      /dev/block/mmcblk0p1   /dev/block/mmcblk0
+/sdcard         vfat      /dev/block/mmcblk0p1   /dev/block/mmcblk0
 /sd-ext         auto      /dev/block/mmcblk0p2
