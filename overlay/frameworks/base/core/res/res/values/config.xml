@@ -146,11 +146,6 @@
          This feature should be disabled for most devices. -->
     <integer name="config_virtualKeyQuietTimeMillis">250</integer>
 
-    <!-- Set additional audio parameters for incall audio -->
-    <string-array name="config_telephony_set_audioparameters" translatable="false">
-        <item>dualmic_enabled=true=false</item>
-    </string-array>
-
     <!-- Device supports LED flashlight -->
     <bool name="config_enableTorch">true</bool>
 
