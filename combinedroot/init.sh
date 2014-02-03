@@ -79,13 +79,10 @@ busybox cat /dev/input/event${keypad_input} > /dev/keycheck&
 busybox echo $! > /dev/keycheck.pid
 busybox sleep 3
 busybox echo 30 > /sys/class/timed_output/vibrator/enable
-busybox kill -9 $(cat /dev/keycheck.pid)
+busybox kill -9 $(busybox cat /dev/keycheck.pid)
 
 # mount cache
 busybox mount -t yaffs2 /dev/block/mtdblock${MTDCACHE} /cache
-
-# android ramdisk
-load_image=/sbin/ramdisk.cpio
 
 # boot decision
 if [ -s /dev/keycheck -o -e /cache/recovery/boot ]
@@ -113,6 +110,8 @@ else
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB2}
 	# framebuffer fix
 	busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
+	# android ramdisk
+	load_image=/sbin/ramdisk.cpio
 fi
 
 # unpack the ramdisk image
@@ -123,6 +122,5 @@ busybox umount /proc
 busybox umount /sys
 
 busybox rm -fr /dev/*
-busybox date >>boot.txt
 export PATH="${_PATH}"
 exec /init
