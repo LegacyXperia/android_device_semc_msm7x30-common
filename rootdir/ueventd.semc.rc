@@ -72,16 +72,6 @@
 /dev/qce                  0660   system     audio
 /dev/msm_pcm_lp_dec       0660   system     audio
 
-# permissions for lm356x flash
-/sys/devices/i2c-0/0-0053/flash_current                0666   system     system
-/sys/devices/i2c-0/0-0053/flash_duration               0666   system     system
-/sys/devices/i2c-0/0-0053/flash_enable                 0666   system     system
-/sys/devices/i2c-0/0-0053/flash_synchronization        0666   system     system
-/sys/devices/i2c-0/0-0053/privacy_current              0666   system     system
-/sys/devices/i2c-0/0-0053/privacy_enable               0666   system     system
-/sys/devices/i2c-0/0-0053/torch_current                0666   system     system
-/sys/devices/i2c-0/0-0053/torch_enable                 0666   system     system
-
 # permissions for bma* sensors
 /sys/devices/virtual/input/input*   enable             0660   root       input
 /sys/devices/virtual/input/input*   poll_delay         0660   root       input
