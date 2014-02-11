@@ -133,6 +133,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=15 \
     ro.com.google.locationfeatures=1 \
+    ro.com.google.clientidbase.ms=android-sonymobile \
     ro.product.locale.language=en \
     ro.product.locale.region=US \
     ro.use_data_netmgrd=true \
