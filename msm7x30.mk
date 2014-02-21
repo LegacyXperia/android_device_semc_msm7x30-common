@@ -206,6 +206,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.max_starting_bg=4
 
+# Disable atlas services on low-ram targets
+PRODUCT_PROPERTY_OVERRIDES += \
+    config.disable_atlas=true
+
 # Disable strict mode
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=0 \
