@@ -40,7 +40,6 @@ static char KEY_EX_VIDEO_MODE[] = "semc-video-mode";
 static char KEY_EX_METERING_MODE[] = "semc-metering-mode";
 static char KEY_EX_SUPPORTED_METERING_MODES[] = "semc-metering-mode-values";
 static char KEY_EX_MAX_MULTI_FOCUS_NUM[] = "semc-max-multi-focus-num";
-static char KEY_EX_SUPPORTED_SCENE_DETECTIONS[] = "semc-scene-detect-supported";
 
 /* SEMC parameter values */
 static char EX_ON[] = "on";
