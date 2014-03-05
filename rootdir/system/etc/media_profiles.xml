@@ -99,8 +99,8 @@
         <EncoderProfile quality="720p" fileFormat="mp4" duration="60">
             <Video codec="h264"
                    bitRate="6000000"
-                   width="864"
-                   height="480"
+                   width="1280"
+                   height="720"
                    frameRate="30" />
             <Audio codec="aac"
                    bitRate="128000"
@@ -147,8 +147,8 @@
         <EncoderProfile quality="timelapse720p" fileFormat="mp4" duration="60">
             <Video codec="h264"
                    bitRate="6000000"
-                   width="864"
-                   height="480"
+                   width="1280"
+                   height="720"
                    frameRate="30" />
             <!-- audio setting is ignored -->
             <Audio codec="aac"
