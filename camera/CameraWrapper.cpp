@@ -175,7 +175,7 @@ static char *camera_fixup_getparams(int id, const char *settings)
     }
 
     /* Metering mode */
-    const char* meteringMode = params.get(KEY_EX_METERING_MODE);
+    const char *meteringMode = params.get(KEY_EX_METERING_MODE);
     if (meteringMode) {
         if (strcmp(meteringMode, "frame-average") == 0) {
             params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, android::CameraParameters::AUTO_EXPOSURE_FRAME_AVG);
@@ -187,7 +187,7 @@ static char *camera_fixup_getparams(int id, const char *settings)
     }
 
     /* Max focus areas */
-    const char* multiFocusNum = params.get(KEY_EX_MAX_MULTI_FOCUS_NUM);
+    const char *multiFocusNum = params.get(KEY_EX_MAX_MULTI_FOCUS_NUM);
     if (multiFocusNum) {
         params.set(android::CameraParameters::KEY_MAX_NUM_FOCUS_AREAS, multiFocusNum);
     }
