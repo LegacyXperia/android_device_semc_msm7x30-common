@@ -158,7 +158,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Set default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb
+    persist.sys.usb.config=mtp
 
 # Increase speed for UMS transfer
 PRODUCT_PROPERTY_OVERRIDES += \
