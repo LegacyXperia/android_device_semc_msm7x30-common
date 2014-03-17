@@ -42,6 +42,7 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
     $(COMMON_PATH)/rootdir/fstab.semc:root/fstab.semc \
     $(COMMON_PATH)/rootdir/init.semc.rc:root/init.semc.rc \
+    $(COMMON_PATH)/rootdir/init.recovery.semc.rc:root/init.recovery.semc.rc \
     $(COMMON_PATH)/rootdir/ueventd.semc.rc:root/ueventd.semc.rc
 
 # Reboot to recovery related scripts
