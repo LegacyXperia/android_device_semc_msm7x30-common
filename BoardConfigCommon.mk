@@ -28,41 +28,35 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 
 # Architecture
 TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := scorpion
-TARGET_ARCH_VARIANT := armv7-a-neon
+
+# Low memory device
 TARGET_ARCH_LOWMEM := true
 
-# QCOM Hardware
+# Qualcomm Hardware
 BOARD_USES_QCOM_HARDWARE := true
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
+TARGET_USES_QCOM_BSP := true
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+TARGET_QCOM_DISPLAY_VARIANT := caf
+TARGET_QCOM_MEDIA_VARIANT := caf
+TARGET_PROVIDES_LIBLIGHT := true
 
-# Display
-TARGET_QCOM_DISPLAY_VARIANT := legacy
-TARGET_QCOM_MEDIA_VARIANT := legacy
-BOARD_EGL_WORKAROUND_BUG_10194508 := true
-TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
-BOARD_USE_MHEAP_SCREENSHOT := true
-TARGET_DOESNT_USE_FENCE_SYNC := true
-BOARD_EGL_NEEDS_FNW := true
+# Graphics
 USE_OPENGL_RENDERER := true
-TARGET_USES_ION := false
+TARGET_USES_ION := true
 TARGET_USES_C2D_COMPOSITION := true
-TARGET_NO_HW_VSYNC := true
+TARGET_DISPLAY_USE_RETIRE_FENCE := true
+TARGET_DISPLAY_INSECURE_MM_HEAP := true
 BOARD_EGL_CFG := device/semc/msm7x30-common/rootdir/system/etc/egl.cfg
 TARGET_NO_INITLOGO := true
-
-# QCOM enhanced A/V
-TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 # Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
 BOARD_USES_LEGACY_ALSA_AUDIO := true
-BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_QCOM_AUDIO_RESETALL := true
-BOARD_USES_QCOM_AUDIO_VOIPMUTE := true
 
 # GPS
 BOARD_USES_QCOM_GPS := true
@@ -71,9 +65,6 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-
-# HACK: Use old Webkit for pmem compatibility
-TARGET_FORCE_CPU_UPLOAD := true
 
 # Camera
 TARGET_DISABLE_ARM_PIE := true
@@ -90,10 +81,13 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
 # Kernel
+TARGET_NO_KERNEL := false
 TARGET_KERNEL_SOURCE := kernel/semc/msm7x30
 BOARD_KERNEL_CMDLINE := # This is ignored by sony's bootloader
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 131072
+
+# We don't build bootloader nor radio
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 COMMON_GLOBAL_CFLAGS += -DHAS_SEMC_BOOTLOADER
@@ -111,9 +105,6 @@ SOMC_CFG_SENSORS_LIGHT_AS3676_MAXRANGE := 9000
 
 # A custom ota package maker for a device without an exposed boot partition
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/msm7x30-common/releasetools/semc_ota_from_target_files
-
-# Workaround to avoid issues with legacy liblights on QCOM platforms
-TARGET_PROVIDES_LIBLIGHT := true
 
 # CM Hardware tunables
 BOARD_HARDWARE_CLASS := device/semc/msm7x30-common/cmhw

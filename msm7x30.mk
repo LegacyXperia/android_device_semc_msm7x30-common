@@ -35,12 +35,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
-# Common device specific configs
+# Init scripts
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
-    $(COMMON_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(COMMON_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    $(COMMON_PATH)/rootdir/fstab.semc:root/fstab.semc \
     $(COMMON_PATH)/rootdir/init.semc.rc:root/init.semc.rc \
     $(COMMON_PATH)/rootdir/init.recovery.semc.rc:root/init.recovery.semc.rc \
     $(COMMON_PATH)/rootdir/ueventd.semc.rc:root/ueventd.semc.rc
@@ -49,6 +45,16 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/sbin/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
     $(COMMON_PATH)/rootdir/system/bin/pre-recovery.sh:system/bin/pre-recovery.sh
+
+# fstab
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/fstab.semc:root/fstab.semc
+
+# Common device specific configs
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    $(COMMON_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
+    $(COMMON_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # Common keylayouts
 PRODUCT_COPY_FILES += \
@@ -77,13 +83,20 @@ PRODUCT_PACKAGES += \
     audio.primary.msm7x30 \
     audio_policy.msm7x30 \
     libaudio-resampler \
-    libaudioparameter
+    libaudioparameter \
+    libdashplayer
 
 # Graphics
 PRODUCT_PACKAGES += \
-    gralloc.msm7x30 \
     copybit.msm7x30 \
-    hwcomposer.msm7x30
+    gralloc.msm7x30 \
+    hwcomposer.msm7x30 \
+    memtrack.msm7x30 \
+    libgenlock \
+    libmemalloc \
+    liboverlay \
+    libqdutils \
+    libtilerenderer
 
 # Hal
 PRODUCT_PACKAGES += \
@@ -96,10 +109,10 @@ PRODUCT_PACKAGES += \
 # QCOM OMX
 PRODUCT_PACKAGES += \
     libstagefrighthw \
+    libmm-omxcore \
     libOmxCore \
     libOmxVdec \
     libOmxVenc \
-    libmm-omxcore \
     libc2dcolorconvert
 
 # Misc
@@ -134,27 +147,29 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd=true \
     ro.tethering.kb_disconnect=1
 
+# Graphics
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw=1 \
+    debug.egl.hw=1 \
+    debug.composition.type=gpu \
+    persist.hwc.mdpcomp.enable=false \
+    debug.mdpcomp.maxlayer=3 \
+    debug.mdpcomp.logs=0 \
+    debug.hwc.dynThreshold=1.9
+
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number.
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
-# QCOM
+# Video
 PRODUCT_PROPERTY_OVERRIDES += \
-    com.qc.hardware=true \
-    debug.sf.hw=1 \
-    debug.egl.hw=1 \
-    debug.mdpcomp.logs=0 \
-    hwui.disable_vsync=true
+    persist.camera.mem.usecache=0 \
+    persist.video.mem.usecache=0
 
 # Low Power Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    lpa.decode=false \
-    lpa.use-stagefright=false
-
-# Resampler quality
-PRODUCT_PROPERTY_OVERRIDES += \
-    af.resampler.quality=255
+    lpa.decode=true
 
 # Set default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -172,18 +187,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cwm.prefer_tar=true
 
-# Fix screenshots with legacy FB
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bq.gpu_to_cpu_unsupported=1
-
-# Fix legacy fb on kitkat
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.zygote.disable_gl_preload=1
-
-# HACK: Use old Webkit for pmem compatibility
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.webview.provider=classic
-
 # For applications to determine if they should turn off specific memory-intensive
 # features that work poorly on low-memory devices.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -192,11 +195,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable KSM by default
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ksm.default=1
-
-# Extra debugging props
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.strictmode.visual=0 \
-    persist.sys.strictmode.disable=1
 
 # proprietary side of the board
 $(call inherit-product, vendor/semc/msm7x30-common/msm7x30-common-vendor.mk)
