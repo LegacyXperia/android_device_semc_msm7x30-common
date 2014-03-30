@@ -74,7 +74,7 @@ PRODUCT_COPY_FILES += \
 
 # Boot logo
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).rle:root/logo.rle
+    $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).rle:root/initlogo.rle
 
 # Audio
 PRODUCT_PACKAGES += \
