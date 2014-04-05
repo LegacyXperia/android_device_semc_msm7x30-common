@@ -44,7 +44,7 @@ PRODUCT_COPY_FILES += \
 # Reboot to recovery related scripts
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/sbin/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
-    $(COMMON_PATH)/rootdir/system/bin/pre-recovery.sh:system/bin/pre-recovery.sh
+    $(COMMON_PATH)/rootdir/sbin/pre-recovery.sh:root/sbin/pre-recovery.sh
 
 # fstab
 PRODUCT_COPY_FILES += \
