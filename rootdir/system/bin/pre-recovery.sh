@@ -2,6 +2,6 @@
 
 PATH=/system/bin
 
-touch /cache/recovery/boot
+echo $@ > /cache/recovery/boot
 sync
 

@@ -85,7 +85,7 @@ busybox kill -9 $(busybox cat /dev/keycheck.pid)
 busybox mount -t yaffs2 /dev/block/mtdblock${MTDCACHE} /cache
 
 # boot decision
-if [ -s /dev/keycheck -o -e /cache/recovery/boot ]
+if [ -s /dev/keycheck ] || busybox grep -q recovery /cache/recovery/boot
 then
 	busybox echo 'RECOVERY BOOT' >>boot.txt
 	busybox rm -fr /cache/recovery/boot
