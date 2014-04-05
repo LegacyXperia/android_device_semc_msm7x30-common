@@ -154,8 +154,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=gpu \
     persist.hwc.mdpcomp.enable=false \
     debug.mdpcomp.maxlayer=3 \
-    debug.mdpcomp.logs=0 \
-    debug.hwc.dynThreshold=1.9
+    debug.mdpcomp.logs=0
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number.
