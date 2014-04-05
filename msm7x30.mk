@@ -161,11 +161,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
-# Video
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.mem.usecache=0 \
-    persist.video.mem.usecache=0
-
 # Low Power Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     lpa.decode=true
