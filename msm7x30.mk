@@ -186,9 +186,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.low_ram=true
 
-# Enable KSM by default
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ksm.default=1
-
 # proprietary side of the board
 $(call inherit-product, vendor/semc/msm7x30-common/msm7x30-common-vendor.mk)
