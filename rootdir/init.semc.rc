@@ -137,6 +137,9 @@ on fs
     mount_all /fstab.semc
     swapon_all /fstab.semc
 
+on post-fs-data
+    setprop vold.post_fs_data_done 1
+
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
