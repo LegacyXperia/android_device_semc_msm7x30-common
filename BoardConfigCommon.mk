@@ -54,6 +54,9 @@ TARGET_DISPLAY_INSECURE_MM_HEAP := true
 BOARD_EGL_CFG := device/semc/msm7x30-common/rootdir/system/etc/egl.cfg
 TARGET_NO_INITLOGO := true
 
+# Screenrecord
+BOARD_SCREENRECORD_LANDSCAPE_ONLY := true
+
 # Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
 BOARD_USES_LEGACY_ALSA_AUDIO := true
