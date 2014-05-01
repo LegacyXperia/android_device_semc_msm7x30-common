@@ -41,9 +41,6 @@ char const*const BUTTON_BACKLIGHT_FILE   = "/sys/class/leds/button-backlight/bri
 #ifdef HAVE_KEYBOARD_BACKLIGHT
 char const*const KEYBOARD_BACKLIGHT_FILE = "/sys/class/leds/keyboard-backlight/brightness";
 #endif
-#ifdef HAVE_MUSIC_LIGHT
-char const*const MUSIC_LIGHT_FILE        = "/sys/class/leds/music-light/brightness";
-#endif
 
 char const*const RED_LED_FILE            = "/sys/class/leds/red/brightness";
 char const*const GREEN_LED_FILE          = "/sys/class/leds/green/brightness";
@@ -199,20 +196,6 @@ static int set_light_keyboard (struct light_device_t* dev, struct light_state_t 
 	return err;
 }
 
-static int set_light_music (struct light_device_t* dev, struct light_state_t const* state) {
-	int err = 0;
-#ifdef HAVE_MUSIC_LIGHT
-	size_t i = 0;
-	int brightness = rgb_to_brightness(state);
-
-	pthread_mutex_lock(&g_lock);
-	ALOGV("%s brightness = %d", __func__, brightness);
-	err |= write_int (MUSIC_LIGHT_FILE, brightness);
-	pthread_mutex_unlock(&g_lock);
-#endif
-	return err;
-}
-
 static void set_shared_light_locked (struct light_device_t *dev, struct light_state_t *state) {
 	int r, g, b;
 	int delayOn, delayOff;
@@ -305,8 +288,6 @@ static int open_lights (const struct hw_module_t* module, char const* name,
 		set_light = set_light_battery;
 	else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name))
 		set_light = set_light_notifications;
-	else if (0 == strcmp(LIGHT_ID_MUSIC, name))
-		set_light = set_light_music;
 	else
 		return -EINVAL;
 
