@@ -171,7 +171,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Increase speed for UMS transfer
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vold.umsdirtyratio=50
+    ro.vold.umsdirtyratio=20
 
 # Enable repeatable keys in CWM
 PRODUCT_PROPERTY_OVERRIDES += \
