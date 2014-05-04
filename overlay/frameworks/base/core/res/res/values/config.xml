@@ -152,6 +152,9 @@
          This feature should be disabled for most devices. -->
     <integer name="config_virtualKeyQuietTimeMillis">250</integer>
 
+    <!-- Is the device capable of hot swapping an UICC Card -->
+    <bool name="config_hotswapCapable">true</bool>
+
     <!-- Device supports LED flashlight -->
     <bool name="config_enableTorch">true</bool>
 
