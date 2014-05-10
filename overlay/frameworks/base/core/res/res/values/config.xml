@@ -155,11 +155,6 @@
     <!-- Is the device capable of hot swapping an UICC Card -->
     <bool name="config_hotswapCapable">true</bool>
 
-    <!-- Set additional audio parameters for incall audio -->
-    <string-array name="config_telephony_set_audioparameters" translatable="false">
-        <item>dualmic_enabled=true=false</item>
-    </string-array>
-
     <!-- Device supports LED flashlight -->
     <bool name="config_enableTorch">true</bool>
 
