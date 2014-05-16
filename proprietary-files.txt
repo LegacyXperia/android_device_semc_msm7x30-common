@@ -8,20 +8,20 @@ etc/firmware/vidc_720p_mp4_enc_mc.fw
 etc/firmware/vidc_720p_vc1_dec_mc.fw
 etc/firmware/yamato_pfp.fw
 etc/firmware/yamato_pm4.fw
-lib/libC2D2.so
-lib/libc2d2_z180.so
-lib/libCB.so
-lib/libgsl.so
-lib/libllvm-arm.so
-lib/libOpenCL.so
-lib/libOpenVG.so
-lib/libsc-a2xx.so
-lib/egl/eglsubAndroid.so
-lib/egl/libEGL_adreno200.so
-lib/egl/libGLESv1_CM_adreno200.so
-lib/egl/libGLESv2_adreno200.so
-lib/egl/libGLESv2S3D_adreno200.so
-lib/egl/libq3dtools_adreno200.so
+vendor/lib/libadreno_utils.so
+vendor/lib/libC2D2.so
+vendor/lib/libc2d2_z180.so
+vendor/lib/libCB.so
+vendor/lib/libgsl.so
+vendor/lib/libOpenCL.so
+vendor/lib/libOpenVG.so
+vendor/lib/libsc-a2xx.so
+vendor/lib/egl/eglsubAndroid.so
+vendor/lib/egl/libEGL_adreno.so
+vendor/lib/egl/libGLESv1_CM_adreno.so
+vendor/lib/egl/libGLESv2_adreno.so
+vendor/lib/egl/libGLESv2S3D_adreno.so
+vendor/lib/egl/libq3dtools_adreno.so
 
 # Media libs
 lib/libDivxDrm.so
