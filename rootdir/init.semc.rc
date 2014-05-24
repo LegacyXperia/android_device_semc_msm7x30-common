@@ -22,6 +22,9 @@ on init
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
 
+    # Clear splash screen
+    write /sys/class/graphics/fb0/blank 1
+
 on early-boot
     # Offline charging
     exec /system/bin/chargemon
