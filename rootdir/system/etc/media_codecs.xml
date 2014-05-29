@@ -57,14 +57,6 @@
             <Quirk name="requires-global-flush"/>
             <Quirk name="requires-wma-pro-component"/>
         </MediaCodec>
-        <MediaCodec name="OMX.qcom.audio.decoder.wmaLossLess" type="audio/x-ms-wma">
-            <Quirk name="requires-global-flush"/>
-        </MediaCodec>
-        <MediaCodec name="OMX.qcom.audio.decoder.wma10Pro" type="audio/x-ms-wma">
-            <Quirk name="requires-global-flush"/>
-        </MediaCodec>
-        <MediaCodec name="OMX.qcom.audio.decoder.amrwbplus" type="audio/amr-wb-plus">
-        </MediaCodec>
         <!-- Audio Software  -->
         <MediaCodec name="OMX.google.vorbis.decoder" type="audio/vorbis"/>
         <MediaCodec name="OMX.google.gsm.decoder" type="audio/gsm"/>
@@ -92,22 +84,12 @@
             <Quirk name="requires-allocate-on-output-ports"/>
             <Quirk name="defers-output-buffer-allocation"/>
         </MediaCodec>
-        <MediaCodec name="OMX.qcom.video.decoder.divx311" type="video/divx311">
-            <Quirk name="requires-allocate-on-input-ports"/>
-            <Quirk name="requires-allocate-on-output-ports"/>
-            <Quirk name="defers-output-buffer-allocation"/>
-        </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.divx4" type="video/divx4">
             <Quirk name="requires-allocate-on-input-ports"/>
             <Quirk name="requires-allocate-on-output-ports"/>
             <Quirk name="defers-output-buffer-allocation"/>
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.avc" type="video/avc">
-            <Quirk name="requires-allocate-on-input-ports"/>
-            <Quirk name="requires-allocate-on-output-ports"/>
-            <Quirk name="defers-output-buffer-allocation"/>
-        </MediaCodec>
-        <MediaCodec name="OMX.qcom.video.decoder.mpeg2" type="video/mpeg2">
             <Quirk name="requires-allocate-on-input-ports"/>
             <Quirk name="requires-allocate-on-output-ports"/>
             <Quirk name="defers-output-buffer-allocation"/>
@@ -123,7 +105,7 @@
             <Quirk name="defers-output-buffer-allocation"/>
         </MediaCodec>
         <MediaCodec name="OMX.google.vp8.decoder" type="video/x-vnd.on2.vp8"/>
-        <MediaCodec name="OMX.google.vp9.decoder" type="video/x-vnd.on2.vp9" />
+        <MediaCodec name="OMX.google.vp9.decoder" type="video/x-vnd.on2.vp9"/>
         <MediaCodec name="OMX.google.h264.decoder" type="video/avc"/>
         <MediaCodec name="OMX.google.h263.decoder" type="video/3gpp"/>
         <MediaCodec name="OMX.google.mpeg4.decoder" type="video/mp4v-es"/>
