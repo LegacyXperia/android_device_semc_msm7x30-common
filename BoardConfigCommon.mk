@@ -90,6 +90,7 @@ TARGET_KERNEL_SOURCE := kernel/semc/msm7x30
 BOARD_KERNEL_CMDLINE := # This is ignored by sony's bootloader
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 131072
+TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
 
 # We don't build bootloader nor radio
 TARGET_NO_BOOTLOADER := true
