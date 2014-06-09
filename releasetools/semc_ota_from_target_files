@@ -106,7 +106,7 @@ OPTIONS.worker_threads = 3
 OPTIONS.backuptool = False
 OPTIONS.override_device = 'auto'
 OPTIONS.override_prop = False
-OPTIONS.no_separate_recovery = False
+OPTIONS.no_separate_recovery = True
 
 def MostPopularKey(d, default):
   """Given a dict, return the key corresponding to the largest
