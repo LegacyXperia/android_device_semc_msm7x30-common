@@ -175,7 +175,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Resampler quality
 PRODUCT_PROPERTY_OVERRIDES += \
-    af.resampler.quality=255
+    af.resampler.quality=4
 
 # Set default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
