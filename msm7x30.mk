@@ -23,6 +23,8 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
+PRODUCT_BOOT_JARS += qcmediaplayer
+
 # These are the common hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -114,6 +116,9 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libc2dcolorconvert
+
+# qcmediaplayer
+PRODUCT_PACKAGES += qcmediaplayer
 
 # Misc
 PRODUCT_PACKAGES += \
