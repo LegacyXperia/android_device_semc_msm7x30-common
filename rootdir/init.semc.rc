@@ -97,6 +97,14 @@ on boot
     chown root system /sys/devices/platform/mddi_sony_s6d05a1_hvga/dbc_ctrl
     chmod 0664 /sys/devices/platform/mddi_sony_s6d05a1_hvga/dbc_ctrl
 
+    # I/O scheduler
+    chown system system /sys/block/mtdblock0/queue/scheduler
+    chmod 0664 /sys/block/mtdblock0/queue/scheduler
+    chown system system /sys/block/mtdblock1/queue/scheduler
+    chmod 0664 /sys/block/mtdblock1/queue/scheduler
+    chown system system /sys/block/mtdblock2/queue/scheduler
+    chmod 0664 /sys/block/mtdblock2/queue/scheduler
+
     # Fix permissions for bma150 (accelerometer). Can be at different adresses.
     chown system system /sys/devices/i2c-0/0-0038/rate
     chown system system /sys/devices/i2c-4/4-0038/rate
