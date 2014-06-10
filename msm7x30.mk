@@ -125,10 +125,6 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     Torch
 
-# WiFi
-PRODUCT_PACKAGES += \
-    libnetcmdiface
-
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
