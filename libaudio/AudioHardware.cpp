@@ -98,6 +98,9 @@ static uint32_t SND_DEVICE_CALL_HANDSET = 60;
 static uint32_t SND_DEVICE_CALL_SPEAKER = 61;
 static uint32_t SND_DEVICE_CALL_HEADSET = 62;
 #endif
+#ifdef SEMC_AUDIO
+static uint32_t SND_DEVICE_SPEAKER_DUAL_MIC_REAL_STEREO = 19;
+#endif
 
 static uint32_t DEVICE_HANDSET_RX = 0;           /* handset_rx */
 static uint32_t DEVICE_HANDSET_TX = 1;           /* handset_tx */
@@ -137,6 +140,9 @@ static uint32_t DEVICE_SPEAKER_CALL_TX = 63;     /* speaker_call_tx */
 static uint32_t DEVICE_HEADSET_CALL_RX = 64;     /* headset_call_rx */
 static uint32_t DEVICE_HEADSET_CALL_TX = 65;     /* headset_call_tx */
 static uint32_t DEVICE_COUNT = DEVICE_HEADSET_CALL_TX + 1;
+#elif defined(SEMC_AUDIO)
+static uint32_t DEVICE_SPEAKER_DUAL_MIC_REAL_STEREO_TX = 19;
+static uint32_t DEVICE_COUNT = DEVICE_SPEAKER_DUAL_MIC_REAL_STEREO_TX + 1;
 #else
 static uint32_t DEVICE_COUNT = DEVICE_BT_SCO_TX + 1;
 #endif
@@ -607,6 +613,10 @@ AudioHardware::AudioHardware() :
                 index = DEVICE_HEADSET_CALL_RX;
             else if(strcmp((char* )name[i], "headset_call_tx") == 0)
                 index = DEVICE_HEADSET_CALL_TX;
+#endif
+#ifdef SEMC_AUDIO
+            else if(strcmp((char* )name[i], "speaker_dual_mic_endfire_tx_real_stereo") == 0)
+                index = DEVICE_SPEAKER_DUAL_MIC_REAL_STEREO_TX;
 #endif
             else
                 continue;
@@ -1250,6 +1260,13 @@ static status_t do_route_audio_rpc(uint32_t device,
         ALOGV("In CALL HEADSET");
     }
 #endif
+#ifdef SEMC_AUDIO
+    else if (device == SND_DEVICE_SPEAKER_DUAL_MIC_REAL_STEREO) {
+        new_rx_device = cur_rx;
+        new_tx_device = DEVICE_SPEAKER_DUAL_MIC_REAL_STEREO_TX;
+        ALOGV("In dual mic real stereo endfire");
+    }
+#endif
 
     if(new_rx_device != INVALID_DEVICE)
         ALOGD("new_rx = %d", DEV_ID(new_rx_device));
@@ -1377,6 +1394,12 @@ status_t AudioHardware::doRouting(AudioStreamInMSM72xx *input, uint32_t outputDe
             if (inputDevice == AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET) {
                 ALOGI("Routing audio to Bluetooth PCM\n");
                 sndDevice = SND_DEVICE_BT;
+#ifdef SEMC_AUDIO
+            // Camcorder case
+            } else if (inputDevice & 0x80000004) {
+                ALOGI("Routing audio to dual mic real stereo\n");
+                sndDevice = SND_DEVICE_SPEAKER_DUAL_MIC_REAL_STEREO;
+#endif
             } else if (inputDevice == AUDIO_DEVICE_IN_WIRED_HEADSET) {
                 if ((outputDevices & AUDIO_DEVICE_OUT_WIRED_HEADSET) &&
                     (outputDevices & AUDIO_DEVICE_OUT_SPEAKER)) {

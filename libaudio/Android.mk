@@ -29,6 +29,10 @@ ifeq ($(BOARD_HAVE_SAMSUNG_AUDIO),true)
     LOCAL_CFLAGS += -DSAMSUNG_AUDIO
 endif
 
+ifeq ($(BOARD_HAVE_SEMC_AUDIO),true)
+    LOCAL_CFLAGS += -DSEMC_AUDIO
+endif
+
 LOCAL_SRC_FILES := \
     AudioHardware.cpp \
     audio_hw_hal.cpp
