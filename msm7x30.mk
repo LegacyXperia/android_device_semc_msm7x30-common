@@ -169,10 +169,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     use.non-omx.mp3.decoder=false \
     use.non-omx.aac.decoder=false
 
-# HW AAC encoder
-PRODUCT_PROPERTY_OVERRIDES += \
-    qcom.hw.aac.encoder=true
-
 # Resampler quality
 PRODUCT_PROPERTY_OVERRIDES += \
     af.resampler.quality=4
