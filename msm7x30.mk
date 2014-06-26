@@ -125,6 +125,19 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     Torch
 
+# Live wallpapers
+PRODUCT_PACKAGES += \
+    Galaxy4 \
+    HoloSpiralWallpaper \
+    LiveWallpapers \
+    LiveWallpapersPicker \
+    MagicSmokeWallpapers \
+    NoiseField \
+    PhaseBeam \
+    VisualizationWallpapers \
+    PhotoTable \
+    PhotoPhase
+
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
