@@ -34,6 +34,7 @@
 #include <camera/Camera.h>
 #include <camera/CameraParameters.h>
 
+#ifndef ZEUS_DEVICE
 /* SEMC parameter names */
 static char KEY_EX_VIDEO_STABILIZER[] = "semc-vs";
 static char KEY_EX_SUPPORTED_VIDEO_STABILIZERS[] = "semc-vs-values";
@@ -53,7 +54,7 @@ static char KEY_QC_SUPPORTED_DIS_MODES[] = "dis-values";
 /* QCOM parameter values */
 static char KEY_QC_DIS_ENABLE[] = "enable";
 static char KEY_QC_DIS_DISABLE[] = "disable";
-
+#endif
 
 static android::Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
@@ -114,6 +115,7 @@ static int check_vendor_module()
     return rv;
 }
 
+#ifndef ZEUS_DEVICE
 void camera_fixup_capability(android::CameraParameters *params)
 {
     ALOGV("%s", __FUNCTION__);
@@ -133,6 +135,7 @@ void camera_fixup_capability(android::CameraParameters *params)
         params->set(android::CameraParameters::KEY_SUPPORTED_AUTO_EXPOSURE, buffer);
     }
 }
+#endif
 
 static char *camera_fixup_getparams(int id, const char *settings)
 {
@@ -144,6 +147,7 @@ static char *camera_fixup_getparams(int id, const char *settings)
     params.dump();
 #endif
 
+#ifndef ZEUS_DEVICE
     /* Back Camera */
     if (id == 0) {
         camera_fixup_capability(&params);
@@ -191,6 +195,7 @@ static char *camera_fixup_getparams(int id, const char *settings)
     if (multiFocusNum) {
         params.set(android::CameraParameters::KEY_MAX_NUM_FOCUS_AREAS, multiFocusNum);
     }
+#endif
 
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
@@ -213,6 +218,7 @@ static char *camera_fixup_setparams(int id, const char *settings)
     params.dump();
 #endif
 
+#ifndef ZEUS_DEVICE
     /* Video recording mode */
     const char *recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
     if (recordingHint) {
@@ -257,6 +263,7 @@ static char *camera_fixup_setparams(int id, const char *settings)
             system("echo 0 > /sys/class/leds/torch-rgb2/brightness");
         }
     }
+#endif
 #endif
 
 #if !LOG_NDEBUG

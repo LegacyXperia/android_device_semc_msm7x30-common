@@ -11,6 +11,10 @@ ifeq ($(TARGET_DEVICE),urushi)
     LOCAL_CFLAGS += -DUSES_AS3676_TORCH
 endif
 
+ifneq ($(filter phoenix zeus zeusc, $(TARGET_DEVICE)),)
+    LOCAL_CFLAGS += -DZEUS_DEVICE
+endif
+
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_MODULE := camera.semc
 
