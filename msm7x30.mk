@@ -186,6 +186,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     af.resampler.quality=4
 
+# Disable gapless mode
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio.gapless.playback.disable=true
+
 # Set default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
