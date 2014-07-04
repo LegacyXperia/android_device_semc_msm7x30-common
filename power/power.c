@@ -108,7 +108,7 @@ static int get_scaling_governor() {
 
 static void cm_power_set_interactive(struct power_module *module, int on)
 {
-    // Do nothing
+    return;
 }
 
 static void configure_governor()
@@ -118,14 +118,17 @@ static void configure_governor()
     if (strncmp(governor, "ondemand", 8) == 0) {
         sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/up_threshold", "90");
         sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/io_is_busy", "1");
-        sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor", "4");
+        sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor", "2");
         sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/down_differential", "10");
-        sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/sampling_rate", "75000");
+        sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/input_boost", "1017600");
+        sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/boostfreq", "1017600");
+        sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/sampling_rate", "50000");
 
     } else if (strncmp(governor, "interactive", 11) == 0) {
-        sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time", "90000");
+        sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time", "40000");
         sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/io_is_busy", "1");
-        sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq", "1134000");
+        sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load", "90");
+        sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq", "1017600");
         sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay", "30000");
         sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate", "30000");
     }
@@ -154,9 +157,10 @@ static int boostpulse_open(struct cm_power_module *cm)
                 ALOGV("Error opening boostpulse: %s\n", buf);
                 cm->boostpulse_warned = 1;
             } else if (cm->boostpulse_fd > 0) {
-                configure_governor();
                 ALOGD("Opened %s boostpulse interface", governor);
             }
+
+        configure_governor();
         }
     }
 
@@ -184,7 +188,7 @@ static void cm_power_hint(struct power_module *module, power_hint_t hint,
 
             if (len < 0) {
                 strerror_r(errno, buf, sizeof(buf));
-	            ALOGE("Error writing to boostpulse: %s\n", buf);
+                ALOGE("Error writing to boostpulse: %s\n", buf);
 
                 pthread_mutex_lock(&cm->lock);
                 close(cm->boostpulse_fd);
