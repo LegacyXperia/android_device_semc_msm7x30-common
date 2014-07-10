@@ -178,7 +178,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Low Power Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     lpa.decode=false \
-    audio.decoder_override_check=false \
     use.non-omx.mp3.decoder=false \
     use.non-omx.aac.decoder=false
 
