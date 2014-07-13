@@ -29,7 +29,7 @@
 #define SCALING_GOVERNOR_PATH "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
 #define BOOSTPULSE_ONDEMAND "/sys/devices/system/cpu/cpufreq/ondemand/boostpulse"
 #define BOOSTPULSE_INTERACTIVE "/sys/devices/system/cpu/cpufreq/interactive/boostpulse"
-#define BOOSTPULSE_SMARTASS2 "/sys/devices/system/cpu/cpufreq/smartass/boost_pulse"
+#define BOOSTPULSE_SMARTASS2 "/sys/devices/system/cpu/cpufreq/smartassV2/boost_pulse"
 
 struct cm_power_module {
     struct power_module base;
@@ -120,7 +120,6 @@ static void configure_governor()
         sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/io_is_busy", "1");
         sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor", "2");
         sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/down_differential", "10");
-        sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/input_boost", "1017600");
         sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/boostfreq", "1017600");
         sysfs_write("/sys/devices/system/cpu/cpufreq/ondemand/sampling_rate", "50000");
 
