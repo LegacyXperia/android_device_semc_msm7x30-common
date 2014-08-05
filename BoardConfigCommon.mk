@@ -84,7 +84,6 @@ TARGET_RECOVERY_FSTAB := device/semc/msm7x30-common/rootdir/recovery.fstab
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/msm7x30-common/recovery/recovery_keys.c
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
-BOARD_RECOVERY_SWIPE := true
 
 # Kernel
 TARGET_NO_KERNEL := false
