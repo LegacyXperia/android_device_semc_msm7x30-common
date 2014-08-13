@@ -61,7 +61,7 @@ for input in `busybox ls -d /sys/class/input/input*`
 do
 	type=`busybox cat ${input}/name`
 	case "$type" in
-    (*keypad*) keypad_input=`busybox echo $input | busybox sed 's/^.*input//'`;;
+    (*pm8xxx-keypad*) keypad_input=`busybox echo $input | busybox sed 's/^.*input//'`;;
     (*)        ;;
     esac
 done
