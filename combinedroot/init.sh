@@ -97,8 +97,10 @@ then
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB2}
 	# framebuffer fix
 	busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
-	# recovery ramdisk
-	load_image=/sbin/ramdisk-recovery.cpio
+	# unpack the recovery ramdisk
+	busybox cpio -i < /sbin/ramdisk-recovery.cpio
+	# remove boot partition from recovery fstab
+	busybox sed -i '/boot/d' /etc/recovery.fstab
 else
 	busybox echo 'ANDROID BOOT' >>boot.txt
 	# poweroff LED & button-backlight
@@ -109,12 +111,9 @@ else
 	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB2}
 	# framebuffer fix
 	busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
-	# android ramdisk
-	load_image=/sbin/ramdisk.cpio
+	# unpack the android ramdisk
+	busybox cpio -i < /sbin/ramdisk.cpio
 fi
-
-# unpack the ramdisk image
-busybox cpio -i < ${load_image}
 
 busybox umount /cache
 busybox umount /proc
