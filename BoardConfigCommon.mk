@@ -53,6 +53,7 @@ TARGET_DISPLAY_INSECURE_MM_HEAP := true
 BOARD_EGL_CFG := device/semc/msm7x30-common/rootdir/system/etc/egl.cfg
 TARGET_NO_INITLOGO := true
 HWUI_COMPILE_FOR_PERF := true
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
 
 # Screenrecord
 BOARD_SCREENRECORD_LANDSCAPE_ONLY := true
