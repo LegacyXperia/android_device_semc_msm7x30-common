@@ -89,6 +89,12 @@ PRODUCT_PACKAGES += \
     libaudioparameter \
     libdashplayer
 
+# FM-Audio
+PRODUCT_PACKAGES += \
+    tinycap \
+    tinymix \
+    tinyplay
+
 # Graphics
 PRODUCT_PACKAGES += \
     copybit.msm7x30 \
