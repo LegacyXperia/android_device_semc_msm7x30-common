@@ -116,9 +116,6 @@ on boot
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
     chown system system /sys/devices/platform/msm_hsusb/gadget/wakeup
 
-    # Don't disable dmesg access for apps
-    write /proc/sys/kernel/dmesg_restrict 0
-
     # Flash storage isn't a good entropy source, and only causes locking
     # overhead in the kernel. Turn it off.
     write /sys/block/mmcblk0/queue/add_random 0
