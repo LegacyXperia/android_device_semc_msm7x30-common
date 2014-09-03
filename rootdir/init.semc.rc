@@ -22,10 +22,6 @@ on init
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
 
-    # Clear splash screen (blank and unblank)
-    write /sys/class/graphics/fb0/blank 1
-    write /sys/class/graphics/fb0/blank 0
-
 on early-boot
     # Offline charging
     exec /system/bin/chargemon
@@ -185,6 +181,10 @@ on property:init.svc.bootanim=running
     write /sys/block/mtdblock1/queue/scheduler noop
     write /sys/block/mtdblock2/queue/scheduler noop
     write /sys/block/mmcblk0/queue/scheduler noop
+
+    # Clear splash screen (blank and unblank)
+    write /sys/class/graphics/fb0/blank 1
+    write /sys/class/graphics/fb0/blank 0
 
 on property:init.svc.bootanim=stopped
     # Switch to ROW after boot for better UX
