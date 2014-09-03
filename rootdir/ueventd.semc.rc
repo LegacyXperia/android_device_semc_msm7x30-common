@@ -68,6 +68,7 @@
 /dev/msm_voicememo        0660   system     audio
 /dev/qce                  0660   system     audio
 /dev/msm_pcm_lp_dec       0660   system     audio
+/dev/msm_mp3              0660   system     audio
 
 # permissions for bma* sensors
 /sys/devices/virtual/input/input*   enable             0660   root       input
