@@ -250,20 +250,6 @@ static char *camera_fixup_setparams(int id, const char *settings)
             params.set(KEY_EX_METERING_MODE, "spot");
         }
     }
-
-#ifdef USES_AS3676_TORCH
-    /* HACK - Fix urushi as3676 torch */
-    const char *flashMode = params.get(android::CameraParameters::KEY_FLASH_MODE);
-    if (flashMode) {
-        if (strcmp(flashMode, android::CameraParameters::FLASH_MODE_TORCH) == 0) {
-            system("echo 255 > /sys/class/leds/torch-rgb1/brightness");
-            system("echo 255 > /sys/class/leds/torch-rgb2/brightness");
-        } else if (strcmp(flashMode, android::CameraParameters::FLASH_MODE_OFF) == 0) {
-            system("echo 0 > /sys/class/leds/torch-rgb1/brightness");
-            system("echo 0 > /sys/class/leds/torch-rgb2/brightness");
-        }
-    }
-#endif
 #endif
 
 #if !LOG_NDEBUG
@@ -573,12 +559,6 @@ static int camera_device_close(hw_device_t *device)
         ret = -EINVAL;
         goto done;
     }
-
-#ifdef USES_AS3676_TORCH
-    /* HACK - Fix urushi as3676 torch */
-    system("echo 0 > /sys/class/leds/torch-rgb1/brightness");
-    system("echo 0 > /sys/class/leds/torch-rgb2/brightness");
-#endif
 
     wrapper_dev = (wrapper_camera_device_t*) device;
 

@@ -7,10 +7,6 @@ LOCAL_SRC_FILES := \
 LOCAL_SHARED_LIBRARIES := \
     libhardware liblog libcamera_client libutils
 
-ifeq ($(TARGET_DEVICE),urushi)
-    LOCAL_CFLAGS += -DUSES_AS3676_TORCH
-endif
-
 ifneq ($(filter phoenix zeus zeusc, $(TARGET_DEVICE)),)
     LOCAL_CFLAGS += -DZEUS_DEVICE
 endif
