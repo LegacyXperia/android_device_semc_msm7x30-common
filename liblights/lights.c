@@ -32,26 +32,34 @@
 #include <sys/types.h>
 
 #include <hardware/lights.h>
-#ifndef NO_BUTTON_BACKLIGHT
-#include "semc_lights.h"
+
+char const*const LCD_BACKLIGHT_FILE      = "/sys/class/leds/lcd-backlight/brightness";
+
+#ifdef HAVE_BUTTON_BACKLIGHT
+char const*const BUTTON_BACKLIGHT_FILE   = "/sys/class/leds/button-backlight/brightness";
+#endif
+#ifdef HAVE_KEYBOARD_BACKLIGHT
+char const*const KEYBOARD_BACKLIGHT_FILE = "/sys/class/leds/keyboard-backlight/brightness";
+#endif
+#ifdef HAVE_MUSIC_LIGHT
+char const*const MUSIC_LIGHT_FILE        = "/sys/class/leds/music-light/brightness";
 #endif
 
-char const*const LCD_BACKLIGHT_FILE = "/sys/class/leds/lcd-backlight/brightness";
-char const*const RED_LED_FILE       = "/sys/class/leds/red/brightness";
-char const*const GREEN_LED_FILE     = "/sys/class/leds/green/brightness";
-char const*const BLUE_LED_FILE      = "/sys/class/leds/blue/brightness";
+char const*const RED_LED_FILE            = "/sys/class/leds/red/brightness";
+char const*const GREEN_LED_FILE          = "/sys/class/leds/green/brightness";
+char const*const BLUE_LED_FILE           = "/sys/class/leds/blue/brightness";
 
-char const*const LED_FILE_TRIGGER[]  = {
+char const*const LED_FILE_TRIGGER[]        = {
   "/sys/class/leds/red/use_pattern",
   "/sys/class/leds/green/use_pattern",
   "/sys/class/leds/blue/use_pattern"
 };
 
-char const*const LED_FILE_PATTERN     = "/sys/devices/i2c-0/0-0040/pattern_data";
-char const*const LED_FILE_REPEATDELAY = "/sys/devices/i2c-0/0-0040/pattern_delay";
-char const*const LED_FILE_PATTERNLEN  = "/sys/devices/i2c-0/0-0040/pattern_duration_secs";
-char const*const LED_FILE_DIMONOFF    = "/sys/devices/i2c-0/0-0040/pattern_use_softdim";
-char const*const LED_FILE_DIMTIME     = "/sys/devices/i2c-0/0-0040/dim_time";
+char const*const LED_FILE_PATTERN          = "/sys/devices/i2c-0/0-0040/pattern_data";
+char const*const LED_FILE_REPEATDELAY      = "/sys/devices/i2c-0/0-0040/pattern_delay";
+char const*const LED_FILE_PATTERNLEN       = "/sys/devices/i2c-0/0-0040/pattern_duration_secs";
+char const*const LED_FILE_DIMONOFF         = "/sys/devices/i2c-0/0-0040/pattern_use_softdim";
+char const*const LED_FILE_DIMTIME          = "/sys/devices/i2c-0/0-0040/dim_time";
 
 const int LCD_BRIGHTNESS_MIN = 1;
 
@@ -159,15 +167,13 @@ static int set_light_backlight (struct light_device_t *dev, struct light_state_t
 
 static int set_light_buttons (struct light_device_t *dev, struct light_state_t const* state) {
 	int err = 0;
-#ifndef NO_BUTTON_BACKLIGHT
+#ifdef HAVE_BUTTON_BACKLIGHT
 	size_t i = 0;
 	int brightness = rgb_to_brightness(state);
 
 	pthread_mutex_lock(&g_lock);
 	ALOGV("%s brightness = %d", __func__, brightness);
-	for (i = 0; i < sizeof(BUTTON_BACKLIGHT_FILE)/sizeof(BUTTON_BACKLIGHT_FILE[0]); i++) {
-		err |= write_int (BUTTON_BACKLIGHT_FILE[i], brightness);
-	}
+	err |= write_int (BUTTON_BACKLIGHT_FILE, brightness);
 	pthread_mutex_unlock(&g_lock);
 #endif
 	return err;
@@ -181,9 +187,7 @@ static int set_light_keyboard (struct light_device_t* dev, struct light_state_t 
 
 	pthread_mutex_lock(&g_lock);
 	ALOGV("%s brightness = %d", __func__, brightness);
-	for (i = 0; i < sizeof(KEYBOARD_BACKLIGHT_FILE)/sizeof(KEYBOARD_BACKLIGHT_FILE[0]); i++) {
-		err |= write_int (KEYBOARD_BACKLIGHT_FILE[i], brightness);
-	}
+	err |= write_int (KEYBOARD_BACKLIGHT_FILE, brightness);
 	pthread_mutex_unlock(&g_lock);
 #endif
 	return err;
@@ -197,9 +201,7 @@ static int set_light_music (struct light_device_t* dev, struct light_state_t con
 
 	pthread_mutex_lock(&g_lock);
 	ALOGV("%s brightness = %d", __func__, brightness);
-	for (i = 0; i < sizeof(MUSIC_LIGHT_FILE)/sizeof(MUSIC_LIGHT_FILE[0]); i++) {
-		err |= write_int (MUSIC_LIGHT_FILE[i], brightness);
-	}
+	err |= write_int (MUSIC_LIGHT_FILE, brightness);
 	pthread_mutex_unlock(&g_lock);
 #endif
 	return err;

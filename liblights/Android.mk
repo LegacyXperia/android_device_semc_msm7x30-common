@@ -26,12 +26,12 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 
 LOCAL_SHARED_LIBRARIES := liblog
 
-ifneq ($(filter iyokan mango, $(TARGET_DEVICE)),)
-    LOCAL_CFLAGS += -DHAVE_KEYBOARD_BACKLIGHT
+ifneq ($(filter anzu coconut haida hallon iyokan mango satsuma smultron, $(TARGET_DEVICE)),)
+    LOCAL_CFLAGS += -DHAVE_BUTTON_BACKLIGHT
 endif
 
-ifneq ($(filter phoenix urushi zeus zeusc, $(TARGET_DEVICE)),)
-    LOCAL_CFLAGS += -DNO_BUTTON_BACKLIGHT
+ifneq ($(filter iyokan mango, $(TARGET_DEVICE)),)
+    LOCAL_CFLAGS += -DHAVE_KEYBOARD_BACKLIGHT
 endif
 
 ifneq ($(filter coconut, $(TARGET_DEVICE)),)
