@@ -49,12 +49,10 @@ done
 MTDCACHE=`busybox cat /proc/mtd | busybox grep cache | busybox awk -F ':' {'print $1'} | busybox sed 's/mtd//'`
 busybox mknod -m 600 /dev/block/mtdblock${MTDCACHE} b 31 $MTDCACHE
 
-# leds & backlight configuration
+# leds configuration
 BOOTREC_LED_RED="/sys/class/leds/red/brightness"
 BOOTREC_LED_GREEN="/sys/class/leds/green/brightness"
 BOOTREC_LED_BLUE="/sys/class/leds/blue/brightness"
-BOOTREC_LED_BUTTONS_RGB1="/sys/class/leds/button-backlight-rgb1/brightness"
-BOOTREC_LED_BUTTONS_RGB2="/sys/class/leds/button-backlight-rgb2/brightness"
 
 keypad_input=''
 for input in `busybox ls -d /sys/class/input/input*`
@@ -66,13 +64,11 @@ do
     esac
 done
 
-# trigger amber LED & button-backlight
+# trigger amber LED
 busybox echo 30 > /sys/class/timed_output/vibrator/enable
 busybox echo 255 > ${BOOTREC_LED_RED}
 busybox echo 0 > ${BOOTREC_LED_GREEN}
 busybox echo 255 > ${BOOTREC_LED_BLUE}
-busybox echo 255 > ${BOOTREC_LED_BUTTONS_RGB1}
-busybox echo 255 > ${BOOTREC_LED_BUTTONS_RGB2}
 
 # keycheck
 busybox cat /dev/input/event${keypad_input} > /dev/keycheck&
@@ -93,8 +89,6 @@ then
 	busybox echo 0 > ${BOOTREC_LED_RED}
 	busybox echo 0 > ${BOOTREC_LED_GREEN}
 	busybox echo 255 > ${BOOTREC_LED_BLUE}
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB1}
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB2}
 	# framebuffer fix
 	busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
 	# unpack the recovery ramdisk
@@ -103,12 +97,10 @@ then
 	busybox sed -i '/boot/d' /etc/recovery.fstab
 else
 	busybox echo 'ANDROID BOOT' >>boot.txt
-	# poweroff LED & button-backlight
+	# poweroff LED
 	busybox echo 0 > ${BOOTREC_LED_RED}
 	busybox echo 0 > ${BOOTREC_LED_GREEN}
 	busybox echo 0 > ${BOOTREC_LED_BLUE}
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB1}
-	busybox echo 0 > ${BOOTREC_LED_BUTTONS_RGB2}
 	# framebuffer fix
 	busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
 	# unpack the android ramdisk
