@@ -55,30 +55,16 @@ on boot
     # LED
     chown system system /sys/class/leds/red/brightness
     chmod 660 /sys/class/leds/red/brightness
-    chown system system /sys/class/leds/red/use_pattern
-    chmod 660 /sys/class/leds/red/use_pattern
+    chown system system /sys/class/leds/red/trigger
+    chmod 660 /sys/class/leds/red/trigger
     chown system system /sys/class/leds/green/brightness
     chmod 660 /sys/class/leds/green/brightness
-    chown system system /sys/class/leds/green/use_pattern
-    chmod 660 /sys/class/leds/green/use_pattern
+    chown system system /sys/class/leds/green/trigger
+    chmod 660 /sys/class/leds/green/trigger
     chown system system /sys/class/leds/blue/brightness
     chmod 660 /sys/class/leds/blue/brightness
-    chown system system /sys/class/leds/blue/use_pattern
-    chmod 660 /sys/class/leds/blue/use_pattern
-    chown system system /sys/devices/i2c-0/0-0040/pattern_data
-    chmod 660 /sys/devices/i2c-0/0-0040/pattern_data
-    chown system system /sys/devices/i2c-0/0-0040/pattern_delay
-    chmod 660 /sys/devices/i2c-0/0-0040/pattern_delay
-    chown system system /sys/devices/i2c-0/0-0040/pattern_duration_secs
-    chmod 660 /sys/devices/i2c-0/0-0040/pattern_duration_secs
-    chown system system /sys/devices/i2c-0/0-0040/pattern_use_softdim
-    chmod 660 /sys/devices/i2c-0/0-0040/pattern_use_softdim
-    chown system system /sys/devices/i2c-0/0-0040/dim_time
-    chmod 660 /sys/devices/i2c-0/0-0040/dim_time
-
-    # Ambient Light Sensor
-    chown system system /sys/devices/i2c-0/0-0040/als_on
-    chmod 660 /sys/devices/i2c-0/0-0040/als_on
+    chown system system /sys/class/leds/blue/trigger
+    chmod 660 /sys/class/leds/blue/trigger
 
     # Vibrator intensity tuning
     chown system system /sys/class/timed_output/vibrator/voltage_level
