@@ -77,6 +77,11 @@ busybox sleep 3
 busybox echo 30 > /sys/class/timed_output/vibrator/enable
 busybox kill -9 $(busybox cat /dev/keycheck.pid)
 
+# poweroff LED
+busybox echo 0 > ${BOOTREC_LED_RED}
+busybox echo 0 > ${BOOTREC_LED_GREEN}
+busybox echo 0 > ${BOOTREC_LED_BLUE}
+
 # mount cache
 busybox mount -t yaffs2 /dev/block/mtdblock${MTDCACHE} /cache
 
@@ -85,10 +90,6 @@ if [ -s /dev/keycheck ] || busybox grep -q recovery /cache/recovery/boot
 then
 	busybox echo 'RECOVERY BOOT' >>boot.txt
 	busybox rm -fr /cache/recovery/boot
-	# trigger blue led
-	busybox echo 0 > ${BOOTREC_LED_RED}
-	busybox echo 0 > ${BOOTREC_LED_GREEN}
-	busybox echo 255 > ${BOOTREC_LED_BLUE}
 	# framebuffer fix
 	busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
 	# unpack the recovery ramdisk
@@ -97,10 +98,6 @@ then
 	busybox sed -i '/boot/d' /etc/recovery.fstab
 else
 	busybox echo 'ANDROID BOOT' >>boot.txt
-	# poweroff LED
-	busybox echo 0 > ${BOOTREC_LED_RED}
-	busybox echo 0 > ${BOOTREC_LED_GREEN}
-	busybox echo 0 > ${BOOTREC_LED_BLUE}
 	# framebuffer fix
 	busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
 	# unpack the android ramdisk
