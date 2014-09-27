@@ -43,9 +43,16 @@ static char KEY_EX_METERING_MODE[] = "semc-metering-mode";
 static char KEY_EX_SUPPORTED_METERING_MODES[] = "semc-metering-mode-values";
 static char KEY_EX_MAX_MULTI_FOCUS_NUM[] = "semc-max-multi-focus-num";
 
+static char KEY_EX_FOCUS_AREA[] = "semc-focus-area";
+static char KEY_EX_SUPPORTED_FOCUS_AREAS[] = "semc-focus-area-values";
+
 /* SEMC parameter values */
 static char EX_ON[] = "on";
 static char EX_OFF[] = "off";
+
+static char EX_FOCUS_AREA_USER[] = "user";
+static char EX_FOCUS_AREA_MULTI[] = "multi";
+static char EX_FOCUS_AREA_CENTER[] = "center";
 
 /* QCOM parameter names */
 static char KEY_QC_DIS_MODE[] = "dis";
@@ -248,6 +255,18 @@ static char *camera_fixup_setparams(int id, const char *settings)
             params.set(KEY_EX_METERING_MODE, "center-weighted");
         } else if (strcmp(meteringMode, android::CameraParameters::AUTO_EXPOSURE_SPOT_METERING) == 0) {
             params.set(KEY_EX_METERING_MODE, "spot");
+        }
+    }
+
+    /* Focus areas */
+    const char *focusAreas = params.get(android::CameraParameters::KEY_FOCUS_AREAS);
+    if (focusAreas) {
+        if (strcmp(params.get(android::CameraParameters::KEY_FOCUS_AREAS), "(0,0,0,0,0)") != 0) {
+            if (params.get(KEY_EX_SUPPORTED_FOCUS_AREAS)) {
+                params.set(KEY_EX_FOCUS_AREA, EX_FOCUS_AREA_USER);
+            } else {
+                params.set(KEY_EX_FOCUS_AREA, EX_FOCUS_AREA_CENTER);
+            }
         }
     }
 #endif
