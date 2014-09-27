@@ -30,10 +30,6 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
-    # Disable idle power collapse during boot.
-    # These features will be enabled at the end of boot
-    write /sys/module/pm2/parameters/idle_sleep_mode 3
-
     # Radio fix
     mkdir /data/radio 0775 radio radio
     mkdir /data/radio/log 0775 radio radio
@@ -173,9 +169,6 @@ on property:init.svc.bootanim=stopped
     write /sys/block/mtdblock0/queue/scheduler row
     write /sys/block/mtdblock1/queue/scheduler row
     write /sys/block/mtdblock2/queue/scheduler row
-
-on property:sys.boot_completed=1
-    write /sys/module/pm2/parameters/idle_sleep_mode 1
 
 on property:sys.perf.profile=0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "conservative"
