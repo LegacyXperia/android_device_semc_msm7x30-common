@@ -55,19 +55,18 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>12</item>
-        <item>24</item>
-        <item>36</item>
-        <item>72</item>
-        <item>156</item>
-        <item>192</item>
-        <item>240</item>
+        <item>2</item>
+        <item>5</item>
+        <item>25</item>
+        <item>75</item>
+        <item>100</item>
         <item>420</item>
-        <item>756</item>
-        <item>1024</item>
-        <item>2048</item>
-        <item>4096</item>
-        <item>8192</item>
+        <item>673</item>
+        <item>1248</item>
+        <item>2099</item>
+        <item>4422</item>
+        <item>7724</item>
+        <item>10724</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -75,20 +74,19 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>35</item>  <!--    0 -   12 -->
-        <item>35</item>  <!--   12 -   24 -->
-        <item>35</item>  <!--   24 -   36 -->
-        <item>35</item>  <!--   36 -   72 -->
-        <item>35</item>  <!--   72 -  156 -->
-        <item>50</item>  <!--  156 -  192 -->
-        <item>70</item>  <!--  192 -  240 -->
-        <item>93</item>  <!--  240 -  420 -->
-        <item>105</item> <!--  420 -  756 -->
-        <item>120</item> <!--  756 - 1024 -->
-        <item>162</item> <!-- 1024 - 2048 -->
-        <item>200</item> <!-- 2048 - 4096 -->
-        <item>236</item> <!-- 4096 - 8192 -->
-        <item>255</item> <!-- 8192+ -->
+        <item>1</item>   <!--     0 -     2 -->
+        <item>5</item>   <!--     2 -     5 -->
+        <item>10</item>  <!--     5 -    25 -->
+        <item>20</item>  <!--    25 -    75 -->
+        <item>30</item>  <!--    75 -   100 -->
+        <item>70</item>  <!--   100 -   420 -->
+        <item>93</item>  <!--   420 -   673 -->
+        <item>105</item> <!--   673 -  1248 -->
+        <item>120</item> <!--  1248 -  2099 -->
+        <item>162</item> <!--  2099 -  4422 -->
+        <item>200</item> <!--  4422 -  7724 -->
+        <item>236</item> <!--  7724 - 10724 -->
+        <item>255</item> <!-- 10724+        -->
     </integer-array>
 
     <!-- Array of output values for button backlight corresponding to the LUX values
@@ -109,7 +107,6 @@
         <item>255</item>
         <item>255</item>
         <item>255</item>
-        <item>255</item>
     </integer-array>
 
     <!-- Array of output values for keyboard backlight corresponding to the LUX values
@@ -117,7 +114,6 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>255</item>
         <item>255</item>
         <item>255</item>
         <item>255</item>
