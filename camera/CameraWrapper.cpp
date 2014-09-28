@@ -38,9 +38,12 @@
 /* SEMC parameter names */
 static char KEY_EX_VIDEO_STABILIZER[] = "semc-vs";
 static char KEY_EX_SUPPORTED_VIDEO_STABILIZERS[] = "semc-vs-values";
+
 static char KEY_EX_VIDEO_MODE[] = "semc-video-mode";
+
 static char KEY_EX_METERING_MODE[] = "semc-metering-mode";
 static char KEY_EX_SUPPORTED_METERING_MODES[] = "semc-metering-mode-values";
+
 static char KEY_EX_MAX_MULTI_FOCUS_NUM[] = "semc-max-multi-focus-num";
 
 static char KEY_EX_FOCUS_AREA[] = "semc-focus-area";
@@ -50,9 +53,13 @@ static char KEY_EX_SUPPORTED_FOCUS_AREAS[] = "semc-focus-area-values";
 static char EX_ON[] = "on";
 static char EX_OFF[] = "off";
 
+static char EX_METERING_MODE_FRAME_AVERAGE[] = "frame-average";
+static char EX_METERING_MODE_CENTER_WEIGHTED[] = "center-weighted";
+static char EX_METERING_MODE_SPOT[] = "spot";
+
+static char EX_FOCUS_AREA_CENTER[] = "center";
 static char EX_FOCUS_AREA_USER[] = "user";
 static char EX_FOCUS_AREA_MULTI[] = "multi";
-static char EX_FOCUS_AREA_CENTER[] = "center";
 
 /* QCOM parameter names */
 static char KEY_QC_DIS_MODE[] = "dis";
@@ -82,7 +89,7 @@ camera_module_t HAL_MODULE_INFO_SYM = {
          .hal_api_version = HARDWARE_HAL_API_VERSION,
          .id = CAMERA_HARDWARE_MODULE_ID,
          .name = "Xperia msm7x30 Camera Wrapper",
-         .author = "The CyanogenMod Project, Michael Bestas",
+         .author = "The CyanogenMod Project",
          .methods = &camera_module_methods,
          .dso = NULL, /* remove compilation warnings */
          .reserved = {0}, /* remove compilation warnings */
@@ -188,11 +195,11 @@ static char *camera_fixup_getparams(int id, const char *settings)
     /* Metering mode */
     const char *meteringMode = params.get(KEY_EX_METERING_MODE);
     if (meteringMode) {
-        if (strcmp(meteringMode, "frame-average") == 0) {
+        if (strcmp(meteringMode, EX_METERING_MODE_FRAME_AVERAGE) == 0) {
             params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, android::CameraParameters::AUTO_EXPOSURE_FRAME_AVG);
-        } else if (strcmp(meteringMode, "center-weighted") == 0) {
+        } else if (strcmp(meteringMode, EX_METERING_MODE_CENTER_WEIGHTED) == 0) {
             params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, android::CameraParameters::AUTO_EXPOSURE_CENTER_WEIGHTED);
-        } else if (strcmp(meteringMode, "spot") == 0) {
+        } else if (strcmp(meteringMode, EX_METERING_MODE_SPOT) == 0) {
             params.set(android::CameraParameters::KEY_AUTO_EXPOSURE, android::CameraParameters::AUTO_EXPOSURE_SPOT_METERING);
         }
     }
@@ -250,18 +257,18 @@ static char *camera_fixup_setparams(int id, const char *settings)
     const char *meteringMode = params.get(android::CameraParameters::KEY_AUTO_EXPOSURE);
     if (meteringMode) {
         if (strcmp(meteringMode, android::CameraParameters::AUTO_EXPOSURE_FRAME_AVG) == 0) {
-            params.set(KEY_EX_METERING_MODE, "frame-average");
+            params.set(KEY_EX_METERING_MODE, EX_METERING_MODE_FRAME_AVERAGE);
         } else if (strcmp(meteringMode, android::CameraParameters::AUTO_EXPOSURE_CENTER_WEIGHTED) == 0) {
-            params.set(KEY_EX_METERING_MODE, "center-weighted");
+            params.set(KEY_EX_METERING_MODE, EX_METERING_MODE_CENTER_WEIGHTED);
         } else if (strcmp(meteringMode, android::CameraParameters::AUTO_EXPOSURE_SPOT_METERING) == 0) {
-            params.set(KEY_EX_METERING_MODE, "spot");
+            params.set(KEY_EX_METERING_MODE, EX_METERING_MODE_SPOT);
         }
     }
 
     /* Focus areas */
     const char *focusAreas = params.get(android::CameraParameters::KEY_FOCUS_AREAS);
     if (focusAreas) {
-        if (strcmp(params.get(android::CameraParameters::KEY_FOCUS_AREAS), "(0,0,0,0,0)") != 0) {
+        if (strcmp(focusAreas, "(0,0,0,0,0)") != 0) {
             if (params.get(KEY_EX_SUPPORTED_FOCUS_AREAS)) {
                 params.set(KEY_EX_FOCUS_AREA, EX_FOCUS_AREA_USER);
             } else {
