@@ -43,8 +43,8 @@ busybox mknod -m 666 /dev/ashmem c 10 37
 busybox mknod -m 666 /dev/urandom c 1 9
 for i in 0 1 2 3 4 5 6 7 8 9
 do
-	num=`busybox expr 64 + $i`
-	busybox mknod -m 600 /dev/input/event${i} c 13 $num
+    num=`busybox expr 64 + $i`
+    busybox mknod -m 600 /dev/input/event${i} c 13 $num
 done
 MTDCACHE=`busybox cat /proc/mtd | busybox grep cache | busybox awk -F ':' {'print $1'} | busybox sed 's/mtd//'`
 busybox mknod -m 600 /dev/block/mtdblock${MTDCACHE} b 31 $MTDCACHE
@@ -57,10 +57,10 @@ BOOTREC_LED_BLUE="/sys/class/leds/blue/brightness"
 keypad_input=''
 for input in `busybox ls -d /sys/class/input/input*`
 do
-	type=`busybox cat ${input}/name`
-	case "$type" in
-    (*pm8xxx-keypad*) keypad_input=`busybox echo $input | busybox sed 's/^.*input//'`;;
-    (*)        ;;
+    type=`busybox cat ${input}/name`
+    case "$type" in
+        (*pm8xxx-keypad*) keypad_input=`busybox echo $input | busybox sed 's/^.*input//'`;;
+        (*)               ;;
     esac
 done
 
@@ -88,20 +88,20 @@ busybox mount -t yaffs2 /dev/block/mtdblock${MTDCACHE} /cache
 # boot decision
 if [ -s /dev/keycheck ] || busybox grep -q recovery /cache/recovery/boot
 then
-	busybox echo 'RECOVERY BOOT' >>boot.txt
-	busybox rm -fr /cache/recovery/boot
-	# framebuffer fix
-	busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
-	# unpack the recovery ramdisk
-	busybox cpio -i < /sbin/ramdisk-recovery.cpio
-	# remove boot partition from recovery fstab
-	busybox sed -i '/boot/d' /etc/recovery.fstab
+    busybox echo 'RECOVERY BOOT' >>boot.txt
+    busybox rm -fr /cache/recovery/boot
+    # framebuffer fix
+    busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
+    # unpack the recovery ramdisk
+    busybox cpio -i < /sbin/ramdisk-recovery.cpio
+    # remove boot partition from recovery fstab
+    busybox sed -i '/boot/d' /etc/recovery.fstab
 else
-	busybox echo 'ANDROID BOOT' >>boot.txt
-	# framebuffer fix
-	busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
-	# unpack the android ramdisk
-	busybox cpio -i < /sbin/ramdisk.cpio
+    busybox echo 'ANDROID BOOT' >>boot.txt
+    # framebuffer fix
+    busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
+    # unpack the android ramdisk
+    busybox cpio -i < /sbin/ramdisk.cpio
 fi
 
 busybox umount /cache
