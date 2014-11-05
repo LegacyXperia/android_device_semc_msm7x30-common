@@ -40,12 +40,10 @@ PRODUCT_COPY_FILES += \
 # Init scripts
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/init.semc.rc:root/init.semc.rc \
-    $(COMMON_PATH)/rootdir/init.recovery.semc.rc:root/init.recovery.semc.rc \
     $(COMMON_PATH)/rootdir/ueventd.semc.rc:root/ueventd.semc.rc
 
 # Reboot to recovery related scripts
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/sbin/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
     $(COMMON_PATH)/rootdir/sbin/pre-recovery.sh:root/sbin/pre-recovery.sh
 
 # fstab
