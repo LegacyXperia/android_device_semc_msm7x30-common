@@ -88,7 +88,6 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.r_submix.default \
     audio.primary.msm7x30 \
-    audio_policy.msm7x30 \
     libaudio-resampler \
     libaudioparameter \
     libdashplayer
