@@ -136,10 +136,10 @@
     <bool name="config_intrusiveNotificationLed">true</bool>
 
     <!-- Can we change the battery color? -->
-    <bool name="config_multiColorBatteryLed">true</bool>
+    <!-- <bool name="config_multiColorBatteryLed">true</bool> -->
 
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveBatteryLed">true</bool>
+    <!-- <bool name="config_intrusiveBatteryLed">true</bool> -->
 
     <!-- Specifies the amount of time to disable virtual keys after the screen is touched
          in order to filter out accidental virtual key presses due to swiping gestures
@@ -152,15 +152,15 @@
     <bool name="config_hotswapCapable">true</bool>
 
     <!-- Device supports LED flashlight -->
-    <bool name="config_enableTorch">true</bool>
+    <!-- <bool name="config_enableTorch">true</bool> -->
 
     <!-- Defines the system property to set for performance profile xe: sys.cpu.modes. Leave it
          blank if the device do not support performance profiles -->
-    <string name="config_perf_profile_prop" translatable="false">sys.perf.profile</string>
+    <!-- <string name="config_perf_profile_prop" translatable="false">sys.perf.profile</string> -->
 
     <!-- When config_perf_profile_prop is defined, this value MUST be the index of
          one of the listes values in frameworks/base/core/res/res/values/cm_arrays.xml
          for "perf_profile_values" array. Leave it blank if the device do not support
          performance profiles  -->
-    <string name="config_perf_profile_default_entry" translatable="false">1</string>
+    <!-- <string name="config_perf_profile_default_entry" translatable="false">1</string> -->
 </resources>
