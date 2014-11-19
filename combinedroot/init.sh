@@ -94,8 +94,9 @@ then
     busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
     # unpack the recovery ramdisk
     busybox cpio -i < /sbin/ramdisk-recovery.cpio
-    # remove boot partition from recovery fstab
+    # remove boot & recovery partitions from recovery fstab
     busybox sed -i '/boot/d' /etc/recovery.fstab
+    busybox sed -i '/recovery/d' /etc/recovery.fstab
 else
     busybox echo 'ANDROID BOOT' >>boot.txt
     # framebuffer fix
