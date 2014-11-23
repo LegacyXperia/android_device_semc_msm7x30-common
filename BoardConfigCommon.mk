@@ -90,6 +90,9 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
+# Don't generate block mode update zips
+BLOCK_BASED_OTA := false
+
 # Radio
 BOARD_RIL_CLASS := ../../../device/semc/msm7x30-common/ril/
 
