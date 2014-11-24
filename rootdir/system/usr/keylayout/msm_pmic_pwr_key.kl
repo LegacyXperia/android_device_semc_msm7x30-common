@@ -3,4 +3,4 @@
 #
 # defines for values are in frameworks/base/include/ui/KeycodeLabels.h
 
-key 116   POWER             WAKE
+key 116   POWER
