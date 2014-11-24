@@ -94,6 +94,7 @@ TARGET_NO_RADIOIMAGE := true
 BLOCK_BASED_OTA := false
 
 # Radio
+TARGET_NEEDS_NON_PIE_SUPPORT := true
 BOARD_RIL_CLASS := ../../../device/semc/msm7x30-common/ril/
 
 # Boot Animation
