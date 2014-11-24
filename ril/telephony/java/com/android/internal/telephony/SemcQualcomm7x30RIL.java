@@ -51,6 +51,11 @@ public class SemcQualcomm7x30RIL extends RIL implements CommandsInterface {
     private final int RIL_INT_RADIO_UNAVALIABLE = 1;
     private final int RIL_INT_RADIO_ON = 2;
 
+    public SemcQualcomm7x30RIL(Context context, int preferredNetworkType,
+            int cdmaSubscription, Integer instanceId) {
+        this(context, preferredNetworkType, cdmaSubscription);
+    }
+
     public SemcQualcomm7x30RIL(Context context, int networkMode, int cdmaSubscription) {
         super(context, networkMode, cdmaSubscription);
         mQANElements = 5;
@@ -73,7 +78,7 @@ public class SemcQualcomm7x30RIL extends RIL implements CommandsInterface {
             dataCall.ifname = "rmnet0";
         } else {
             dataCall.status = p.readInt();
-	          dataCall.suggestedRetryTime = p.readInt();
+            dataCall.suggestedRetryTime = p.readInt();
             dataCall.cid = p.readInt();
             dataCall.active = p.readInt();
             dataCall.type = p.readString();
