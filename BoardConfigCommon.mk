@@ -94,6 +94,15 @@ TARGET_NO_RADIOIMAGE := true
 # Don't generate block mode update zips
 BLOCK_BASED_OTA := false
 
+# Enable dex-preoptimization to speed up first boot sequence
+ifeq ($(HOST_OS),linux)
+  ifeq ($(TARGET_BUILD_VARIANT),userdebug)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+    endif
+  endif
+endif
+
 # Radio
 TARGET_NEEDS_NON_PIE_SUPPORT := true
 BOARD_RIL_CLASS := ../../../device/semc/msm7x30-common/ril/
