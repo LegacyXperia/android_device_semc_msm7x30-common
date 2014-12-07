@@ -167,6 +167,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
+# Newer camera API isn't supported.
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
+
 # Low Power Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     lpa.decode=false \
