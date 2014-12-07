@@ -26,6 +26,9 @@ vendor/lib/egl/libq3dtools_adreno.so
 # Audio
 lib/libaudioalsa.so
 
+# IPv6 tethering
+bin/radish
+
 # Media libs
 lib/libDivxDrm.so
 lib/libExtendedExtractor.so

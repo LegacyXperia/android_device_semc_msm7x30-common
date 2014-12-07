@@ -124,6 +124,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     keycheck
 
+# IPv6 tethering
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes
+
 # qcmediaplayer
 PRODUCT_PACKAGES += qcmediaplayer
 
