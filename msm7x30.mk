@@ -152,7 +152,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     debug.composition.type=dyn \
-    persist.hwc.mdpcomp.enable=false \
+    persist.hwc.mdpcomp.enable=true \
     debug.mdpcomp.maxlayer=3 \
     debug.mdpcomp.logs=0
 
