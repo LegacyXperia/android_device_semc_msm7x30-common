@@ -18,8 +18,6 @@
 -->
 
 <MediaCodecs>
-    <Include href="media_codecs_google_audio.xml" />
-    <Include href="media_codecs_google_telephony.xml" />
     <Encoders>
         <!-- Audio Hardware  -->
         <!--
@@ -107,6 +105,8 @@
             <Feature name="adaptive-playback" />
         </MediaCodec>
     </Decoders>
+    <Include href="media_codecs_google_audio.xml" />
+    <Include href="media_codecs_google_telephony.xml" />
     <Include href="media_codecs_google_video.xml" />
     <Include href="media_codecs_ffmpeg.xml" />
 </MediaCodecs>
