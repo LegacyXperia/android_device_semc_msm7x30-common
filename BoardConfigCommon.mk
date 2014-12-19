@@ -104,6 +104,9 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
+# Use dlmalloc instead of jemalloc
+MALLOC_IMPL := dlmalloc
+
 # Radio
 TARGET_NEEDS_NON_PIE_SUPPORT := true
 BOARD_RIL_CLASS := ../../../device/semc/msm7x30-common/ril/
