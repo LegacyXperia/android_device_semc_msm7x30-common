@@ -202,7 +202,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Set max background services
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.max_starting_bg=8
+    ro.config.max_starting_bg=4
 
 # Disable strict mode
 PRODUCT_PROPERTY_OVERRIDES += \
