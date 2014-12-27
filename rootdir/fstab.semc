@@ -10,6 +10,7 @@
 # Vold managed devices
 /devices/platform/msm_sdcc.4/mmc_host/mmc1    auto           auto      defaults                  voldmanaged=sdcard0:auto,noemulatedsd
 /devices/platform/msm_hsusb_host.0            auto           auto      defaults                  voldmanaged=usbdisk:auto
+/dev/block/mmcblk0p2                          /sdext         auto      defaults                  recoveryonly
 
 # zRAM
 /dev/block/zram0                              none           swap      defaults                  zramsize=201326592
