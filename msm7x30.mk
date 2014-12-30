@@ -186,7 +186,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.stagefright.use-awesome=true
 
 # Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
 # Increase speed for UMS transfer
