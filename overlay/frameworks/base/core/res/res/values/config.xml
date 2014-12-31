@@ -23,9 +23,6 @@
     <!-- If this is true, the screen will fade off. -->
     <bool name="config_animateScreenLights">false</bool>
 
-    <!-- True will enable the screen-on animation. -->
-    <!--<bool name="config_screenOnAnimation">true</bool>-->
-
     <!-- Disable lockscreen rotation by default -->
     <bool name="config_enableLockScreenRotation">true</bool>
 
@@ -155,9 +152,6 @@
 
     <!-- Is the device capable of hot swapping an UICC Card -->
     <bool name="config_hotswapCapable">true</bool>
-
-    <!-- Device supports LED flashlight
-    <bool name="config_enableTorch">true</bool> -->
 
     <!-- Defines the system property to set for performance profile xe: sys.cpu.modes. Leave it
          blank if the device do not support performance profiles -->
