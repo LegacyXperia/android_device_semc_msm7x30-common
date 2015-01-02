@@ -95,6 +95,8 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
+PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
+
 # Radio
 BOARD_RIL_CLASS := ../../../device/semc/msm7x30-common/ril/
 
