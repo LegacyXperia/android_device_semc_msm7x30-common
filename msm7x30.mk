@@ -171,19 +171,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
 
-# Low Power Audio
+# Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    lpa.decode=false \
-    use.non-omx.mp3.decoder=false \
-    use.non-omx.aac.decoder=false
-
-# Disable gapless mode
-PRODUCT_PROPERTY_OVERRIDES += \
-    audio.gapless.playback.disable=true
-
-# AwesomePlayer
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.stagefright.use-awesome=true
+    audio.offload.disable=1 \
+    persist.sys.media.use-awesome=true
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
