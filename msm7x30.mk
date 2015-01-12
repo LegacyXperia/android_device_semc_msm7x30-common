@@ -124,9 +124,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += qcmediaplayer
 
 # Misc
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory \
-    Torch
+PRODUCT_PACKAGES += com.android.future.usb.accessory
 
 # Live wallpapers picker
 PRODUCT_PACKAGES += LiveWallpapersPicker
