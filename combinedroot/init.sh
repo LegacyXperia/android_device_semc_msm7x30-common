@@ -90,16 +90,12 @@ if [ -s /dev/keycheck ] || busybox grep -q recovery /cache/recovery/boot
 then
     busybox echo 'RECOVERY BOOT' >>boot.txt
     busybox rm -fr /cache/recovery/boot
-    # framebuffer fix
-    busybox echo 0 > /sys/module/msm_fb/parameters/align_buffer
     # unpack the recovery ramdisk
     busybox cpio -i < /sbin/ramdisk-recovery.cpio
     # remove boot partition from recovery fstab
     busybox sed -i '/boot/d' /etc/recovery.fstab
 else
     busybox echo 'ANDROID BOOT' >>boot.txt
-    # framebuffer fix
-    busybox echo 1 > /sys/module/msm_fb/parameters/align_buffer
     # unpack the android ramdisk
     busybox cpio -i < /sbin/ramdisk.cpio
 fi
