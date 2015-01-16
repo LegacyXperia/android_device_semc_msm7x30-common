@@ -35,7 +35,3 @@ lib/libmmosal.so
 lib/libmmparser.so
 lib/libOmxMp3Dec.so
 lib/libSHIMDivxDrm.so
-
-# Offline charging
-bin/chargemon
-lib/libmiscta.so
