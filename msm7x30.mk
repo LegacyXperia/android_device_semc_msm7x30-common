@@ -179,7 +179,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # For applications to determine if they should turn off specific memory-intensive
 # features that work poorly on low-memory devices.
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.low_ram=true
+    ro.config.low_ram=true \
+    persist.sys.force_highendgfx=true
 
 # Reduce background apps limit to 16 on low-tier devices
 PRODUCT_PROPERTY_OVERRIDES += \
