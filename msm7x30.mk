@@ -130,23 +130,20 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Common device properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libril-qc-1.so \
-    rild.libargs=-d/dev/smd0 \
-    ro.ril.hsxpa=1 \
-    ro.ril.gprsclass=10 \
-    ro.telephony.call_ring.multiple=false \
-    persist.ro.ril.sms_sync_sending=1 \
-    ro.ril.def.agps.mode=2 \
-    ro.ril.def.agps.feature=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.supplicant_scan_interval=15 \
-    ro.com.google.locationfeatures=1 \
     ro.com.google.clientidbase.ms=android-sonymobile \
+    ro.com.google.locationfeatures=1 \
     ro.product.locale.language=en \
     ro.product.locale.region=US \
-    ro.use_data_netmgrd=true \
-    ro.tethering.kb_disconnect=1
+    wifi.supplicant_scan_interval=15
+
+# Radio
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libargs=-d/dev/smd0 \
+    rild.libpath=/system/lib/libril-qc-1.so \
+    ro.telephony.call_ring.multiple=false \
+    ro.ril.def.agps.feature=1 \
+    ro.ril.def.agps.mode=2 \
+    ro.use_data_netmgrd=true
 
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
