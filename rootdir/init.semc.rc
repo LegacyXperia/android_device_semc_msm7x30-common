@@ -41,21 +41,11 @@ on boot
 
     chown root system /proc/net/ip_conntrack
 
-    # Panel backlight
-    chown system system /sys/class/leds/lcd-backlight/brightness
-    chmod 660 /sys/class/leds/lcd-backlight/brightness
-
     # LED
-    chown system system /sys/class/leds/red/brightness
-    chmod 660 /sys/class/leds/red/brightness
     chown system system /sys/class/leds/red/trigger
     chmod 660 /sys/class/leds/red/trigger
-    chown system system /sys/class/leds/green/brightness
-    chmod 660 /sys/class/leds/green/brightness
     chown system system /sys/class/leds/green/trigger
     chmod 660 /sys/class/leds/green/trigger
-    chown system system /sys/class/leds/blue/brightness
-    chmod 660 /sys/class/leds/blue/brightness
     chown system system /sys/class/leds/blue/trigger
     chmod 660 /sys/class/leds/blue/trigger
 
