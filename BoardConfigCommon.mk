@@ -120,7 +120,6 @@ MALLOC_IMPL := dlmalloc
 
 # Radio
 TARGET_NEEDS_NON_PIE_SUPPORT := true
-BOARD_RIL_CLASS := ../../../device/semc/msm7x30-common/ril/
 
 # Boot Animation
 TARGET_BOOTANIMATION_PRELOAD := true
