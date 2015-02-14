@@ -1,0 +1,6 @@
+type nv_param_loader, domain;
+type nv_param_loader_exec, exec_type, file_type;
+
+domain_auto_trans(init_shell, nv_param_loader_exec, nv_param_loader)
+
+allow nv_param_loader self:process execmem;

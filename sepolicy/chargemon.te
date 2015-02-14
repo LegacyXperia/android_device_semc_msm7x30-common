@@ -1,0 +1,6 @@
+type chargemon, domain;
+type chargemon_exec, exec_type, file_type;
+
+domain_auto_trans(init, chargemon_exec, chargemon)
+
+allow chargemon self:process execmem;
