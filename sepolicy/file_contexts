@@ -1,0 +1,33 @@
+# Audio
+/dev/msm_a2dp.*                u:object_r:audio_device:s0
+/dev/msm_aac.*                 u:object_r:audio_device:s0
+/dev/msm_acdb                  u:object_r:audio_device:s0
+/dev/msm_adc                   u:object_r:audio_device:s0
+/dev/msm_adpcm                 u:object_r:audio_device:s0
+/dev/msm_amrnb.*               u:object_r:audio_device:s0
+/dev/msm_amrwb.*               u:object_r:audio_device:s0
+/dev/msm_audio.*               u:object_r:audio_device:s0
+/dev/msm_evrc.*                u:object_r:audio_device:s0
+/dev/msm_fm                    u:object_r:audio_device:s0
+/dev/msm_mp3.*                 u:object_r:audio_device:s0
+/dev/msm_mvs                   u:object_r:audio_device:s0
+/dev/msm_pcm.*                 u:object_r:audio_device:s0
+/dev/msm_qcelp.*               u:object_r:audio_device:s0
+/dev/msm_vidc.*                u:object_r:audio_device:s0
+/dev/msm_wma.*                 u:object_r:audio_device:s0
+
+# Camera
+/dev/gemini.*                  u:object_r:camera_device:s0
+/dev/video.*                   u:object_r:camera_device:s0
+/dev/msm_camera.*              u:object_r:camera_device:s0
+/dev/pmem_adsp                 u:object_r:camera_device:s0
+
+# Media
+/dev/msm_rotator               u:object_r:video_device:s0
+
+# GPU
+/dev/kgsl-2d0                  u:object_r:gpu_device:s0
+/dev/kgsl-3d0                  u:object_r:gpu_device:s0
+
+# Compass
+/system/bin/akmd8975           u:object_r:akmd_exec:s0

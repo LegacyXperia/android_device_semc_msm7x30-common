@@ -136,3 +136,10 @@ SOMC_CFG_SENSORS_LIGHT_AS3676_DISABLE_ALS_SWITCH := yes
 
 # CM Hardware tunables
 BOARD_HARDWARE_CLASS := device/semc/msm7x30-common/cmhw
+
+# SELinux policies
+BOARD_SEPOLICY_DIRS += \
+    device/semc/msm7x30-common/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+    akmd.te
