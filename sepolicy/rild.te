@@ -1,0 +1,3 @@
+allow rild self:process execmem;
+
+allow rild diag_device:chr_file rw_file_perms;

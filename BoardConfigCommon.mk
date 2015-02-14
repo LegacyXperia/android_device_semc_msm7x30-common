@@ -134,3 +134,17 @@ SOMC_CFG_SENSORS_LIGHT_AS3676_PATH := "/sys/devices/i2c-0/0-0040"
 
 # CM Hardware tunables
 BOARD_HARDWARE_CLASS := device/semc/msm7x30-common/cmhw
+
+# SELinux policies
+BOARD_SEPOLICY_DIRS += \
+    device/semc/msm7x30-common/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+    akmd.te \
+    chargemon.te \
+    device.te \
+    netmgrd.te \
+    nv_param_loader.te \
+    port-bridge.te \
+    qmuxd.te \
+    rild.te
