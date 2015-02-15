@@ -173,6 +173,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vold.umsdirtyratio=20
 
+# Enable USB OTG interface
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.isUsbOtgEnabled=true
+
 # For applications to determine if they should turn off specific memory-intensive
 # features that work poorly on low-memory devices.
 PRODUCT_PROPERTY_OVERRIDES += \
