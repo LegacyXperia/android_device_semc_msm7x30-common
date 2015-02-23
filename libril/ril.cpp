@@ -1057,7 +1057,26 @@ dispatchSIM_IO (Parcel &p, RequestInfo *pRI) {
         goto invalid;
     }
 
-    CALL_ONREQUEST(pRI->pCI->requestNumber, &simIO, sizeof(simIO), pRI, pRI->socket_id);
+    /* Stub MF_SIM calls to read ICC ID & size. */
+    if (!strcmp(simIO.path, "3F00") && simIO.command == 0xc0) {
+        RLOGW("Stubbing 0xc0\n");
+        char *result = "0000000a2fe2040000000005020000";
+        RIL_SIM_IO_Response p_cur;
+        p_cur.sw1 = 0x90;
+        p_cur.sw2 = 0x0;
+        p_cur.simResponse = result;
+        RIL_onRequestComplete(pRI, RIL_E_SUCCESS, &p_cur, sizeof(p_cur));
+    } else if (!strcmp(simIO.path, "3F00") && simIO.command == 0xb0) {
+        RLOGW("Stubbing 0xb0\n");
+        char *result = "00000000000000000010";
+        RIL_SIM_IO_Response p_cur;
+        p_cur.sw1 = 0x90;
+        p_cur.sw2 = 0x0;
+        p_cur.simResponse = result;
+        RIL_onRequestComplete(pRI, RIL_E_SUCCESS, &p_cur, sizeof(p_cur));
+    } else {
+        CALL_ONREQUEST(pRI->pCI->requestNumber, &simIO, sizeof(simIO), pRI, pRI->socket_id);
+    }
 
 #ifdef MEMSET_FREED
     memsetString (simIO.path);
