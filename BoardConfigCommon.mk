@@ -120,6 +120,7 @@ MALLOC_IMPL := dlmalloc
 
 # Radio
 TARGET_NEEDS_NON_PIE_SUPPORT := true
+BOARD_PROVIDES_LIBRIL := true
 
 # Boot Animation
 TARGET_BOOTANIMATION_PRELOAD := true
