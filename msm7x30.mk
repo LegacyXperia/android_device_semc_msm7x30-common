@@ -161,12 +161,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
-# Low Power Audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    lpa.decode=false \
-    use.non-omx.mp3.decoder=false \
-    use.non-omx.aac.decoder=false
-
 # Resampler quality
 PRODUCT_PROPERTY_OVERRIDES += \
     af.resampler.quality=4
