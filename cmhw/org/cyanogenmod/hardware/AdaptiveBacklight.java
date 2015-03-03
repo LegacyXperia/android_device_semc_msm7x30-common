@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The CyanogenMod Project
+ * Copyright (C) 2013-2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,15 +37,26 @@ public class AdaptiveBacklight {
         File f3 = new File(SII_SYSFS);
         File f4 = new File(SONY_SYSFS);
 
-        if (f1.exists() || f2.exists() || f3.exists() || f4.exists()) {
-            return true;
-        } else {
-            return false;
-        }
+        return (f1.exists() || f2.exists() || f3.exists() || f4.exists());
     }
 
     public static boolean isEnabled() {
-        return isSupported();
+        File f1 = new File(AUO_SYSFS);
+        File f2 = new File(HITACHI_SYSFS);
+        File f3 = new File(SII_SYSFS);
+        File f4 = new File(SONY_SYSFS);
+
+        if (f1.exists()) {
+            return Boolean.parseBoolean(FileUtils.readOneLine(AUO_SYSFS));
+        } else if (f2.exists()) {
+            return Boolean.parseBoolean(FileUtils.readOneLine(HITACHI_SYSFS));
+        } else if (f3.exists()) {
+            return Boolean.parseBoolean(FileUtils.readOneLine(SII_SYSFS));
+        } else if (f4.exists()) {
+            return Boolean.parseBoolean(FileUtils.readOneLine(SONY_SYSFS));
+        } else {
+            return false;
+        }
     }
 
     public static boolean setEnabled(boolean status) {
