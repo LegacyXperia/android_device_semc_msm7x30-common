@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The CyanogenMod Project
+ * Copyright (C) 2013-2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,36 +31,37 @@ public class AdaptiveBacklight {
     private static final String SONY_SYSFS =
             "/sys/devices/platform/mddi_sony_s6d05a1_hvga/dbc_ctrl";
 
-    public static boolean isSupported() {
-        File f1 = new File(AUO_SYSFS);
-        File f2 = new File(HITACHI_SYSFS);
-        File f3 = new File(SII_SYSFS);
-        File f4 = new File(SONY_SYSFS);
+    private static final File auo = new File(AUO_SYSFS);
+    private static final File hitachi = new File(HITACHI_SYSFS);
+    private static final File sii = new File(SII_SYSFS);
+    private static final File sony = new File(SONY_SYSFS);
 
-        if (f1.exists() || f2.exists() || f3.exists() || f4.exists()) {
-            return true;
+    public static boolean isSupported() {
+        return (auo.exists() || hitachi.exists() || sii.exists() || sony.exists());
+    }
+
+    public static boolean isEnabled() {
+        if (auo.exists()) {
+            return Boolean.parseBoolean(FileUtils.readOneLine(AUO_SYSFS));
+        } else if (hitachi.exists()) {
+            return Boolean.parseBoolean(FileUtils.readOneLine(HITACHI_SYSFS));
+        } else if (sii.exists()) {
+            return Boolean.parseBoolean(FileUtils.readOneLine(SII_SYSFS));
+        } else if (sony.exists()) {
+            return Boolean.parseBoolean(FileUtils.readOneLine(SONY_SYSFS));
         } else {
             return false;
         }
     }
 
-    public static boolean isEnabled() {
-        return isSupported();
-    }
-
     public static boolean setEnabled(boolean status) {
-        File f1 = new File(AUO_SYSFS);
-        File f2 = new File(HITACHI_SYSFS);
-        File f3 = new File(SII_SYSFS);
-        File f4 = new File(SONY_SYSFS);
-
-        if (f1.exists()) {
+        if (auo.exists()) {
             return FileUtils.writeLine(AUO_SYSFS, status ? "1" : "0");
-        } else if (f2.exists()) {
+        } else if (hitachi.exists()) {
             return FileUtils.writeLine(HITACHI_SYSFS, status ? "1" : "0");
-        } else if (f3.exists()) {
+        } else if (sii.exists()) {
             return FileUtils.writeLine(SII_SYSFS, status ? "1" : "0");
-        } else if (f4.exists()) {
+        } else if (sony.exists()) {
             return FileUtils.writeLine(SONY_SYSFS, status ? "1" : "0");
         } else {
             return false;
