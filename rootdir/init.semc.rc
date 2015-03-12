@@ -52,6 +52,9 @@ on boot
     # Vibrator intensity tuning
     chown system system /sys/class/timed_output/vibrator/voltage_level
 
+    # Display color calibration
+    chown system system /sys/class/graphics/fb0/kcal
+
     # Adaptive backlight
     chown root system /sys/devices/platform/mddi_auo_s6d05a1_hvga/dbc_ctrl
     chmod 0664 /sys/devices/platform/mddi_auo_s6d05a1_hvga/dbc_ctrl
