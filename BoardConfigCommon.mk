@@ -45,7 +45,6 @@ TARGET_USES_ION := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 TARGET_NO_ADAPTIVE_PLAYBACK := true
-BOARD_EGL_CFG := device/semc/msm7x30-common/rootdir/system/etc/egl.cfg
 TARGET_NO_INITLOGO := true
 
 # Screenrecord
