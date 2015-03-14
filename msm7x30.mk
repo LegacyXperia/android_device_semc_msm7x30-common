@@ -187,13 +187,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.low_ram=true
 
-# Reduce background apps limit to 16 on low-tier devices
+# Reduce background apps limit to 14 on low-tier devices
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.fw.bg_apps_limit=16
+    ro.sys.fw.bg_apps_limit=14
 
 # Set max background services
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.max_starting_bg=4
+    ro.config.max_starting_bg=6
 
 # Disable strict mode
 PRODUCT_PROPERTY_OVERRIDES += \
