@@ -197,6 +197,7 @@ static size_t s_lastNITZTimeDataSize;
 #endif
 
 /*******************************************************************/
+static int sendResponse (Parcel &p);
 
 static void dispatchVoid (Parcel& p, RequestInfo *pRI);
 static void dispatchString (Parcel& p, RequestInfo *pRI);
@@ -402,8 +403,14 @@ processCommandBuffer(void *buffer, size_t buflen) {
 
     if (request < 1 || request >= (int32_t)NUM_ELEMS(s_commands) ||
         s_commands[request].requestNumber == 0) {
+        Parcel pErr;
         RLOGE("unsupported request code %d token %d", request, token);
         // FIXME this should perhaps return a response
+        pErr.writeInt32 (RESPONSE_SOLICITED);
+        pErr.writeInt32 (token);
+        pErr.writeInt32 (RIL_E_GENERIC_FAILURE);
+
+        sendResponse(pErr);
         return 0;
     }
 
