@@ -143,6 +143,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.def.agps.mode=2 \
     ro.use_data_netmgrd=true
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    DeviceSettings
+
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
