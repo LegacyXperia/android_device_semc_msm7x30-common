@@ -41,28 +41,19 @@ busybox mknod -m 666 /dev/log/events c 10 21
 busybox mknod -m 666 /dev/log/main c 10 22
 busybox mknod -m 666 /dev/ashmem c 10 37
 busybox mknod -m 666 /dev/urandom c 1 9
-for i in 0 1 2 3 4 5 6 7 8 9
-do
-    num=`busybox expr 64 + $i`
-    busybox mknod -m 600 /dev/input/event${i} c 13 $num
+for i in $(busybox seq 0 12); do
+    busybox mknod -m 600 /dev/input/event${i} c 13 $(busybox expr 64 + ${i})
 done
 MTDCACHE=`busybox cat /proc/mtd | busybox grep cache | busybox awk -F ':' {'print $1'} | busybox sed 's/mtd//'`
 busybox mknod -m 600 /dev/block/mtdblock${MTDCACHE} b 31 $MTDCACHE
+
+# mount cache
+busybox mount -t yaffs2 /dev/block/mtdblock${MTDCACHE} /cache
 
 # leds configuration
 BOOTREC_LED_RED="/sys/class/leds/red/brightness"
 BOOTREC_LED_GREEN="/sys/class/leds/green/brightness"
 BOOTREC_LED_BLUE="/sys/class/leds/blue/brightness"
-
-keypad_input=''
-for input in `busybox ls -d /sys/class/input/input*`
-do
-    type=`busybox cat ${input}/name`
-    case "$type" in
-        (*pm8xxx-keypad*) keypad_input=`busybox echo $input | busybox sed 's/^.*input//'`;;
-        (*)               ;;
-    esac
-done
 
 # trigger amber LED
 busybox echo 30 > /sys/class/timed_output/vibrator/enable
@@ -71,22 +62,10 @@ busybox echo 0 > ${BOOTREC_LED_GREEN}
 busybox echo 255 > ${BOOTREC_LED_BLUE}
 
 # keycheck
-busybox cat /dev/input/event${keypad_input} > /dev/keycheck&
-busybox echo $! > /dev/keycheck.pid
-busybox sleep 3
-busybox echo 30 > /sys/class/timed_output/vibrator/enable
-busybox kill -9 $(busybox cat /dev/keycheck.pid)
-
-# poweroff LED
-busybox echo 0 > ${BOOTREC_LED_RED}
-busybox echo 0 > ${BOOTREC_LED_GREEN}
-busybox echo 0 > ${BOOTREC_LED_BLUE}
-
-# mount cache
-busybox mount -t yaffs2 /dev/block/mtdblock${MTDCACHE} /cache
+busybox timeout -t 3 keycheck
 
 # boot decision
-if [ -s /dev/keycheck ] || busybox grep -q recovery /cache/recovery/boot
+if [ $? -eq 42 ] || busybox grep -q recovery /cache/recovery/boot
 then
     busybox echo 'RECOVERY BOOT' >>boot.txt
     busybox rm -fr /cache/recovery/boot
@@ -100,6 +79,12 @@ else
     # unpack the android ramdisk
     busybox cpio -i < /sbin/ramdisk.cpio
 fi
+
+# poweroff LED
+busybox echo 30 > /sys/class/timed_output/vibrator/enable
+busybox echo 0 > ${BOOTREC_LED_RED}
+busybox echo 0 > ${BOOTREC_LED_GREEN}
+busybox echo 0 > ${BOOTREC_LED_BLUE}
 
 busybox umount /cache
 busybox umount /proc
