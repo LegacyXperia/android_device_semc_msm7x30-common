@@ -78,10 +78,12 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    audio.primary.msm7x30 \
     libaudio-resampler \
     libaudioparameter \
     libdashplayer
+
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/audio.primary.msm7x30.so:system/lib/hw/audio.primary.msm7x30.so
 
 # Graphics
 PRODUCT_PACKAGES += \
