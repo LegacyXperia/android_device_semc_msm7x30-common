@@ -18,4 +18,13 @@
 -->
 <resources>
     <bool name="def_screen_brightness_automatic_mode">true</bool>
+
+    <!-- Default value of Settings.System.ENABLE_FORWARD_LOOKUP -->
+    <integer name="def_forward_lookup">0</integer>
+
+    <!-- Default value of Settings.System.ENABLE_PEOPLE_LOOKUP -->
+    <integer name="def_people_lookup">0</integer>
+
+    <!-- Default value of Settings.System.ENABLE_REVERSE_LOOKUP -->
+    <integer name="def_reverse_lookup">0</integer>
 </resources>
