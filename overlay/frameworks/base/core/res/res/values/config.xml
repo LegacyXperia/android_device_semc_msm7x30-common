@@ -145,4 +145,6 @@
          strictly needed. -->
     <bool name="config_sf_limitedAlpha">true</bool>
 
+    <integer name="config_longPressOnHomeBehavior">1</integer>
+
 </resources>
