@@ -123,9 +123,6 @@ PRODUCT_PACKAGES += com.android.future.usb.accessory
 # Live wallpapers picker
 PRODUCT_PACKAGES += LiveWallpapersPicker
 
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
-
 # Common device properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase.ms=android-sonymobile \
