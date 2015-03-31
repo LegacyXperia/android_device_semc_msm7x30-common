@@ -123,9 +123,6 @@ PRODUCT_PACKAGES += com.android.future.usb.accessory
 # Live wallpapers picker
 PRODUCT_PACKAGES += LiveWallpapersPicker
 
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
-
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-filter=interpret-only \
     dalvik.vm.image-dex2oat-filter=speed
