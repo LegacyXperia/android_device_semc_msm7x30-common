@@ -107,9 +107,12 @@ TARGET_NO_RADIOIMAGE := true
 # Don't generate block mode update zips
 BLOCK_BASED_OTA := false
 
+# Enable transparent compression in the build
+TARGET_TRANSPARENT_COMPRESSION_METHOD := lz4
+
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
-  ifeq ($(TARGET_BUILD_VARIANT),userdebug)
+  ifneq ($(filter user userdebug,$(TARGET_BUILD_VARIANT)),)
     ifeq ($(WITH_DEXPREOPT),)
       WITH_DEXPREOPT := true
     endif
