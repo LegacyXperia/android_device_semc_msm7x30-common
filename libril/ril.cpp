@@ -91,6 +91,9 @@ namespace android {
 // request, response, and unsolicited msg print macro
 #define PRINTBUF_SIZE 8096
 
+// Enable verbose logging
+#define VDBG 0
+
 // Enable RILC log
 #define RILC_LOG 0
 
@@ -1035,7 +1038,9 @@ dispatchSIM_IO (Parcel &p, RequestInfo *pRI) {
     int32_t t;
     status_t status;
 
+#if VDBG
     RLOGD("dispatchSIM_IO");
+#endif
     memset (&simIO, 0, sizeof(simIO));
 
     // note we only check status at the end
@@ -1131,7 +1136,9 @@ dispatchSIM_APDU (Parcel &p, RequestInfo *pRI) {
     status_t status;
     RIL_SIM_APDU apdu;
 
+#if VDBG
     RLOGD("dispatchSIM_APDU");
+#endif
     memset (&apdu, 0, sizeof(RIL_SIM_APDU));
 
     // Note we only check status at the end. Any single failure leads to
@@ -2376,7 +2383,9 @@ blockingWrite(int fd, const void *buffer, size_t len) {
             return -1;
         }
     }
+#if VDBG
     RLOGE("RIL Response bytes written:%d", writeOffset);
+#endif
     return 0;
 }
 
@@ -2387,7 +2396,9 @@ sendResponseRaw (const void *data, size_t dataSize, RIL_SOCKET_ID socket_id) {
     uint32_t header;
     pthread_mutex_t * writeMutexHook = &s_writeMutex;
 
+#if VDBG
     RLOGE("Send Response to %s", rilSocketIdToString(socket_id));
+#endif
 
 #if (SIM_COUNT >= 2)
     if (socket_id == RIL_SOCKET_2) {
@@ -4876,7 +4887,9 @@ RIL_onRequestComplete(RIL_Token t, RIL_Errno e, void *response, size_t responsel
     }
 #endif
 #endif
+#if VDBG
     RLOGD("RequestComplete, %s", rilSocketIdToString(socket_id));
+#endif
 
     if (pRI->local > 0) {
         // Locally issued command...void only!
@@ -5185,7 +5198,9 @@ void RIL_onUnsolicitedResponse(int unsolResponse, const void *data,
         break;
     }
 
+#if VDBG
     RLOGI("%s UNSOLICITED: %s length:%d", rilSocketIdToString(soc_id), requestToString(unsolResponse), p.dataSize());
+#endif
     ret = sendResponse(p, soc_id);
     if (ret != 0 && unsolResponse == RIL_UNSOL_NITZ_TIME_RECEIVED) {
 
