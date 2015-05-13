@@ -89,7 +89,7 @@ TARGET_RECOVERY_DEVICE_DIRS += device/semc/msm7x30-common
 
 # Kernel
 TARGET_NO_KERNEL := false
-TARGET_KERNEL_SOURCE := kernel/semc/msm7x30
+TARGET_KERNEL_SOURCE := kernel/qcom/msm7x30
 ifeq ($(HOST_OS),linux)
   KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin
 else
