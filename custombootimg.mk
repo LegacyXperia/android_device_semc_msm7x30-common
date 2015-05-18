@@ -19,6 +19,7 @@ $(uncompressed_ramdisk): $(INSTALLED_RAMDISK_TARGET)
 	gunzip -c $< > $@
 
 INITSH := $(LOCAL_PATH)/combinedroot/init.sh
+LZMA_BIN := $(shell which lzma)
 
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
 $(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel $(uncompressed_ramdisk) $(recovery_uncompressed_ramdisk) $(INSTALLED_RAMDISK_TARGET) $(INITSH) $(PRODUCT_OUT)/utilities/busybox $(MKBOOTIMG) $(MINIGZIP) $(INTERNAL_BOOTIMAGE_FILES)
@@ -37,7 +38,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel $(uncompressed_ramdisk) $(r
 	$(hide) ln -s sbin/init.sh $(PRODUCT_OUT)/combinedroot/init
 
 	$(hide) $(MKBOOTFS) $(PRODUCT_OUT)/combinedroot/ > $(PRODUCT_OUT)/combinedroot.cpio
-	$(hide) cat $(PRODUCT_OUT)/combinedroot.cpio | $(MINIGZIP) -9 > $(PRODUCT_OUT)/combinedroot.fs
+	$(hide) cat $(PRODUCT_OUT)/combinedroot.cpio | $(LZMA_BIN) -9 > $(PRODUCT_OUT)/combinedroot.fs
 
 	$(hide) $(MKBOOTIMG) --kernel $(PRODUCT_OUT)/kernel --ramdisk $(PRODUCT_OUT)/combinedroot.fs --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) -o $(INSTALLED_BOOTIMAGE_TARGET)
 	@echo -e ${CL_CYN}"Made boot image: $@"${CL_RST}
