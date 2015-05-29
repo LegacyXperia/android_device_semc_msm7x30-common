@@ -34,3 +34,7 @@ lib/libmm-color-convertor.so
 lib/libmmosal.so
 lib/libmmparser.so
 lib/libSHIMDivxDrm.so
+
+# Offline charging
+bin/chargemon
+lib/libmiscta.so
