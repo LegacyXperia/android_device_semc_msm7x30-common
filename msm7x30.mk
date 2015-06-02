@@ -190,10 +190,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.disable=1
 
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
 # Increase speed for UMS transfer
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vold.umsdirtyratio=20
