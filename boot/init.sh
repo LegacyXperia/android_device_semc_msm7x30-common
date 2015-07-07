@@ -22,32 +22,26 @@ busybox date >>boot.txt
 exec >>boot.txt 2>&1
 busybox rm /init
 
-# create directories & mount filesystems
-busybox mount -o remount,rw rootfs /
-
-busybox mkdir -p /sys /tmp /proc /data /dev /system/bin /cache
-busybox mount -t sysfs sysfs /sys
-busybox mount -t proc proc /proc
-busybox mkdir /dev/input /dev/graphics /dev/block /dev/log
+# create directories
+busybox mkdir -m 755 -p /cache
+busybox mkdir -m 755 -p /dev/block
+busybox mkdir -m 755 -p /dev/input
+busybox mkdir -m 555 -p /proc
+busybox mkdir -m 755 -p /sys
 
 # create device nodes
-busybox mknod -m 666 /dev/null c 1 3
-busybox mknod -m 666 /dev/graphics/fb0 c 29 0
-busybox mknod -m 666 /dev/tty0 c 4 0
 busybox mknod -m 600 /dev/block/mmcblk0 b 179 0
-busybox mknod -m 666 /dev/log/system c 10 19
-busybox mknod -m 666 /dev/log/radio c 10 20
-busybox mknod -m 666 /dev/log/events c 10 21
-busybox mknod -m 666 /dev/log/main c 10 22
-busybox mknod -m 666 /dev/ashmem c 10 37
-busybox mknod -m 666 /dev/urandom c 1 9
+MTDCACHE=`busybox cat /proc/mtd | busybox grep cache | busybox awk -F ':' {'print $1'} | busybox sed 's/mtd//'`
+busybox mknod -m 600 /dev/block/mtdblock${MTDCACHE} b 31 ${MTDCACHE}
+# Per linux Documentation/devices.txt
 for i in $(busybox seq 0 12); do
     busybox mknod -m 600 /dev/input/event${i} c 13 $(busybox expr 64 + ${i})
 done
-MTDCACHE=`busybox cat /proc/mtd | busybox grep cache | busybox awk -F ':' {'print $1'} | busybox sed 's/mtd//'`
-busybox mknod -m 600 /dev/block/mtdblock${MTDCACHE} b 31 $MTDCACHE
+busybox mknod -m 666 /dev/null c 1 3
 
-# mount cache
+# mount filesystems
+busybox mount -t proc proc /proc
+busybox mount -t sysfs sysfs /sys
 busybox mount -t yaffs2 /dev/block/mtdblock${MTDCACHE} /cache
 
 # leds configuration
