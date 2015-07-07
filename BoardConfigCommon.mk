@@ -76,7 +76,7 @@ TARGET_RELEASE_CPPFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 # Combined root
 BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 BOARD_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := device/semc/msm7x30-common/custombootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := device/semc/msm7x30-common/boot/custombootimg.mk
 TARGET_NO_SEPARATE_RECOVERY := true
 TARGET_RECOVERY_PRE_COMMAND := "/sbin/pre-recovery.sh"
 TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
