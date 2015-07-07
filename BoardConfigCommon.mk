@@ -73,11 +73,14 @@ BOARD_NEEDS_MEMORYHEAPPMEM := true
 COMMON_GLOBAL_CFLAGS += -DSEMC_ICS_CAMERA_BLOB
 TARGET_GLOBAL_CPPFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
-# Recovery
+# Combined root
+BOARD_CUSTOM_BOOTIMG_MK := device/semc/msm7x30-common/boot/custombootimg.mk
 TARGET_NO_SEPARATE_RECOVERY := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-BOARD_CUSTOM_BOOTIMG_MK := device/semc/msm7x30-common/custombootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "/sbin/pre-recovery.sh"
+TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
+
+# Recovery
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_FSTAB := device/semc/msm7x30-common/rootdir/recovery.fstab
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/msm7x30-common/recovery/recovery_keys.c
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
@@ -90,7 +93,6 @@ TARGET_KERNEL_SOURCE := kernel/semc/msm7x30
 BOARD_KERNEL_CMDLINE := # This is ignored by sony's bootloader
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 131072
-TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
 
 # We don't build bootloader nor radio
 TARGET_NO_BOOTLOADER := true
