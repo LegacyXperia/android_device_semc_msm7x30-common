@@ -152,6 +152,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
+    debug.sf.swaprect=1 \
     debug.composition.type=mdp \
     persist.hwc.mdpcomp.enable=true \
     debug.mdpcomp.maxlayer=3 \
