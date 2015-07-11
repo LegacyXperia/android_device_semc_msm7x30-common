@@ -175,6 +175,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     af.resampler.quality=4
 
+# Low Power Audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    lpa.decode=true
+
 # Set default USB interface
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
