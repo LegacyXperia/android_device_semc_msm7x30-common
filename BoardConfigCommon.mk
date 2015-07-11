@@ -34,6 +34,9 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := false
 TARGET_CPU_VARIANT := scorpion
 
+# Low memory device
+TARGET_ARCH_LOWMEM := true
+
 # Qualcomm Hardware
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
