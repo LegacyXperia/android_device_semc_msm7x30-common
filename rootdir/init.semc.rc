@@ -152,10 +152,10 @@ on property:init.svc.bootanim=running
     write /sys/class/graphics/fb0/blank 0
 
 on property:init.svc.bootanim=stopped
-    # Switch to ROW after boot for better UX
-    write /sys/block/mtdblock0/queue/scheduler row
-    write /sys/block/mtdblock1/queue/scheduler row
-    write /sys/block/mtdblock2/queue/scheduler row
+    # Switch to FIOPS after boot for better UX
+    write /sys/block/mtdblock0/queue/scheduler fiops
+    write /sys/block/mtdblock1/queue/scheduler fiops
+    write /sys/block/mtdblock2/queue/scheduler fiops
 
 on property:sys.perf.profile=0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "conservative"
