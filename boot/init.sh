@@ -31,8 +31,7 @@ busybox mkdir -m 755 -p /sys
 
 # create device nodes
 busybox mknod -m 600 /dev/block/mmcblk0 b 179 0
-MTDCACHE=`busybox cat /proc/mtd | busybox grep cache | busybox awk -F ':' {'print $1'} | busybox sed 's/mtd//'`
-busybox mknod -m 600 /dev/block/mtdblock${MTDCACHE} b 31 ${MTDCACHE}
+busybox mknod -m 600 /dev/block/mtdblock2 b 31 2
 # Per linux Documentation/devices.txt
 for i in $(busybox seq 0 12); do
     busybox mknod -m 600 /dev/input/event${i} c 13 $(busybox expr 64 + ${i})
@@ -42,7 +41,7 @@ busybox mknod -m 666 /dev/null c 1 3
 # mount filesystems
 busybox mount -t proc proc /proc
 busybox mount -t sysfs sysfs /sys
-busybox mount -t yaffs2 /dev/block/mtdblock${MTDCACHE} /cache
+busybox mount -t yaffs2 /dev/block/mtdblock2 /cache
 
 # leds configuration
 BOOTREC_LED_RED="/sys/class/leds/red/brightness"
