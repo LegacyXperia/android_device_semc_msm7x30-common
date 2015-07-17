@@ -3730,7 +3730,7 @@ void  AudioHardware::AudioSessionOutLPA::eventThreadEntry()
     while (1) {
         //Wait for an event to occur
         rc = ioctl(afd, AUDIO_GET_EVENT, &cur_pcmdec_event);
-        ALOGE("pcm dec Event Thread rc = %d and errno is %d",rc, errno);
+        ALOGV("pcm dec Event Thread rc = %d and errno is %d",rc, errno);
 
         if ( (rc < 0) && ((errno == ENODEV) || (errno == EBADF)) ) {
             ALOGV("AUDIO__GET_EVENT called. Exit the thread");
@@ -3741,7 +3741,7 @@ void  AudioHardware::AudioSessionOutLPA::eventThreadEntry()
         case AUDIO_EVENT_WRITE_DONE:
             {
                 Mutex::Autolock autoLock(mLock);
-                ALOGE("WRITE_DONE: addr %p len %d and fd is %d\n",
+                ALOGV("WRITE_DONE: addr %p len %d and fd is %d\n",
                      cur_pcmdec_event.event_payload.aio_buf.buf_addr,
                      cur_pcmdec_event.event_payload.aio_buf.data_len,
                      (int32_t) cur_pcmdec_event.event_payload.aio_buf.private_data);
