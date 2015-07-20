@@ -98,6 +98,10 @@ on boot
     # Read only 1 page at a time
     write /proc/sys/vm/page-cluster 0
 
+    # Adaptive LMK
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+
 on fs
     mount_all /fstab.semc
     swapon_all /fstab.semc
