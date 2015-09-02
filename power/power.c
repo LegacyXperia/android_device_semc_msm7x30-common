@@ -128,7 +128,7 @@ static void configure_governor()
         sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/io_is_busy", "1");
         sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load", "90");
         sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq", "1017600");
-        sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay", "30000");
+        sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay", "90000");
         sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate", "30000");
     }
 }
