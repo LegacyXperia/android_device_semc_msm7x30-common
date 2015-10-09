@@ -155,7 +155,4 @@
 
     <!-- Is the device capable of hot swapping an UICC Card -->
     <bool name="config_hotswapCapable">true</bool>
-
-    <!-- Is the device LTE capable -->
-    <bool name="config_lte_capable">false</bool>
 </resources>
