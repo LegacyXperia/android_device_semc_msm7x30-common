@@ -88,22 +88,21 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    audio.primary.msm7x30 \
     libaudio-resampler \
     libaudioparameter \
     libdashplayer
 
 # Graphics
-PRODUCT_PACKAGES += \
-    copybit.msm7x30 \
-    gralloc.msm7x30 \
-    hwcomposer.msm7x30 \
-    memtrack.msm7x30 \
-    libgenlock \
-    libmemalloc \
-    liboverlay \
-    libqdutils \
-    libtilerenderer
+#PRODUCT_PACKAGES += \
+#    copybit.msm7x30 \
+#    gralloc.msm7x30 \
+#    hwcomposer.msm7x30 \
+#    memtrack.msm7x30 \
+#    libgenlock \
+#    libmemalloc \
+#    liboverlay \
+#    libqdutils \
+#    libtilerenderer
 
 # Hal
 PRODUCT_PACKAGES += \
@@ -113,12 +112,12 @@ PRODUCT_PACKAGES += \
     sensors.msm7x30
 
 # QCOM OMX
-PRODUCT_PACKAGES += \
-    libstagefrighthw \
-    libOmxCore \
-    libOmxVdec \
-    libOmxVenc \
-    libc2dcolorconvert
+#PRODUCT_PACKAGES += \
+#    libstagefrighthw \
+#    libOmxCore \
+#    libOmxVdec \
+#    libOmxVenc \
+#    libc2dcolorconvert
 
 # Recovery
 PRODUCT_PACKAGES += \
