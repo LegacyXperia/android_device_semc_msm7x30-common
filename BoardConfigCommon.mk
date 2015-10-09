@@ -32,7 +32,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := false
-TARGET_CPU_VARIANT := scorpion
+TARGET_CPU_VARIANT := cortex-a8
 
 # Qualcomm Hardware
 BOARD_USES_QCOM_HARDWARE := true
@@ -120,7 +120,7 @@ MALLOC_IMPL := dlmalloc
 
 # Radio
 TARGET_NEEDS_NON_PIE_SUPPORT := true
-BOARD_PROVIDES_LIBRIL := true
+#BOARD_PROVIDES_LIBRIL := true
 
 # Boot Animation
 TARGET_BOOTANIMATION_PRELOAD := true
