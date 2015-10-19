@@ -22,6 +22,9 @@ on init
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
 
+    # Preload the BoringSSL compat symbols wrapper
+    export LD_PRELOAD "/system/lib/libboringssl-compat.so"
+
 on early-boot
     # Offline charging
     exec /system/bin/chargemon
