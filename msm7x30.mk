@@ -93,6 +93,10 @@ PRODUCT_PACKAGES += \
     libaudioparameter \
     libdashplayer
 
+# BoringSSL compat symbols wrapper
+PRODUCT_PACKAGES += \
+    libboringssl-compat
+
 # Graphics
 PRODUCT_PACKAGES += \
     copybit.msm7x30 \
