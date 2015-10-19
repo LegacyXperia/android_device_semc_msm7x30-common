@@ -25,6 +25,9 @@ on init
     # Preload the BoringSSL compat symbols wrapper
     export LD_PRELOAD "/system/lib/libboringssl-compat.so"
 
+    # Preload the camera compat symbols
+    export LD_PRELOAD "/system/lib/libcamera-compat.so"
+
 on early-boot
     # Offline charging
     exec /system/bin/chargemon
