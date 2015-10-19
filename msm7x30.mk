@@ -93,6 +93,10 @@ PRODUCT_PACKAGES += \
     libaudioparameter \
     libdashplayer
 
+# Adreno
+PRODUCT_PACKAGES += \
+    libstlport
+
 # BoringSSL compat symbols wrapper
 PRODUCT_PACKAGES += \
     libboringssl-compat
