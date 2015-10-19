@@ -99,9 +99,10 @@ BOARD_KERNEL_CMDLINE := # This is ignored by sony's bootloader
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 131072
 
-# We don't build bootloader nor radio
+# Images
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
+TARGET_USERIMAGES_USE_YAFFS := true
 
 # Don't generate block mode update zips
 BLOCK_BASED_OTA := false
