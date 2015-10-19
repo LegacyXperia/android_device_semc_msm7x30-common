@@ -12,8 +12,8 @@ on init
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
-    # Preload the BoringSSL compat symbols wrapper
-    export LD_PRELOAD "/system/lib/libboringssl-compat.so"
+    # Preload the BoringSSL compat symbols wrapper and camera compat symbols
+    export LD_PRELOAD "/system/lib/libboringssl-compat.so /system/lib/libsemc_symbols.so"
 
 on early-boot
     # Offline charging
