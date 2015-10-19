@@ -97,6 +97,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libboringssl-compat
 
+# Camera compat symbols
+PRODUCT_PACKAGES += \
+    libsemc_symbols
+
 # Graphics
 PRODUCT_PACKAGES += \
     copybit.msm7x30 \
