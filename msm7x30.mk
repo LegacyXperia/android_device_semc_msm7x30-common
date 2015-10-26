@@ -192,12 +192,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.disable=1 \
-    persist.sys.media.use-awesome=true
-
-# Low Power Audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    lpa.decode=true
+    audio.offload.disable=1
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
