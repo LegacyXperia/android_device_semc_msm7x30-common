@@ -17,6 +17,7 @@ TARGET_SPECIFIC_HEADER_PATH := device/semc/msm7x30-common/include
 # Platform
 TARGET_BOARD_PLATFORM := msm7x30
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+USE_CLANG_PLATFORM_BUILD := true
 
 # Architecture
 TARGET_ARCH := arm
