@@ -82,7 +82,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TARGET_RECOVERY_FSTAB := device/semc/msm7x30-common/rootdir/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/semc/msm7x30-common/rootdir/fstab.semc
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
 TARGET_RECOVERY_DEVICE_DIRS += device/semc/msm7x30-common
 
