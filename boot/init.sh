@@ -71,6 +71,9 @@ else
     busybox echo 'ANDROID BOOT' >>boot.txt
     # unpack the android ramdisk
     busybox cpio -i < /sbin/ramdisk.cpio
+    # remove boot & recovery partitions from fstab
+    busybox sed -i '/boot/d' /fstab.semc
+    busybox sed -i '/recovery/d' /fstab.semc
 fi
 
 # poweroff LED
