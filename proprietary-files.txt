@@ -24,7 +24,7 @@ vendor/lib/egl/libGLESv2S3D_adreno.so
 vendor/lib/egl/libq3dtools_adreno.so
 
 # Audio
-lib/libaudioalsa.so
+-lib/libaudioalsa.so
 
 # IPv6 tethering
 bin/radish
