@@ -12,14 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# WARNING: This line must come *before* including the proprietary
-# variant, so that it gets overwritten by the parent (which goes
-# against the traditional rules of inheritance).
-USE_CAMERA_STUB := true
-
-# inherit from the proprietary version
--include vendor/semc/msm7x30-common/BoardConfigVendor.mk
-
 TARGET_SPECIFIC_HEADER_PATH := device/semc/msm7x30-common/include
 
 # Platform
