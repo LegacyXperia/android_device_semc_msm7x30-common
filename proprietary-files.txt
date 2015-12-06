@@ -31,11 +31,9 @@ bin/radish
 
 # Media libs
 lib/libDivxDrm.so
-lib/libExtendedExtractor.so
 lib/libI420colorconvert.so
 lib/libmm-color-convertor.so
 lib/libmmosal.so
-lib/libmmparser.so
 lib/libSHIMDivxDrm.so
 
 # Offline charging
