@@ -1,4 +1,4 @@
-# Copyright (C) 2011-2013 The CyanogenMod Project
+# Copyright (C) 2011-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,6 +67,7 @@ COMMON_GLOBAL_CFLAGS += -DSEMC_ICS_CAMERA_BLOB
 BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := device/semc/msm7x30-common/boot/custombootimg.mk
+BOARD_SEMC_INIT_BOARD := device/semc/msm7x30-common/boot/init_board_semc.cpp
 TARGET_NO_SEPARATE_RECOVERY := true
 TARGET_RECOVERY_PRE_COMMAND := "/sbin/pre-recovery.sh"
 TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
