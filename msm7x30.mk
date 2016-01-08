@@ -102,7 +102,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcamera_semccl \
     libsemcu \
-    libshim_camera
+    libshim_camera \
+    Snap
 
 # Graphics
 PRODUCT_PACKAGES += \
