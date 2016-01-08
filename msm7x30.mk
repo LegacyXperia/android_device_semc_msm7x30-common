@@ -133,7 +133,8 @@ PRODUCT_PACKAGES += \
 
 # Recovery
 PRODUCT_PACKAGES += \
-    keycheck
+    keycheck \
+    static_min_busybox
 
 # IPv6 tethering
 PRODUCT_PACKAGES += \
