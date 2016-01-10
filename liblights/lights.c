@@ -197,15 +197,14 @@ static int set_light_keyboard (struct light_device_t* dev, struct light_state_t 
 }
 
 static void set_shared_light_locked (struct light_device_t *dev, struct light_state_t *state) {
-	int r, g, b;
 	int delayOn, delayOff;
 	size_t i = 0;
+	unsigned int colorRGB;
 
-	ALOGV("color 0x%x", state->color);
+	// state->color is an ARGB value, clear the alpha channel
+	colorRGB = (0xFFFFFF & state->color);
 
-	r = (state->color >> 16) & 0xFF;
-	g = (state->color >> 8) & 0xFF;
-	b = (state->color) & 0xFF;
+	ALOGV("colorRGB 0x%x", state->color);
 
 	delayOn = state->flashOnMS;
 	delayOff = state->flashOffMS;
@@ -232,9 +231,9 @@ static void set_shared_light_locked (struct light_device_t *dev, struct light_st
 		break;
 	}
 
-	write_int (RED_LED_FILE, r);
-	write_int (GREEN_LED_FILE, g);
-	write_int (BLUE_LED_FILE, b);
+	write_int (RED_LED_FILE, (colorRGB >> 16) & 0xFF);
+	write_int (GREEN_LED_FILE, (colorRGB >> 8) & 0xFF);
+	write_int (BLUE_LED_FILE, colorRGB & 0xFF);
 }
 
 static void handle_shared_battery_locked (struct light_device_t *dev) {
