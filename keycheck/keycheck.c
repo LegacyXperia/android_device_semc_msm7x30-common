@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <fcntl.h>
+#include <string.h>
 #include <sys/ioctl.h>
 #include <sys/inotify.h>
 #include <sys/poll.h>
 #include <linux/input.h>
 #include <errno.h>
+#include <unistd.h>
 
 static struct pollfd *ufds;
 static char **device_names;
@@ -53,6 +55,7 @@ static int open_device(const char *device)
         //fprintf(stderr, "could not get idstring for %s, %s\n", device, strerror(errno));
         idstr[0] = '\0';
     }
+
     if (ioctl(fd, EVIOCSCLOCKID, &clkid) != 0) {
         //fprintf(stderr, "Can't enable monotonic clock reporting: %s\n", strerror(errno));
         // a non-fatal error
@@ -151,8 +154,8 @@ static int scan_dir(const char *dirname)
     filename = devname + strlen(devname);
     *filename++ = '/';
     while ((de = readdir(dir))) {
-        if (de->d_name[0] == '.' &&
-                (de->d_name[1] == '\0' || (de->d_name[1] == '.' && de->d_name[2] == '\0'))) {
+        if (de->d_name[0] == '.' && (de->d_name[1] == '\0' ||
+                (de->d_name[1] == '.' && de->d_name[2] == '\0'))) {
             continue;
         }
         strcpy(filename, de->d_name);
@@ -162,7 +165,9 @@ static int scan_dir(const char *dirname)
     return 0;
 }
 
-int main(int argc, char *argv[]) {
+int main(int __attribute__((unused)) argc,
+        char __attribute__((unused)) *argv[])
+{
     int i;
     int res;
     struct input_event event;
