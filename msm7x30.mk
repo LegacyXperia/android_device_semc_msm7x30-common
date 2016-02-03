@@ -150,11 +150,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false \
     dalvik.vm.image-dex2oat-filter=speed
 
-# Common device properties
+# Google
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase.ms=android-sonymobile \
-    ro.com.google.locationfeatures=1 \
-    wifi.supplicant_scan_interval=15
+    ro.com.google.locationfeatures=1
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
