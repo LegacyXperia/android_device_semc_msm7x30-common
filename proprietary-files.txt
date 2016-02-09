@@ -30,11 +30,8 @@ vendor/lib/egl/libq3dtools_adreno.so
 bin/radish
 
 # Media libs
-lib/libDivxDrm.so
 lib/libI420colorconvert.so
 lib/libmm-color-convertor.so
-lib/libmmosal.so
-lib/libSHIMDivxDrm.so
 
 # Offline charging
 bin/chargemon
