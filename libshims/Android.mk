@@ -19,9 +19,15 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
     GraphicBufferMapper.cpp \
-    MemoryHeapPmem.cpp
+    MemoryHeapPmem.cpp \
+    RefBase.cpp \
+    SharedBuffer.cpp \
+    VectorImpl.cpp
 
-LOCAL_SHARED_LIBRARIES := libbinder liblog libui libsemcu
+LOCAL_C_INCLUDES += external/safe-iop/include
+
+LOCAL_SHARED_LIBRARIES := libbinder liblog libui libutils
+
 LOCAL_MODULE := libshim_camera
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
