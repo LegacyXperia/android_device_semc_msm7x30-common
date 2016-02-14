@@ -154,8 +154,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase.ms=android-sonymobile \
     ro.com.google.locationfeatures=1 \
-    ro.product.locale.language=en \
-    ro.product.locale.region=US \
     wifi.supplicant_scan_interval=15
 
 # Radio
