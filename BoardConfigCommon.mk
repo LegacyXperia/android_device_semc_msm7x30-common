@@ -69,11 +69,15 @@ TARGET_NO_SEPARATE_RECOVERY := true
 TARGET_RECOVERY_PRE_COMMAND := "/sbin/pre-recovery.sh"
 TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
 
+# Init
+TARGET_INIT_VENDOR_LIB := libinit_semc
+
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_FSTAB := device/semc/msm7x30-common/rootdir/fstab.semc
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
 TARGET_RECOVERY_DEVICE_DIRS += device/semc/msm7x30-common
+TARGET_RECOVERY_DEVICE_MODULES := libinit_semc
 
 # Kernel
 TARGET_NO_KERNEL := false
