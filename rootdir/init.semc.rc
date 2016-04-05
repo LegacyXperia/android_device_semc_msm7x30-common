@@ -125,6 +125,8 @@ on fs
     mount_all /fstab.semc
     swapon_all /fstab.semc
 
+    write /proc/sys/vm/swappiness 100
+
 on post-fs-data
     setprop vold.post_fs_data_done 1
 
