@@ -29,6 +29,7 @@ int main(int argc, char** __attribute__((unused)) argv)
 {
     // Execution variables
     unsigned char i;
+    bool chargerBoot;
     bool recoveryBoot;
     int keycheckStatus;
     char buffer_events[20];
@@ -66,11 +67,13 @@ int main(int argc, char** __attribute__((unused)) argv)
     // Additional board inits
     init_board.start_init();
 
-    // Recovery boot detection
+    // Warmboots detection
+    chargerBoot = CHARGER_BYPASS &&
+            file_contains(WARMBOOT_CMDLINE, WARMBOOT_CHARGER);
     recoveryBoot = file_contains(WARMBOOT_CMDLINE, WARMBOOT_RECOVERY);
 
     // Keycheck introduction
-    if (!recoveryBoot)
+    if (!recoveryBoot && !chargerBoot)
     {
         // Listen for volume keys
         const char* argv_keycheck[] = { EXEC_KEYCHECK, nullptr };
@@ -83,6 +86,11 @@ int main(int argc, char** __attribute__((unused)) argv)
         keycheckStatus = system_exec_kill(keycheck_pid, KEYCHECK_TIMEOUT);
         recoveryBoot = (keycheckStatus == KEYCHECK_RECOVERY_BOOT ||
                 keycheckStatus == KEYCHECK_RECOVERY_FOTA);
+    }
+    else if (chargerBoot)
+    {
+        // Direct boot to Android
+        recoveryBoot = false;
     }
     else
     {

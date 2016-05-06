@@ -51,11 +51,17 @@
 #ifndef WARMBOOT_CMDLINE
 #define WARMBOOT_CMDLINE "/proc/cmdline"
 #endif
+#ifndef WARMBOOT_CHARGER
+#define WARMBOOT_CHARGER "androidboot.mode=charger"
+#endif
 #ifndef WARMBOOT_RECOVERY
 #define WARMBOOT_RECOVERY "warmboot=0x77665502"
 #endif
 
 // Constants: init configurations
+#ifndef CHARGER_BYPASS
+#define CHARGER_BYPASS 1
+#endif
 #ifndef KEYCHECK_TIMEOUT
 #define KEYCHECK_TIMEOUT 3
 #endif
