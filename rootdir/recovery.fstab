@@ -7,9 +7,7 @@
 /dev/null                             /boot          mtd       defaults                   defaults
 system                                /system        yaffs2    ro                         wait
 cache                                 /cache         yaffs2    rw,noatime,nosuid,nodev    wait
-userdata                              /data          yaffs2    rw,noatime,nosuid,nodev    wait
-/dev/block/mmcblk0p2                  /sd-ext        auto      defaults                   defaults
+/dev/block/mmcblk0p2                          /data          f2fs      rw,discard,nosuid,nodev,noatime,nodiratime      wait
 
 # Vold managed devices
-/dev/block/mmcblk0p1                  auto           auto      defaults                   voldmanaged=sdcard0:auto,noemulatedsd
 /devices/platform/msm_hsusb_host.0    auto           auto      defaults                   voldmanaged=usbdisk:auto
