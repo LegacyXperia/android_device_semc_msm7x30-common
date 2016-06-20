@@ -89,3 +89,25 @@
 /dev/oncrpc/30000003:*   0660   radio   radio
 /dev/oncrpc/3000001b:*   0660   radio   radio
 /dev/oncrpc/3000006b:*   0660   radio   system
+
+# Governor permissions
+/sys/devices/system/cpu/cpu*   cpufreq/scaling_governor   0664  system system
+
+/sys/devices/system/cpu/cpufreq interactive/above_hispeed_delay 0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/align_windows 0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/boost  0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/boostpulse  0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/boostpulse_duration  0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/go_hispeed_load 0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/hispeed_freq    0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/io_is_busy      0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/max_freq_hysteresis 0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/min_sample_rate 0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/min_sample_time 0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/sampling_down_factor 0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/sync_freq 0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/target_loads 0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/timer_rate  0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/timer_slack      0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/up_threshold_any_cpu_freq      0664    system  system
+/sys/devices/system/cpu/cpufreq interactive/up_threshold_any_cpu_load      0664    system  system
