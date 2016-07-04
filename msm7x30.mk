@@ -41,10 +41,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/init.semc.usb.rc:root/init.semc.usb.rc \
     $(COMMON_PATH)/rootdir/ueventd.semc.rc:root/ueventd.semc.rc
 
-# Reboot to recovery related scripts
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/sbin/pre-recovery.sh:root/sbin/pre-recovery.sh
-
 # fstab
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/fstab.semc:root/fstab.semc

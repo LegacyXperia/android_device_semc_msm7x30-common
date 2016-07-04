@@ -66,7 +66,6 @@ BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := device/semc/msm7x30-common/boot/custombootimg.mk
 TARGET_NO_SEPARATE_RECOVERY := true
-TARGET_RECOVERY_PRE_COMMAND := "/sbin/pre-recovery.sh"
 TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
 
 # Init
