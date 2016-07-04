@@ -32,7 +32,3 @@ bin/radish
 # Media libs
 lib/libI420colorconvert.so
 lib/libmm-color-convertor.so
-
-# Offline charging
-bin/chargemon
-lib/libmiscta.so
