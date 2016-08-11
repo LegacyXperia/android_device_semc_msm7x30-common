@@ -22,7 +22,8 @@ LOCAL_SRC_FILES := \
     init_exec.cpp \
     init_files.cpp \
     init_io.cpp \
-    init_main.cpp
+    init_main.cpp \
+    init_ramdisk.cpp
 
 LOCAL_CPPFLAGS := \
     -Wall \
