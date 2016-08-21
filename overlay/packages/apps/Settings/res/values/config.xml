@@ -19,4 +19,6 @@
     <bool name="config_show_volumeRockerWake">true</bool>
     <!-- make home button wake configurable in display settings -->
     <bool name="config_show_homeWake">true</bool>
+    <!-- Does the device allow updating the recovery. -->
+    <bool name="config_enableRecoveryUpdater">false</bool>
 </resources>
