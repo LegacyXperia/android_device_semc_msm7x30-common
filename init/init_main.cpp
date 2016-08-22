@@ -96,8 +96,11 @@ int main(int argc, char** __attribute__((unused)) argv)
         write_string(BOOT_TXT, "RECOVERY BOOT", true);
         init_board.introduce_recovery();
 
-        // Clean ramdisk files before extraction
-        ramdisk_clean_files();
+        // Clean ramdisk files before extraction on boot
+        if (argc < 2)
+        {
+            ramdisk_clean_files();
+        }
 
         // Recovery ramdisk
         const char* argv_ramdiskcpio[] = { EXEC_TOYBOX, "cpio", "-i", "-F",
@@ -111,9 +114,12 @@ int main(int argc, char** __attribute__((unused)) argv)
         write_string(BOOT_TXT, "ANDROID BOOT", true);
         init_board.introduce_android();
 
-        // Rename Android init
-        unlink("/init");
-        rename("/init.real", "/init");
+        // Rename Android init on boot
+        if (argc < 2)
+        {
+            unlink("/init");
+            rename("/init.real", "/init");
+        }
     }
 
     // Finish init outputs
