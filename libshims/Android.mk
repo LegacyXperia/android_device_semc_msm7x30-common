@@ -24,7 +24,9 @@ LOCAL_SRC_FILES := \
     SharedBuffer.cpp \
     VectorImpl.cpp
 
-LOCAL_C_INCLUDES += external/safe-iop/include
+LOCAL_C_INCLUDES += \
+    external/safe-iop/include \
+    system/core/libutils
 
 LOCAL_SHARED_LIBRARIES := libbinder liblog libui libutils
 
