@@ -109,7 +109,7 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # Use dlmalloc instead of jemalloc
-MALLOC_IMPL := dlmalloc
+MALLOC_SVELTE := true
 
 # Radio
 TARGET_NEEDS_NON_PIE_SUPPORT := true
