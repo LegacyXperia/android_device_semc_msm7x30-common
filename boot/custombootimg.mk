@@ -42,11 +42,11 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel $(uncompressed_ramdisk) $(r
 	$(hide) cat $(PRODUCT_OUT)/combinedroot.cpio | $(MINIGZIP) -9 > $(PRODUCT_OUT)/combinedroot.fs
 
 	$(hide) $(MKBOOTIMG) --kernel $(PRODUCT_OUT)/kernel --ramdisk $(PRODUCT_OUT)/combinedroot.fs --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) -o $(INSTALLED_BOOTIMAGE_TARGET)
-	@echo -e ${CL_CYN}"Made boot image: $@"${CL_RST}
+	@echo "Made boot image: $@"
 
 INSTALLED_RECOVERYIMAGE_TARGET := $(PRODUCT_OUT)/recovery.img
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(recovery_ramdisk) $(recovery_kernel)
 	$(call build-recoveryimage-target, $@)
-	@echo -e ${CL_CYN}"----- Making recovery image ------"${CL_RST}
+	@echo "----- Making recovery image ------"
 	$(hide) $(MKBOOTIMG) --kernel $(PRODUCT_OUT)/kernel --ramdisk $(PRODUCT_OUT)/ramdisk-recovery.img --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) -o $(INSTALLED_RECOVERYIMAGE_TARGET)
-	@echo -e ${CL_CYN}"Made recovery image: $@"${CL_RST}
+	@echo "Made recovery image: $@"
