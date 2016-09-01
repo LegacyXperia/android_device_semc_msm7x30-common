@@ -108,8 +108,8 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
-# Use dlmalloc instead of jemalloc
-MALLOC_IMPL := dlmalloc
+# Bionic
+MALLOC_SVELTE := true
 
 # Radio
 TARGET_NEEDS_NON_PIE_SUPPORT := true
