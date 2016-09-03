@@ -74,6 +74,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/semc/msm7x30-common
 TARGET_INIT_VENDOR_LIB := libinit_semc
 
 # Recovery
+TARGET_RECOVERY_DENSITY := mdpi
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_FSTAB := device/semc/msm7x30-common/rootdir/fstab.semc
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
