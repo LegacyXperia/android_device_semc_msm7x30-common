@@ -21,7 +21,6 @@ LOCAL_SRC_FILES := \
     GraphicBufferMapper.cpp \
     MemoryHeapPmem.cpp \
     RefBase.cpp \
-    SharedBuffer.cpp \
     VectorImpl.cpp
 
 LOCAL_C_INCLUDES += \
