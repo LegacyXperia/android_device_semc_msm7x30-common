@@ -25,25 +25,21 @@
 /* Serial number */
 #define SERIAL_PROP "ro.serialno"
 
-static void import_kernel_nv(char *name,
-        __attribute__((unused)) int for_emulator)
+static void import_kernel_nv(const std::string& key, const std::string& value,
+        __attribute__((unused)) bool for_emulator)
 {
-    char *value = strchr(name, '=');
-    int name_len = strlen(name);
     prop_info *pi;
 
-    if (value == 0) return;
-    *value++ = 0;
-    if (name_len == 0) return;
+    if (key.empty()) return;
 
-    if (!strcmp(name, "serialno")) {
+    if (key == "serialno") {
         pi = (prop_info*) __system_property_find(SERIAL_PROP);
         if (pi)
             __system_property_update(pi,
-                    value, strlen(value));
+                    value.c_str(), strlen(value.c_str()));
         else
             __system_property_add(SERIAL_PROP, strlen(SERIAL_PROP),
-                    value, strlen(value));
+                    value.c_str(), strlen(value.c_str()));
     }
 }
 
