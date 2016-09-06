@@ -148,6 +148,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false \
     dalvik.vm.image-dex2oat-filter=speed
 
+# twrp.fstab
+PRODUCT_COPY_FILES += \
+	$(COMMON_PATH)/recovery/root/etc/twrp.fstab:recovery/root/etc/twrp.fstab
+
 # Google
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase.ms=android-sonymobile \
