@@ -81,6 +81,15 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).rle:root/initlogo.rle
 
+# TWRP (Optional)
+ifeq ($(WITH_TWRP),true)
+
+# Recovery files
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/recovery/root/etc/twrp.fstab:recovery/root/etc/twrp.fstab
+
+endif
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
