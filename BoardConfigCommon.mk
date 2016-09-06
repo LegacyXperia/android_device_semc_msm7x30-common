@@ -80,6 +80,21 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d
 TARGET_RECOVERY_DEVICE_DIRS += device/semc/msm7x30-common
 TARGET_RECOVERY_DEVICE_MODULES := libinit_semc
 
+# TWRP (Optional)
+ifeq ($(WITH_TWRP),true)
+
+# TWRP configurations
+ifneq ($(wildcard $(TOPDIR)bootable/recovery-twrp/*),)
+       RECOVERY_VARIANT := twrp
+endif
+TARGET_MTD_BY_NAME := true
+TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/bq27520
+TW_EXCLUDE_SUPERSU := true
+TW_HAS_NO_RECOVERY_PARTITION := true
+TW_USE_TOOLBOX := true
+
+endif
+
 # Kernel
 TARGET_NO_KERNEL := false
 TARGET_KERNEL_SOURCE := kernel/semc/msm7x30
