@@ -1,0 +1,6 @@
+#<mount>        <fstype>    <device>                [device2]             <flags>
+
+/system         yaffs2      system
+/cache          yaffs2      cache
+/data           ext4        /dev/block/mmcblk0p1
+/usb-otg        auto        /dev/block/sda1         /dev/block/sda        flags=display="USB OTG";storage;wipeingui;removable
