@@ -75,7 +75,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel \
 	@echo "Made boot image: $@"
 
 INSTALLED_RECOVERYIMAGE_TARGET := $(PRODUCT_OUT)/recovery.img
-$(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) \
+$(INSTALLED_RECOVERYIMAGE_TARGET): $(HOST_OUT_EXECUTABLES)/imgdiff $(MKBOOTIMG) \
 		$(recovery_ramdisk) \
 		$(recovery_kernel)
 	@echo "----- Making recovery image ------"
