@@ -120,3 +120,6 @@ SOMC_CFG_SENSORS_LIGHT_AS3676_PATH := "/sys/devices/i2c-0/0-0040"
 
 # CM Hardware tunables
 BOARD_HARDWARE_CLASS := device/semc/msm7x30-common/cmhw
+
+# Misc
+WITHOUT_CHECK_API := true
