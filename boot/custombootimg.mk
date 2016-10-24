@@ -22,7 +22,7 @@ $(uncompressed_ramdisk): $(INSTALLED_RAMDISK_TARGET)
 INITSEMC := $(PRODUCT_OUT)/utilities/init_semc
 
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
-$(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel $(uncompressed_ramdisk) $(recovery_uncompressed_ramdisk) $(INSTALLED_RAMDISK_TARGET) $(INITSEMC) $(PRODUCT_OUT)/utilities/toybox $(PRODUCT_OUT)/utilities/keycheck $(MKBOOTIMG) $(MINIGZIP) $(INTERNAL_BOOTIMAGE_FILES)
+$(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel $(uncompressed_ramdisk) $(recovery_uncompressed_ramdisk) $(INSTALLED_RAMDISK_TARGET) $(INITSEMC) $(PRODUCT_OUT)/utilities/toybox $(PRODUCT_OUT)/utilities/keycheck $(MKBOOTIMG) $(LZMA_BIN) $(INTERNAL_BOOTIMAGE_FILES)
 	$(call pretty,"Target boot image: $@")
 
 	$(hide) rm -fr $(PRODUCT_OUT)/combinedroot
