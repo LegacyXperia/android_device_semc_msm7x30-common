@@ -3,13 +3,13 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
-/dev/block/mtdblock0                          /system        yaffs2    ro                        wait
-/dev/block/mtdblock1                          /data          yaffs2    rw,noatime,nosuid,nodev   wait
-/dev/block/mtdblock2                          /cache         yaffs2    rw,noatime,nosuid,nodev   wait
+/dev/block/mtdblock0                          /system        yaffs2    ro                                                                                    wait
+/dev/block/mtdblock1                          /cache         yaffs2    rw,noatime,nosuid,nodev                                                               wait
+/dev/block/mmcblk0p1                          /data          ext4      noatime,nosuid,nodev,data=ordered,noauto_da_alloc,journal_async_commit,errors=panic   wait,check
+/dev/block/mmcblk0p1                          /data          f2fs      rw,discard,nosuid,nodev,noatime,nodiratime,inline_xattr                               wait,check
 
 # Vold managed devices
-/devices/platform/msm_sdcc.4/mmc_host/mmc1    auto           auto      defaults                  voldmanaged=sdcard0:auto,noemulatedsd
-/devices/platform/msm_hsusb_host.0            auto           auto      defaults                  voldmanaged=usbdisk:auto
+/devices/platform/msm_hsusb_host.0            auto           auto      defaults                                                                              voldmanaged=usbdisk:auto
 
 # zRAM
-/dev/block/zram0                              none           swap      defaults                  zramsize=134217728
+/dev/block/zram0                              none           swap      defaults                                                                              zramsize=134217728
