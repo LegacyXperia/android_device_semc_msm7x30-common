@@ -19,10 +19,40 @@ uncompressed_ramdisk := $(PRODUCT_OUT)/ramdisk.cpio
 $(uncompressed_ramdisk): $(INSTALLED_RAMDISK_TARGET)
 	gunzip -c $< > $@
 
+recovery_uncompressed_ramdisk := $(PRODUCT_OUT)/ramdisk-recovery.cpio
+recovery_uncompressed_device_ramdisk := $(PRODUCT_OUT)/ramdisk-recovery-device.cpio
+$(recovery_uncompressed_device_ramdisk): $(MKBOOTFS) \
+		$(INTERNAL_RECOVERYIMAGE_FILES) \
+		$(recovery_initrc) $(recovery_sepolicy) $(recovery_kernel) \
+		$(INSTALLED_2NDBOOTLOADER_TARGET) \
+		$(recovery_build_prop) $(recovery_resource_deps) $(recovery_root_deps) \
+		$(recovery_fstab) \
+		$(RECOVERY_INSTALL_OTA_KEYS) \
+		$(INTERNAL_BOOTIMAGE_FILES)
+	$(call build-recoveryramdisk)
+	@echo "----- Making uncompressed recovery ramdisk ------"
+	$(hide) $(MKBOOTFS) $(TARGET_RECOVERY_ROOT_OUT) > $@
+	$(hide) rm -f $(recovery_uncompressed_ramdisk)
+	$(hide) cp $(recovery_uncompressed_device_ramdisk) $(recovery_uncompressed_ramdisk)
+
+recovery_ramdisk := $(PRODUCT_OUT)/ramdisk-recovery.img
+$(recovery_ramdisk): $(MINIGZIP) \
+		$(recovery_uncompressed_device_ramdisk)
+	@echo "----- Making compressed recovery ramdisk ------"
+	$(hide) $(LZMA_BIN) -9 < $(recovery_uncompressed_ramdisk) > $@
+
 INITSEMC := $(PRODUCT_OUT)/utilities/init_semc
 
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
-$(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel $(uncompressed_ramdisk) $(recovery_uncompressed_ramdisk) $(INSTALLED_RAMDISK_TARGET) $(INITSEMC) $(PRODUCT_OUT)/utilities/toybox $(PRODUCT_OUT)/utilities/keycheck $(MKBOOTIMG) $(MINIGZIP) $(INTERNAL_BOOTIMAGE_FILES)
+$(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel \
+		$(uncompressed_ramdisk) \
+		$(recovery_uncompressed_device_ramdisk) \
+		$(INSTALLED_RAMDISK_TARGET) \
+		$(INITSEMC) \
+		$(PRODUCT_OUT)/utilities/toybox \
+		$(PRODUCT_OUT)/utilities/keycheck \
+		$(MKBOOTIMG) $(MINIGZIP) \
+		$(INTERNAL_BOOTIMAGE_FILES)
 	$(call pretty,"Target boot image: $@")
 
 	$(hide) rm -fr $(PRODUCT_OUT)/combinedroot
@@ -46,7 +76,6 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(PRODUCT_OUT)/kernel $(uncompressed_ramdisk) $(r
 
 INSTALLED_RECOVERYIMAGE_TARGET := $(PRODUCT_OUT)/recovery.img
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(recovery_ramdisk) $(recovery_kernel)
-	$(call build-recoveryimage-target, $@)
 	@echo -e ${CL_CYN}"----- Making recovery image ------"${CL_RST}
 	$(hide) $(MKBOOTIMG) --kernel $(PRODUCT_OUT)/kernel --ramdisk $(PRODUCT_OUT)/ramdisk-recovery.img --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) -o $(INSTALLED_RECOVERYIMAGE_TARGET)
 	@echo -e ${CL_CYN}"Made recovery image: $@"${CL_RST}
