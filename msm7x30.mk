@@ -163,6 +163,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.idletime=-1 \
     persist.sys.force_highendgfx=true
 
+# JIT codecache size
+PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.jit.codecachesize=512k
+
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number.
 PRODUCT_PROPERTY_OVERRIDES += \
