@@ -158,6 +158,6 @@ on property:sys.io.scheduler=bfq
     write /sys/block/mtdblock2/queue/iosched/slice_idle 0
 
 on property:service.bootanim.exit=1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "smartassv2"
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1017600"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "122880"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "460800"
