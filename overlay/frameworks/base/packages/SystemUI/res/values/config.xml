@@ -25,6 +25,6 @@
     <bool name="config_recents_use_hardware_layers">true</bool>
 
     <!-- Allow Flashlight service to use wakelock -->
-    <bool name="flashlight_use_wakelock">true</bool>
+    <bool name="config_useWakelockForFlashlight">true</bool>
 
 </resources>
