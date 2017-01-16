@@ -209,10 +209,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.fw.bg_apps_limit=8
 
-# Set max background services
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.max_starting_bg=8
-
 # Disable strict mode
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.visual=0 \
