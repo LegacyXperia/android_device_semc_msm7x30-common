@@ -109,6 +109,9 @@ BLOCK_BASED_OTA := false
 # Bionic
 MALLOC_SVELTE := true
 
+# SU binary
+WITH_SU := true
+
 # Radio
 TARGET_NEEDS_NON_PIE_SUPPORT := true
 BOARD_PROVIDES_LIBRIL := true
