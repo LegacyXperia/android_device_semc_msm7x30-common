@@ -21,8 +21,6 @@
      for different hardware and product builds. -->
 <resources>
 
-    <!-- Disable expensive shadows -->
-    <bool name="config_recents_fake_shadows">true</bool>
     <!-- Use hardware layers in recents -->
     <bool name="config_recents_use_hardware_layers">true</bool>
 
