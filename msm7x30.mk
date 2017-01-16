@@ -197,9 +197,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.low_ram=true \
     persist.sys.force_highendgfx=true
 
-# Reduce background apps limit to 16 on low-tier devices
+# Reduce background apps limit to 8 on low-tier devices
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.fw.bg_apps_limit=16
+    ro.sys.fw.bg_apps_limit=8
 
 # Set max background services
 PRODUCT_PROPERTY_OVERRIDES += \
