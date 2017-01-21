@@ -142,12 +142,6 @@ PRODUCT_PACKAGES += \
 # Live wallpapers picker
 PRODUCT_PACKAGES += LiveWallpapersPicker
 
-# ART
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-filter=balanced \
-    dalvik.vm.dex2oat-swap=false \
-    dalvik.vm.image-dex2oat-filter=speed
-
 # Google
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase.ms=android-sonymobile \
