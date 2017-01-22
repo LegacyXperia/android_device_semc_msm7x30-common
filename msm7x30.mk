@@ -81,6 +81,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/bootlogo/$(TARGET_SCREEN_WIDTH)x$(TARGET_SCREEN_HEIGHT).rle:root/initlogo.rle
 
+PRODUCT_DEX_PREOPT_BOOT_FLAGS := --compiler-filter=everything
+PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := --compiler-filter=interpret-only
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \

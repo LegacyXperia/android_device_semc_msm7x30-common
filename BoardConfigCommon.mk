@@ -106,6 +106,9 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 # Don't generate block mode update zips
 BLOCK_BASED_OTA := false
 
+# Preoptimization
+WITH_DEXPREOPT := true
+
 # Bionic
 MALLOC_SVELTE := true
 
