@@ -144,10 +144,16 @@ PRODUCT_PACKAGES += LiveWallpapersPicker
 
 # ART
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-filter=balanced \
-    dalvik.vm.dex2oat-swap=false \
-    dalvik.vm.image-dex2oat-filter=speed
+    pm.dexopt.install=interpret-only \
+    pm.dexopt.bg-dexopt=interpret-only \
+    pm.dexopt.ab-ota=interpret-only \
+    pm.dexopt.nsys-library=interpret-only \
+    pm.dexopt.shared-apk=interpret-only \
+    pm.dexopt.core-app=interpret-only
 
+PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := --compiler-filter=interpret-only
+PRODUCT_DEX_PREOPT_BOOT_FLAGS := --compiler-filter=speed
+    
 # Google
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase.ms=android-sonymobile \
