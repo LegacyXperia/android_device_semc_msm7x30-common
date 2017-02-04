@@ -1,0 +1,2 @@
+/system/bin/akmd8975                            u:object_r:sensors_exec:s0
+/system/bin/chargemon                           u:object_r:chargemon_exec:s0

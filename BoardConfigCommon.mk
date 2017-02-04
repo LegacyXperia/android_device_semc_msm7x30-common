@@ -55,6 +55,10 @@ BOARD_HAVE_BLUETOOTH := true
 TARGET_NEEDS_NONPIE_CAMERASERVER := true
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 
+# SELinux
+include device/qcom/sepolicy/sepolicy.mk
+BOARD_SEPOLICY_DIRS += device/semc/msm7x30-common/sepolicy
+
 # Combined root
 BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 BOARD_USES_FULL_RECOVERY_IMAGE := true
