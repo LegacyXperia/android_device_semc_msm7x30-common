@@ -1,0 +1,4 @@
+type chargemon, domain;
+type chargemon_exec, exec_type, file_type;
+
+init_daemon_domain(chargemon)

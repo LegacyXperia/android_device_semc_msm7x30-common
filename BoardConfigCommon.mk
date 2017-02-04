@@ -62,6 +62,10 @@ TARGET_DISABLE_ARM_PIE := true
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 BOARD_GLOBAL_CFLAGS += -DSEMC_ICS_CAMERA_BLOB
 
+# SELinux
+include device/qcom/sepolicy/sepolicy.mk
+BOARD_SEPOLICY_DIRS += device/semc/msm7x30-common/sepolicy
+
 # Combined root
 BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 BOARD_CUSTOM_BOOTIMG := true
