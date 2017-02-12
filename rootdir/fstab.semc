@@ -8,7 +8,7 @@
 /dev/block/mtd/by-name/system         /system        yaffs2    ro                                                                                    wait
 /dev/block/mtd/by-name/userdata       /misc          mtd       defaults                                                                              defaults
 /dev/block/mtd/by-name/cache          /cache         yaffs2    rw,noatime,nosuid,nodev                                                               wait
-/dev/block/mmcblk0p1                  /data          f2fs      rw,discard,nosuid,nodev,noatime,nodiratime,inline_xattr                               wait,check,formattable
+/dev/block/mmcblk0p1                  /data          f2fs      rw,nosuid,nodev,noatime,nodiratime,inline_xattr                                       wait,check,formattable
 /dev/block/mmcblk0p1                  /data          ext4      noatime,nosuid,nodev,data=ordered,noauto_da_alloc,journal_async_commit,errors=panic   wait,check
 
 # Vold managed devices
