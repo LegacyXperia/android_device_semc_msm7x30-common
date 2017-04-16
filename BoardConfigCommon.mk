@@ -16,8 +16,6 @@ TARGET_SPECIFIC_HEADER_PATH := device/semc/msm7x30-common/include
 
 # Platform
 TARGET_BOARD_PLATFORM := msm7x30
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-USE_CLANG_PLATFORM_BUILD := true
 
 # Architecture
 TARGET_ARCH := arm
@@ -29,7 +27,6 @@ TARGET_CPU_VARIANT := scorpion
 
 # Qualcomm Hardware
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Graphics
@@ -39,9 +36,6 @@ TARGET_USES_C2D_COMPOSITION := true
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 TARGET_NO_ADAPTIVE_PLAYBACK := true
 TARGET_NO_INITLOGO := true
-
-# Screenrecord
-BOARD_SCREENRECORD_LANDSCAPE_ONLY := true
 
 # Audio
 BOARD_HAVE_SEMC_AUDIO := true
@@ -60,7 +54,6 @@ BOARD_HAVE_BLUETOOTH := true
 # Camera
 TARGET_NEEDS_NONPIE_CAMERASERVER := true
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
-BOARD_GLOBAL_CFLAGS += -DSEMC_ICS_CAMERA_BLOB
 
 # Combined root
 BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
@@ -76,12 +69,10 @@ TARGET_INIT_VENDOR_LIB := libinit_semc
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_FSTAB := device/semc/msm7x30-common/rootdir/fstab.semc
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
 TARGET_RECOVERY_DEVICE_DIRS += device/semc/msm7x30-common
 TARGET_RECOVERY_DEVICE_MODULES := libinit_semc
 
 # Kernel
-TARGET_NO_KERNEL := false
 TARGET_KERNEL_SOURCE := kernel/semc/msm7x30
 ifeq ($(HOST_OS),linux)
   KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin
