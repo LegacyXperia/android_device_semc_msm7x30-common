@@ -21,6 +21,10 @@ on init
     symlink /storage/sdcard0 /mnt/sdcard
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
+    
+    #sd-ext
+    mkdir /sd-ext 0771 system system
+    export SD_EXT_DIRECTORY /sd-ext
 
     # Set up the BFQIO hierarchy
     chmod 0755 /sys/fs/cgroup
