@@ -1,0 +1,4 @@
+type cy8ctma300_fwloader, domain;
+type cy8ctma300_fwloader_exec, exec_type, file_type;
+
+init_daemon_domain(cy8ctma300_fwloader)

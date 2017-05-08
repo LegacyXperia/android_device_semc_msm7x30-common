@@ -1,2 +1,20 @@
+#############################
+# msm7x30-common
+#############################
 /system/bin/akmd8975                            u:object_r:sensors_exec:s0
 /system/bin/chargemon                           u:object_r:chargemon_exec:s0
+
+#############################
+# urushi
+#############################
+/system/bin/clearpad_fwloader                   u:object_r:clearpad_fwloader_exec:s0
+
+#############################
+# anzu, haida, hallon
+#############################
+/system/bin/cy8ctma300_fwloader                 u:object_r:cy8ctma300_fwloader_exec:s0
+
+#############################
+# coconut, iyokan, mango, satsuma, smultron
+#############################
+/system/bin/cyttsp_fwloader                     u:object_r:cyttsp_fwloader_exec:s0
