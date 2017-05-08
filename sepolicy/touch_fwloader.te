@@ -1,0 +1,4 @@
+type touch_fwloader, domain;
+type touch_fwloader_exec, exec_type, file_type;
+
+init_daemon_domain(touch_fwloader)
