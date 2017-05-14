@@ -1,0 +1,8 @@
+#<mount>        <fstype>    <device>                [device2]             <flags>
+
+/system         yaffs2      system
+/cache          yaffs2      cache
+/data           yaffs2      userdata
+/sdcard         auto        /dev/block/mmcblk0p1    /dev/block/mmcblk0    flags=display="Micro SDcard";storage;wipeingui;removable
+/sd-ext         auto        /dev/block/mmcblk0p2                          flags=removable
+/usb-otg        auto        /dev/block/sda1         /dev/block/sda        flags=display="USB OTG";storage;wipeingui;removable

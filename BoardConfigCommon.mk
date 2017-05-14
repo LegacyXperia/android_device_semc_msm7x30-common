@@ -90,6 +90,14 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 TARGET_RECOVERY_DEVICE_DIRS += device/semc/msm7x30-common
 
+# TWRP (Optional)
+ifeq ($(WITH_TWRP),true)
+RECOVERY_VARIANT := twrp
+TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/bq27520
+TW_EXCLUDE_SUPERSU := true
+TW_HAS_NO_RECOVERY_PARTITION := true
+endif
+
 # Kernel
 TARGET_NO_KERNEL := false
 TARGET_KERNEL_SOURCE := kernel/semc/msm7x30
