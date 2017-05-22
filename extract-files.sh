@@ -37,7 +37,6 @@ fi
 
 for FILE in `cat proprietary-files.txt | grep -v ^# | grep -v ^$`; do
     # Split the file from the destination (format is "file[:destination]")
-    OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
     FILE=`echo ${PARSING_ARRAY[0]} | sed -e "s/^-//g"`
     DIR=`dirname $FILE`
     if [ ! -d $BASE/$DIR ]; then
